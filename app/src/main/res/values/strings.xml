@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SaberGo</string>
+
+
+    -- Common
+    <string name="strTitulo">Saber Go</string>
+</resources>
