@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">SaberGo</string>
 
+    --Login
 
+    <string name="strSignup">Registrarse</string>
+    <string name="strLogin">Iniciar Sesión</string>
     -- Common
-    <string name="strTitulo">Saber Go</string>
+    <string name="strTitulo">Saber Go!</string>
 </resources>
+
