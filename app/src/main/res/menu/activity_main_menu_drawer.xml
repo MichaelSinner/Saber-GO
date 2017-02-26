@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/itmPruebaDiagnostico"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/strBtnPruebaDiag" />
+        <item
+            android:id="@+id/itmPruebaDiaria"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/strBtnPruebaDiaria" />
+        <item
+            android:id="@+id/itmSimulacro"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/strBtnSimulacro" />
+        <item
+            android:id="@+id/itmLogros"
+            android:icon="@drawable/com_facebook_button_like_icon_selected"
+            android:title="@string/strBtnLogros" />
+        <item
+            android:id="@+id/itmSettings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/strBtnConfiguracion" />
+    </group>
+
+    <item android:title="idk">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/strBtnCompartir" />
+            <item
+                android:id="@+id/itmAbout"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/strBtnAcercade" />
+            <item
+                android:id="@+id/itmExit"
+                android:icon="@drawable/com_facebook_button_icon_blue"
+                android:title="@string/strBtnSalir" />
+        </menu>
+    </item>
+
+</menu>

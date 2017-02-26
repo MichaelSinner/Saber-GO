@@ -1,11 +1,26 @@
 <resources>
     <string name="app_name">SaberGo</string>
+    <string name="facebook_app_id">200353460445301</string>
 
     --Login
-
     <string name="strSignup">Registrarse</string>
     <string name="strLogin">Iniciar Sesión</string>
+    -- Menú Principal
+    <string name="strSubtitMenu">Menú Principal</string>
+    <string name="strBtnPruebaDiag">Exámen Diagnóstico</string>
+    <string name="strBtnPruebaDiaria">Preguntas rápidas</string>
+    <string name="strBtnSimulacro">Simulacro</string>
+    <string name="strBtnLogros">Logros</string>
+    <string name="strBtnConfiguracion">Configuración</string>
+    <string name="strBtnCompartir">Compartir</string>
+    <string name="strBtnAcercade">Acerca de</string>
+    <string name="strBtnSalir">Salir</string>
+
     -- Common
     <string name="strTitulo">Saber Go!</string>
+    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
 </resources>
 
