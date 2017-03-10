@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "72261182313",
+    "firebase_url": "https://saber-go.firebaseio.com",
+    "project_id": "saber-go",
+    "storage_bucket": "saber-go.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72261182313:android:a148ab3b577f449b",
+        "android_client_info": {
+          "package_name": "com.example.michaelsinner.sabergo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72261182313-2muh7e1m93f99jervfnlbh3g5qtjl78j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.michaelsinner.sabergo",
+            "certificate_hash": "f6e30e8a3e48e758f8f6d66887b955c848b120db"
+          }
+        },
+        {
+          "client_id": "72261182313-kher2c36mn77df5hl44h5a33vrb8o3pn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk0gDH2ta1EySxr2V6gLBjLObTH9xh6xE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72261182313-kher2c36mn77df5hl44h5a33vrb8o3pn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

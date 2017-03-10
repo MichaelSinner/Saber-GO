@@ -117,16 +117,20 @@ public class MainMenu extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.itmPruebaDiaria) {
 
-        } else if (id == R.id.itmSimulacro) {
+        } else if (id == R.id.itmLudica) {
 
         } else if (id == R.id.itmLogros) {
-
+            startActivity(toAchievements());
         } else if (id == R.id.itmSettings) {
-
+            startActivity(toSettings());
         } else if (id == R.id.itmAbout) {
-
+            startActivity(toAbout());
         } else if (id == R.id.itmExit) {
-
+            goLoginScreen();
+        } else if (id == R.id.itmTutorial){
+            startActivity(toTutorial());
+        }else if (id == R.id.nav_share){
+            startActivity(toShare());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -135,9 +139,36 @@ public class MainMenu extends AppCompatActivity
     }
 
 
-    public Intent toPruebaDiagnostico()
+    public Intent toTutorial()
     {
-        Intent toPruebaDiagnostico = new Intent(MainMenu.this, PruebaDiagnostico.class);
-        return toPruebaDiagnostico;
+        Intent toTutorial = new Intent(MainMenu.this, Tutorial.class);
+        return toTutorial;
     }
+
+    public Intent toAbout(){
+        Intent toAbout = new Intent(MainMenu.this, About.class);
+        return  toAbout;
+    }
+
+    public  Intent toAchievements(){
+        Intent toAchievements = new Intent(MainMenu.this, Achievements.class);
+        return  toAchievements;
+    }
+
+    public  Intent toShare(){
+        Intent toShare = new Intent(MainMenu.this, Share.class);
+        return  toShare;
+    }
+    private void goLoginScreen()
+    {
+        Intent intent = new Intent(this, Login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+    public Intent toSettings(){
+        Intent toSettings = new Intent(MainMenu.this, Settings.class);
+        return  toSettings;
+    }
+
+
 }

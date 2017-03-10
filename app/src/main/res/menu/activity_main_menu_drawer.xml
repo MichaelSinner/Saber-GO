@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/itmTutorial"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/strBtnTutorial" />
+        <item
             android:id="@+id/itmPruebaDiagnostico"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/strBtnPruebaDiag" />
@@ -11,9 +15,9 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/strBtnPruebaDiaria" />
         <item
-            android:id="@+id/itmSimulacro"
+            android:id="@+id/itmLudica"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/strBtnSimulacro" />
+            android:title="@string/strBtnLudica" />
         <item
             android:id="@+id/itmLogros"
             android:icon="@drawable/com_facebook_button_like_icon_selected"
