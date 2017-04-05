@@ -50,6 +50,8 @@ public class MainActivity extends Activity
             }
         });
         btnStart.setTypeface(font);
+
+
     }
 
     public void printHashKey()

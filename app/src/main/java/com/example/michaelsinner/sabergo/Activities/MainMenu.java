@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,9 +15,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.michaelsinner.sabergo.R;
 import com.example.michaelsinner.sabergo.Utilities.PrefUtil;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class MainMenu extends AppCompatActivity
@@ -26,7 +32,10 @@ public class MainMenu extends AppCompatActivity
     private Button btnPruebaDiaria;
     private Button btnSimulacro;
 
-    private PrefUtil prefUtil;
+    private ImageView ivUserImagProfile;
+    private TextView tvUsername, tvUserEmail, tcUserLevel;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener fireAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +44,7 @@ public class MainMenu extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -44,8 +53,12 @@ public class MainMenu extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*
-        btnPruebaDiagn = (Button) findViewById(R.id.btnPruebaDiag);
+        tvUsername = (TextView) findViewById(R.id.tvUserEmail);
+        tvUsername = null;
+
+//                    toMenuPrincipal();
+
+        btnPruebaDiagn = (Button) findViewById(R.id.btnPruebaDiagnostico);
         btnPruebaDiagn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,27 +66,14 @@ public class MainMenu extends AppCompatActivity
             }
         });
 
-        btnPruebaDiaria = (Button) findViewById(R.id.btnPruebaDiaria);
-        btnPruebaDiaria.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(toPruebaDiagnostico());
-            }
-        });
-
-        btnSimulacro = (Button) findViewById(R.id.btnSimulacro);
-        btnSimulacro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(toPruebaDiagnostico());
-            }
-        });
 
 
-        */
+
 
 
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -114,7 +114,7 @@ public class MainMenu extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.itmPruebaDiagnostico) {
-            // Handle the camera action
+
         } else if (id == R.id.itmPruebaDiaria) {
 
         } else if (id == R.id.itmLudica) {
@@ -126,7 +126,7 @@ public class MainMenu extends AppCompatActivity
         } else if (id == R.id.itmAbout) {
             startActivity(toAbout());
         } else if (id == R.id.itmExit) {
-            goLoginScreen();
+            exitApp();
         } else if (id == R.id.itmTutorial){
             startActivity(toTutorial());
         }else if (id == R.id.nav_share){
@@ -138,6 +138,11 @@ public class MainMenu extends AppCompatActivity
         return true;
     }
 
+    private Intent toPruebaDiagnostico()
+    {
+        Intent toPruebaDiagnostico = new Intent(MainMenu.this, PruebaDiagnostico.class);
+        return  toPruebaDiagnostico;
+    }
 
     public Intent toTutorial()
     {
@@ -168,6 +173,11 @@ public class MainMenu extends AppCompatActivity
     public Intent toSettings(){
         Intent toSettings = new Intent(MainMenu.this, Settings.class);
         return  toSettings;
+    }
+    private void exitApp(){
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+        goLoginScreen();
     }
 
 

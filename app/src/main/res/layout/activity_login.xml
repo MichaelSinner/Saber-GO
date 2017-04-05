@@ -17,38 +17,72 @@
         android:textSize="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/tvTitleLogin"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:id="@+id/tvTitleLogin" />
+        android:layout_centerHorizontal="true" />
 
 
     <Button
-        android:text="@string/strSignup"
+        android:text="@string/strBtnIniciarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnRegistrarse"
-        android:layout_marginBottom="120dp"
-        android:layout_below="@+id/tvTitleLogin"
-        android:layout_alignStart="@+id/tvTitleLogin"
-        android:layout_alignEnd="@+id/tvTitleLogin" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tvO"
-        android:text="Ó"
-        android:layout_below="@+id/tvTitleLogin"
-        android:layout_marginTop="58dp"
+        android:id="@+id/btnIniciarSesion"
         android:layout_above="@+id/button_fbLogin"
-        android:layout_alignEnd="@+id/button_fbLogin"
-        android:layout_alignStart="@+id/button_fbLogin" />
+        android:layout_alignStart="@+id/etPassword"
+        android:layout_marginBottom="14dp"
+        android:layout_alignEnd="@+id/etPassword" />
+
+
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/button_fbLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btnIniciarSesion"
+        android:layout_marginBottom="108dp"
+        android:layout_alignEnd="@+id/btnIniciarSesion" />
+
+    <ProgressBar
+        android:id="@+id/prgBarFirebase"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingEnd="2022dp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitleLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="53dp"
+        android:ems="10"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:layout_below="@+id/etEmail"
+        android:layout_alignStart="@+id/etEmail" />
+
+    <TextView
+        android:id="@+id/textViewPrueba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="" />
 
 </RelativeLayout>

@@ -57,7 +57,9 @@
         <activity android:name=".Activities.Share" />
         <activity
             android:name=".Activities.Settings"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".Activities.LoginEmail" />
+        <activity android:name=".Activities.PruebaDiagnostico"></activity>
     </application>
 
 </manifest>

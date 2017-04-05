@@ -8,10 +8,13 @@
     -- Menú Principal
     <string name="strSubtitMenu">Menú Principal</string>
     <string name="strBtnPruebaDiag">Exámen Diagnóstico</string>
-    <string name="strBtnPruebaDiaria">Preguntas rápidas</string>
+    <string name="strBtnIniciarSesion">Iniciar sesión</string>
+    <string name="strBtnPruebaDiaria">Preguntas  rápidas</string>
+    <string name="strBtnRegistrarse">Registrarse</string>
     <string name="strBtnTutorial">Tutorial</string>
-    <string name="strBtnLudica">Meteoritos</string>
+    <string name="strBtnLudica">Meteoro</string>
     <string name="strBtnLogros">Logros</string>
+    <string name="strBtnPerfil">Perfil</string>
     <string name="strBtnConfiguracion">Configuración</string>
     <string name="strBtnCompartir">Compartir</string>
     <string name="strBtnAcercade">Acerca de</string>
