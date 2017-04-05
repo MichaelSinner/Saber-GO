@@ -20,6 +20,15 @@
     <string name="strBtnAcercade">Acerca de</string>
     <string name="strBtnSalir">Salir</string>
 
+    -- Prueba Diagnostico
+    <string name="strOpcionA">A</string>
+    <string name="strOpcionB">B</string>
+    <string name="strOpcionC">C</string>
+    <string name="strOpcionD">D</string>
+    <string name="strCorrectas">0/50</string>
+    <string name="strIncorrectas">0/50</string>
+    <string name="strTime">00:00</string>
+
     -- Common
     <string name="strTitulo">Saber Go!</string>
     <string name="title_activity_main_menu">MainMenu</string>
