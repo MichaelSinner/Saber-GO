@@ -2,6 +2,7 @@ package com.example.michaelsinner.sabergo.Activities;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,8 +49,8 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
     private ProgressBar progressBarFireBase;
-    private TextView tvprueba;
-    private Button btnLogIn;
+    private TextView tvTitleLogin, tvprueba;
+    private Button btnLogIn, btnSignup;
     private EditText etEmail, etPassword;
 
 
@@ -65,9 +66,14 @@ public class Login extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
         btnFBLogin = (LoginButton) findViewById(R.id.button_fbLogin);
-        ActionBar actionBar = getActionBar();
+        getSupportActionBar().hide();
+
         LayoutInflater inflater = LayoutInflater.from(this);
         View customView = inflater.inflate(R.layout.actionbar_home, null);
+
+        tvTitleLogin = (TextView) findViewById(R.id.tvTitleLogin);
+        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/Sanlabello.ttf");
+        tvTitleLogin.setTypeface(font);
 
         btnFBLogin.setReadPermissions(Arrays.asList("email"));
         btnFBLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -87,6 +93,7 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this, "Login Cancel", Toast.LENGTH_LONG);
             }
         });
+        btnFBLogin.setTypeface(font);
 
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -100,6 +107,7 @@ public class Login extends AppCompatActivity {
                 tvprueba.setText(etEmail.getText());
             }
         });
+        btnLogIn.setTypeface(font);
 
         firebaseAuth = FirebaseAuth.getInstance();
         fireAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -112,6 +120,14 @@ public class Login extends AppCompatActivity {
                 }
             }
         };
+        btnSignup = (Button) findViewById(R.id.btnToRegister);
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toRegister();   
+            }
+        });
+        btnSignup.setTypeface(font);
 
     }
 
@@ -133,7 +149,12 @@ public class Login extends AppCompatActivity {
         });
     }
 
-
+    private void toRegister()
+    {
+        Intent toRegister = new Intent(this , SignUp.class);
+        toRegister.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toRegister);
+    }
 
 
     public void toMenuPrincipal()

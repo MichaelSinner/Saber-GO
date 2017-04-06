@@ -58,8 +58,13 @@
         <activity
             android:name=".Activities.Settings"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".Activities.LoginEmail" />
-        <activity android:name=".Activities.PruebaDiagnostico"></activity>
+        <activity android:name=".Activities.PruebaDiagnostico" />
+        <activity android:name=".Activities.SignUp" />
+        <activity android:name=".Activities.ModuloLudica" />
+        <activity android:name=".Activities.ModuloAR" />
+        <activity
+            android:name=".Activities.Profile"
+            android:label="@string/title_activity_profile"></activity>
     </application>
 
 </manifest>

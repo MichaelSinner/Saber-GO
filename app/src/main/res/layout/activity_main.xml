@@ -14,7 +14,7 @@
     <Button
         android:text="@string/strTitulo"
         android:textAllCaps="false"
-        android:textSize="50dp"
+        android:textSize="70dp"
         android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
