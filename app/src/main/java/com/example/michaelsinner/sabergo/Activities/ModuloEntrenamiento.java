@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.michaelsinner.sabergo.R;
 
-public class ModuloLudica extends AppCompatActivity {
+public class ModuloEntrenamiento extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

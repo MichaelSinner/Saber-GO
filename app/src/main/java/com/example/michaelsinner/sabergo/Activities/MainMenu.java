@@ -1,10 +1,13 @@
 package com.example.michaelsinner.sabergo.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,20 +23,32 @@ import android.widget.TextView;
 
 import com.example.michaelsinner.sabergo.R;
 import com.example.michaelsinner.sabergo.Utilities.PrefUtil;
+import com.facebook.*;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.net.URL;
 
 
 public class MainMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "01" ;
     private Button btnPruebaDiagn;
     private Button btnPruebaDiaria;
     private Button btnSimulacro;
 
+    private String userName, userEmail;
+
     private ImageView ivUserImagProfile;
-    private TextView tvUsername, tvUserEmail, tcUserLevel;
+    TextView tvUserName, tvUserEmail, tcUserLevel, prueba;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
 
@@ -52,10 +67,37 @@ public class MainMenu extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View viewNav = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
 
-        tvUsername = (TextView) findViewById(R.id.tvUserEmail);
-        tvUsername = null;
+        prueba = (TextView) findViewById(R.id.tvPruebaMenu);
+        tvUserName = (TextView) viewNav.findViewById(R.id.tvUserNameMain);
+        tvUserEmail = (TextView) viewNav.findViewById(R.id.tvUserEmailMain);
+        ivUserImagProfile = (ImageView) viewNav.findViewById(R.id.imgProfile);
+
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle!=null){
+            String email = (String) bundle.get("EMAIL");
+            tvUserEmail.setText(email);
+            Bitmap imageProfile = (Bitmap) bundle.get("IMAGE");
+            ivUserImagProfile.setImageBitmap(imageProfile);
+        }
+
+
+        if(AccessToken.getCurrentAccessToken()== null)
+        {
+            goLoginScreen();
+        }else{
+            com.facebook.Profile perfilFb = Profile.getCurrentProfile();
+          //  tvUsername.setText("Holo");
+          //  tvUserEmail.setText(perfilFb.getFirstName());
+            prueba.setText(perfilFb.getFirstName()+" "+perfilFb.getLastName());
+            tvUserName.setText(perfilFb.getFirstName()+" "+perfilFb.getLastName());
+            String userI = perfilFb.getId();
+
+        }
 
 //                    toMenuPrincipal();
 
@@ -67,11 +109,33 @@ public class MainMenu extends AppCompatActivity
             }
         });
 
+        btnPruebaDiaria = (Button) findViewById(R.id.btnPruebasDiarias);
+        btnPruebaDiaria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(toPruebaEntrenamiento());
+            }
+        });
 
+        btnSimulacro = (Button) findViewById(R.id.btnMeteoros);
+        btnSimulacro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(toModuloLudica());
+            }
+        });
 
+    }
 
+    public static Bitmap getFacebookProfilePicture(String userID) throws SocketException, SocketTimeoutException, MalformedURLException, IOException, Exception
+    {
+        String imageURL;
+        Bitmap bitmap = null;
+        imageURL = "http://graph.facebook.com/"+userID+"/picture?type=large";
+        InputStream in = (InputStream) new URL(imageURL).getContent();
+        bitmap = BitmapFactory.decodeStream(in);
 
-
+        return bitmap;
     }
 
 
@@ -115,11 +179,11 @@ public class MainMenu extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.itmPruebaDiagnostico) {
-
+            startActivity(toPruebaDiagnostico());
         } else if (id == R.id.itmPruebaDiaria) {
-
+            startActivity(toPruebaEntrenamiento());
         } else if (id == R.id.itmLudica) {
-
+            startActivity(toModuloLudica());
         } else if (id == R.id.itmLogros) {
             startActivity(toAchievements());
         } else if (id == R.id.itmSettings) {
@@ -143,6 +207,14 @@ public class MainMenu extends AppCompatActivity
     {
         Intent toPruebaDiagnostico = new Intent(MainMenu.this, PruebaDiagnostico.class);
         return  toPruebaDiagnostico;
+    }
+    private Intent toPruebaEntrenamiento(){
+        Intent toPruebaEntrenamiento = new Intent(MainMenu.this, PruebaDiagnostico.class);
+        return  toPruebaEntrenamiento;
+    }
+    private Intent toModuloLudica(){
+        Intent toModuloLudica = new Intent(MainMenu.this, ModuloAR.class);
+        return  toModuloLudica;
     }
 
     public Intent toTutorial()

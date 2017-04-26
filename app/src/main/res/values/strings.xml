@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">SaberGo</string>
     <string name="facebook_app_id">200353460445301</string>
+    <string name="strYear">2017</string>
 
     --Login
     <string name="strSignup">Registrarse</string>
     <string name="strLogin">Iniciar Sesión</string>
+    --Signup
+    <string name="strSubtittleSignUp">Crea tu cuenta</string>
+
     -- Menú Principal
     <string name="strSubtitMenu">Menú Principal</string>
     <string name="strBtnPruebaDiag">Exámen Diagnóstico</string>
@@ -18,7 +22,7 @@
     <string name="strBtnConfiguracion">Configuración</string>
     <string name="strBtnCompartir">Compartir</string>
     <string name="strBtnAcercade">Acerca de</string>
-    <string name="strBtnSalir">Salir</string>
+    <string name="strBtnSalir">Cerrar Sesion</string>
 
     -- Prueba Diagnostico
     <string name="strOpcionA">A</string>
