@@ -1,47 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimarySG"
+    android:id="@+id/activity_sign_up"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.michaelsinner.sabergo.Activities.SignUp">
 
     <TextView
-        android:id="@+id/tvTitulo"
+        android:id="@+id/tvTituloRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textSize="55dp"
         tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_marginBottom="38dp"
+        android:layout_above="@+id/tvSubtituloRegistro"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/tvSubtitulo"
+        android:id="@+id/tvSubtituloRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/strSubtittleSignUp"
         tools:layout_editor_absoluteX="116dp"
-        tools:layout_editor_absoluteY="81dp" />
+        tools:layout_editor_absoluteY="81dp"
+        android:layout_above="@+id/etEmailSignUp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etEmailSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Correo Electrónico"
         android:inputType="textEmailAddress"
         tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="154dp" />
+        tools:layout_editor_absoluteY="154dp"
+        android:layout_above="@+id/etPasswordSignUp"
+        android:layout_alignStart="@+id/etPasswordSignUp"
+        android:layout_marginBottom="38dp" />
 
     <EditText
-        android:id="@+id/etPassword"
+        android:id="@+id/etPasswordSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="contraseña"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="216dp" />
+        tools:layout_editor_absoluteY="216dp"
+        android:layout_above="@+id/btnSignUp"
+        android:layout_alignStart="@+id/tvTituloRegistro"
+        android:layout_marginBottom="22dp" />
 
     <Button
         android:id="@+id/btnSignUp"
@@ -49,5 +62,8 @@
         android:layout_height="wrap_content"
         android:text="@string/strBtnRegistrarse"
         tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="298dp" />
-</android.support.constraint.ConstraintLayout>
+        tools:layout_editor_absoluteY="298dp"
+        android:layout_marginBottom="82dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
