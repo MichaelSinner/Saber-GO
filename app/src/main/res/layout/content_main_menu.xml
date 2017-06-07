@@ -9,7 +9,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background03"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.michaelsinner.sabergo.Activities.MainMenu"
     tools:showIn="@layout/app_bar_main_menu">
@@ -19,10 +18,11 @@
         android:id="@+id/btnPruebaDiagnostico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
         android:text="@string/strBtnPruebaDiag"
-        android:layout_below="@+id/tvPruebaMenu"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/btnMeteoros"
@@ -57,8 +57,8 @@
         android:id="@+id/tvPruebaMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_marginTop="16dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="TextView" />
 </RelativeLayout>

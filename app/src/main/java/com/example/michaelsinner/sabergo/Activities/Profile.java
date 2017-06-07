@@ -12,7 +12,6 @@ import com.example.michaelsinner.sabergo.R;
 public class Profile extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private com.example.michaelsinner.sabergo.Data.Profile profile;
 
 
     @Override

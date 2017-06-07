@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -65,6 +64,7 @@ public class Login extends AppCompatActivity {
     private TextView tvTitleLogin, tvprueba;
     private Button btnLogIn, btnSignup;
     private EditText etEmail, etPassword;
+    private TextView tvemailUser, tvnamedUser;
     String emailUser, nameUser;
     private Bitmap imageUser;
 
@@ -83,6 +83,8 @@ public class Login extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         View customView = inflater.inflate(R.layout.actionbar_home, null);
 
+        tvemailUser = (TextView) findViewById(R.id.tvUserEmail);
+        tvnamedUser = (TextView) findViewById(R.id.tvUserName);
 
         tvTitleLogin = (TextView) findViewById(R.id.tvTitleLogin);
         Typeface font = Typeface.createFromAsset(getAssets(),"fonts/Sanlabello.ttf");
@@ -153,15 +155,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String strUserEmail = etEmail.getText().toString();
-                String strUserPass = etPassword.getText().toString();
-
-                if(TextUtils.isEmpty(strUserEmail)||TextUtils.isEmpty(strUserPass)){
-                    //Toast.makeText(getApplicationContext(),"Escribe tu correo y contraseña para iniciar sesión",Toast.LENGTH_SHORT).show();
-                    etEmail.setError("Escribe tu correo aquí");
-                    etPassword.setError("Escribe tu contraseña");
-                    return;
-
+                if(etEmail.equals("")||etPassword.equals("")){
+                   Toast.makeText(getApplicationContext(),"Escribe tu correo y contraseña",Toast.LENGTH_SHORT);
                 }else {
                     toLogin(etEmail.getText().toString(),etPassword.getText().toString());
                     tvprueba.setText(etEmail.getText());
@@ -197,8 +192,9 @@ public class Login extends AppCompatActivity {
     {
         try {
 
-
+            tvemailUser.setText(object.getString("email"));
             emailUser = object.getString("email");
+            tvnamedUser.setText(object.getString("name"));
             imageUser = getFacebookProfilePicture(object.getString("id"));
             //profilePictureView.setPresetSize(ProfilePictureView.NORMAL);
             //profilePictureView.setProfileId(object.getString("id"));
@@ -274,7 +270,7 @@ public class Login extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()){
                     Log.d(TAG, "FAILED");
-                    Toast.makeText(getApplicationContext(), "Error email auntenticacion",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error email auntenticacion",Toast.LENGTH_LONG);
                 }
             }
         });

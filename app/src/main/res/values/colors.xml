@@ -6,8 +6,6 @@
     <color name="colorPrimarySG">#25B7D3</color>
     <color name="black_overlay">#66000000</color>
     <color name="colorTitle">#ffffff</color>
-    <color name="colorAnswerTrue">#03c100</color>
-    <color name="colorAnswerFalse">#f41717</color>
 
 
 </resources>

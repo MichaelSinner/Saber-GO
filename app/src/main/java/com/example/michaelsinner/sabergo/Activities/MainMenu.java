@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,10 +22,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.michaelsinner.sabergo.R;
+import com.example.michaelsinner.sabergo.Utilities.PrefUtil;
 import com.facebook.*;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -84,14 +88,14 @@ public class MainMenu extends AppCompatActivity
 
         if(AccessToken.getCurrentAccessToken()== null)
         {
-            //goLoginScreen();
+            goLoginScreen();
         }else{
             com.facebook.Profile perfilFb = Profile.getCurrentProfile();
           //  tvUsername.setText("Holo");
           //  tvUserEmail.setText(perfilFb.getFirstName());
             prueba.setText(perfilFb.getFirstName()+" "+perfilFb.getLastName());
             tvUserName.setText(perfilFb.getFirstName()+" "+perfilFb.getLastName());
-            String userId = perfilFb.getId();
+            String userI = perfilFb.getId();
 
         }
 

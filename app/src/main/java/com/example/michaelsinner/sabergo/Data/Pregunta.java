@@ -5,9 +5,8 @@ package com.example.michaelsinner.sabergo.Data;
  */
 
 public class Pregunta {
-    private String id;
+    private String idPregunta;
     private String respuesta;
-
 
 
 

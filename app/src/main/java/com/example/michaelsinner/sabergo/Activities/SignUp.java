@@ -1,15 +1,12 @@
 package com.example.michaelsinner.sabergo.Activities;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -36,16 +33,7 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
-
-        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/Sanlabello.ttf");
-        tvTitle = (TextView) findViewById(R.id.tvTituloRegistro);
-        tvTitle.setTypeface(font);
-        tvSubtitle = (TextView) findViewById(R.id.tvSubtituloRegistro);
-        tvSubtitle.setTypeface(font);
 
         firebaseAuth = FirebaseAuth.getInstance();
         fireAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -59,8 +47,12 @@ public class SignUp extends AppCompatActivity {
             }
         };
 
+
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        String email , password;
+
+
 
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
@@ -71,14 +63,13 @@ public class SignUp extends AppCompatActivity {
             }
 
         });
-        btnSignUp.setTypeface(font);
 
 
     }
     private void toLogin(String emailEditText, String passwordEditText)
     {
 
-        firebaseAuth.createUserWithEmailAndPassword(emailEditText,passwordEditText).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(emailEditText,passwordEditText).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             public static final String TAG = "1" ;
 
             @Override

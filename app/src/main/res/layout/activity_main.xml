@@ -18,7 +18,7 @@
         android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background02"
+        android:background="#25B7D3"
         android:id="@+id/btnStart"
         tools:textStyle="normal|bold" />
 </RelativeLayout>
