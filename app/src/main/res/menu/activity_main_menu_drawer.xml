@@ -4,23 +4,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/itmTutorial"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_action_tutorial"
             android:title="@string/strBtnTutorial" />
         <item
             android:id="@+id/itmPruebaDiagnostico"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_action_exam"
             android:title="@string/strBtnPruebaDiag" />
         <item
             android:id="@+id/itmPruebaDiaria"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_action_pruebarapida"
             android:title="@string/strBtnPruebaDiaria" />
         <item
             android:id="@+id/itmLudica"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_action_ar"
             android:title="@string/strBtnLudica" />
         <item
             android:id="@+id/itmLogros"
-            android:icon="@drawable/com_facebook_button_like_icon_selected"
+            android:icon="@drawable/ic_action_logros"
             android:title="@string/strBtnLogros" />
         <item
             android:id="@+id/itmSettings"
@@ -36,11 +36,11 @@
                 android:title="@string/strBtnCompartir" />
             <item
                 android:id="@+id/itmAbout"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_action_about"
                 android:title="@string/strBtnAcercade" />
             <item
                 android:id="@+id/itmExit"
-                android:icon="@drawable/com_facebook_button_icon_blue"
+                android:icon="@drawable/ic_action_logout"
                 android:title="@string/strBtnSalir" />
         </menu>
     </item>

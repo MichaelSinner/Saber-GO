@@ -12,5 +12,6 @@ public class PruebaDiagnostico {
     private int numPreguntasCorrectas;
     private  int numPreguntasIncorrectas;
     private ArrayList<Pregunta> listaPreguntas;
+    private  Pregunta pregunta;
 
 }
