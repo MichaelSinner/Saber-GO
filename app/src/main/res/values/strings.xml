@@ -34,7 +34,7 @@
     <string name="strTime">00:00</string>
 
     -- Common
-    <string name="strTitulo">Saber Go!</string>
+    <string name="strTitulo">Saber Go</string>
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -121,5 +121,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_activity_modulo_preguntas_diarias">ModuloPreguntasDiarias</string>
 </resources>
 

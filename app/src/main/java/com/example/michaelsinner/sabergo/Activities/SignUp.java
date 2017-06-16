@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,6 +29,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignUp extends AppCompatActivity {
 
+    private Toolbar toolbar;
+
     private Button btnSignUp;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
@@ -37,9 +42,13 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Registrarse");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Typeface font = Typeface.createFromAsset(getAssets(),"fonts/Sanlabello.ttf");
         tvTitle = (TextView) findViewById(R.id.tvTituloRegistro);
@@ -115,6 +124,20 @@ public class SignUp extends AppCompatActivity {
         firebaseAuth.removeAuthStateListener(fireAuthStateListener);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }else if(id == android.R.id.home){
+            Intent intent = NavUtils.getParentActivityIntent(this);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            NavUtils.navigateUpTo(this,intent);
+            return true;
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
 }

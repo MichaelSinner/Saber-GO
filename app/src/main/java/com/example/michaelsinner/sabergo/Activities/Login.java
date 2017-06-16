@@ -30,7 +30,13 @@ import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.login.widget.ProfilePictureView;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -38,6 +44,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,14 +60,21 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
+    //google objcts
+    private GoogleApiClient googleApiClient;
+    private SignInButton signInButton;
+
+    public static final int  SIGN_IN_CODE_GMAIL = 777;
 
     private LoginButton btnFBLogin;
     private CallbackManager callbackManager;
     //private ProfilePictureView profilePictureView;
+
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
+
     private ProgressBar progressBarFireBase;
     private TextView tvTitleLogin, tvprueba;
     private Button btnLogIn, btnSignup;
@@ -73,15 +87,23 @@ public class Login extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        progressBarFireBase = (ProgressBar) findViewById(R.id.prgBarFirebase);
-
-        callbackManager = CallbackManager.Factory.create();
-        btnFBLogin = (LoginButton) findViewById(R.id.button_fbLogin);
         getSupportActionBar().hide();
-
         LayoutInflater inflater = LayoutInflater.from(this);
         View customView = inflater.inflate(R.layout.actionbar_home, null);
+
+
+        progressBarFireBase = (ProgressBar) findViewById(R.id.prgBarFirebase);
+        callbackManager = CallbackManager.Factory.create();
+
+        final GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
+                requestIdToken(getString(R.string.default_web_client_id)).
+                requestEmail().build();
+
+        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).
+                addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions).build();
+
+        signInButton = (SignInButton) findViewById(R.id.btnSignInGoogle);
+        btnFBLogin = (LoginButton) findViewById(R.id.button_fbLogin);
 
 
         tvTitleLogin = (TextView) findViewById(R.id.tvTitleLogin);
@@ -126,8 +148,6 @@ public class Login extends AppCompatActivity {
                 parameters.putString("fields", "id,name,email,gender, birthday");
                 request.setParameters(parameters);
                 request.executeAsync();
-
-
                 handleFacebookAccesToken(loginResult.getAccessToken());
             }
 
@@ -142,6 +162,16 @@ public class Login extends AppCompatActivity {
             }
         });
         btnFBLogin.setTypeface(font);
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                startActivityForResult(intent,SIGN_IN_CODE_GMAIL);
+            }
+        });
+        signInButton.setColorScheme(SignInButton.COLOR_DARK);
+
 
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -182,6 +212,8 @@ public class Login extends AppCompatActivity {
                 }
             }
         };
+
+
         btnSignup = (Button) findViewById(R.id.btnToRegister);
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,6 +267,29 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+    private void handleGoogleAccesToken(GoogleSignInResult result)
+    {
+        if(result.isSuccess()){
+            firebasAuthwithGoogle(result.getSignInAccount());
+        }else{
+
+            Toast.makeText(getApplicationContext(), "Error gmail autenticacion",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void firebasAuthwithGoogle(GoogleSignInAccount signInAccount)
+    {
+        AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(!task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(),"No se realizo la autenticacion Firebase",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
 
     private void toRegister()
     {
@@ -284,7 +339,14 @@ public class Login extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode,resultCode,data);
+
+        if(requestCode == SIGN_IN_CODE_GMAIL){
+            GoogleSignInResult result  = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleGoogleAccesToken(result);
+        }
     }
+
+
 
     @Override
     protected void onStart() {
@@ -293,8 +355,15 @@ public class Login extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop()
+    {
         super.onStop();
-        firebaseAuth.removeAuthStateListener(fireAuthStateListener);
+
+        if(firebaseAuth != null) firebaseAuth.removeAuthStateListener(fireAuthStateListener);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

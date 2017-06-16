@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimarySG"
     android:id="@+id/activity_sign_up"
@@ -7,22 +8,40 @@
     android:layout_height="match_parent"
     tools:context="com.example.michaelsinner.sabergo.Activities.SignUp">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorPrimarySG"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </android.support.design.widget.AppBarLayout>
+
     <TextView
         android:id="@+id/tvTituloRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textSize="55dp"
+        android:textColor="@color/colorTitle"
         tools:layout_editor_absoluteX="54dp"
         tools:layout_editor_absoluteY="16dp"
-        android:layout_marginBottom="38dp"
         android:layout_above="@+id/tvSubtituloRegistro"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp" />
 
     <TextView
         android:id="@+id/tvSubtituloRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorTitle"
         android:text="@string/strSubtittleSignUp"
         tools:layout_editor_absoluteX="116dp"
         tools:layout_editor_absoluteY="81dp"
@@ -63,7 +82,8 @@
         android:text="@string/strBtnRegistrarse"
         tools:layout_editor_absoluteX="103dp"
         tools:layout_editor_absoluteY="298dp"
-        android:layout_marginBottom="82dp"
+        android:layout_marginBottom="36dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

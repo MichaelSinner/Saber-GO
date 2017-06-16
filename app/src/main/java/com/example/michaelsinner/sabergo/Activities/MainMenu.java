@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,12 +19,20 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.michaelsinner.sabergo.R;
 import com.facebook.*;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +43,7 @@ import java.net.URL;
 
 
 public class MainMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "01" ;
     private Button btnPruebaDiagn;
@@ -45,8 +54,11 @@ public class MainMenu extends AppCompatActivity
 
     private ImageView ivUserImagProfile;
     TextView tvUserName, tvUserEmail, tcUserLevel, prueba;
+
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
+
+    private GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +67,26 @@ public class MainMenu extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Menú Principal");
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
+                requestEmail().build();
+
+        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        fireAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user!=null){
+
+                }else{
+                    goLoginScreen();;
+                }
+            }
+        };
+
+
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -121,6 +153,18 @@ public class MainMenu extends AppCompatActivity
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(fireAuthStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(firebaseAuth != null) firebaseAuth.removeAuthStateListener(fireAuthStateListener);
     }
 
     public static Bitmap getFacebookProfilePicture(String userID) throws SocketException, SocketTimeoutException, MalformedURLException, IOException, Exception
@@ -205,7 +249,7 @@ public class MainMenu extends AppCompatActivity
         return  toPruebaDiagnostico;
     }
     private Intent toPruebaEntrenamiento(){
-        Intent toPruebaEntrenamiento = new Intent(MainMenu.this, PruebaDiagnostico.class);
+        Intent toPruebaEntrenamiento = new Intent(MainMenu.this, ModuloPruebasDiarias.class);
         return  toPruebaEntrenamiento;
     }
     private Intent toModuloLudica(){
@@ -246,8 +290,38 @@ public class MainMenu extends AppCompatActivity
     private void exitApp(){
         FirebaseAuth.getInstance().signOut();
         LoginManager.getInstance().logOut();
-        goLoginScreen();
+
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                if(status.isSuccess()){
+                    goLoginScreen();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Error al cerrar sesion Google",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+    public void revoke(View view){
+        FirebaseAuth.getInstance().signOut();
+
+        Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                if(status.isSuccess()){
+                    goLoginScreen();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Error al revocar sesion Google",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }

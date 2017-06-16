@@ -18,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvTitleLogin"
+        android:layout_marginTop="78dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -27,19 +28,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnIniciarSesion"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/etPassword"
-        android:layout_alignEnd="@+id/etPassword" />
-
-
+        android:layout_below="@+id/etPassword"
+        android:layout_alignEnd="@+id/etPassword"
+        android:layout_alignStart="@+id/etPassword" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/button_fbLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/btnSignInGoogle"
+        android:layout_alignStart="@+id/tvTitleLogin"
+        android:layout_alignEnd="@+id/tvTitleLogin"
 
+    />
+
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSignInGoogle"
         android:layout_below="@+id/btnIniciarSesion"
-        android:layout_alignStart="@+id/btnIniciarSesion"
+        android:layout_alignStart="@+id/button_fbLogin"
         android:layout_alignEnd="@+id/btnIniciarSesion" />
 
     <ProgressBar
@@ -58,12 +66,12 @@
         android:id="@+id/etEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitleLogin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp"
         android:ems="10"
         android:hint="Correo electrónico"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:layout_below="@+id/tvTitleLogin"
+        android:layout_alignEnd="@+id/tvTitleLogin"
+        android:layout_alignStart="@+id/tvTitleLogin" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -72,8 +80,9 @@
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
+        android:layout_alignStart="@+id/etEmail"
         android:layout_below="@+id/etEmail"
-        android:layout_alignStart="@+id/etEmail" />
+        android:layout_alignEnd="@+id/etEmail" />
 
     <TextView
         android:id="@+id/textViewPrueba"
@@ -88,10 +97,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/strBtnRegistrarse"
-        android:layout_below="@+id/btnIniciarSesion"
-        android:layout_alignStart="@+id/button_fbLogin"
-        android:layout_marginTop="36dp"
-        android:layout_alignEnd="@+id/button_fbLogin" />
+        android:layout_above="@+id/textViewPrueba"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/tvYear"
