@@ -1,35 +1,35 @@
 package com.example.michaelsinner.sabergo.Activities;
 
-import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.michaelsinner.sabergo.R;
-
-
-import com.facebook.*;
-
-
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -56,7 +56,6 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -144,6 +143,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                             }
                         });
+
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "id,name,email,gender, birthday");
                 request.setParameters(parameters);
@@ -187,15 +187,18 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 String strUserPass = etPassword.getText().toString();
 
                 if(TextUtils.isEmpty(strUserEmail)||TextUtils.isEmpty(strUserPass)){
-                    //Toast.makeText(getApplicationContext(),"Escribe tu correo y contraseña para iniciar sesión",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Escribe tu correo y contraseña para iniciar sesión",Toast.LENGTH_SHORT).show();
                     etEmail.setError("Escribe tu correo aquí");
                     etPassword.setError("Escribe tu contraseña");
                     return;
 
-                }else {
+                }else if(isOnline(getApplicationContext())){
                     toLogin(etEmail.getText().toString(),etPassword.getText().toString());
                     tvprueba.setText(etEmail.getText());
+                }else{
+                    toNoInternet();
                 }
+
 
             }
         });
@@ -228,13 +231,10 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private void setProfileToView(JSONObject object)
     {
         try {
-
-
             emailUser = object.getString("email");
             imageUser = getFacebookProfilePicture(object.getString("id"));
             //profilePictureView.setPresetSize(ProfilePictureView.NORMAL);
             //profilePictureView.setProfileId(object.getString("id"));
-
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -249,11 +249,21 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             e.printStackTrace();
         }
     }
-
+    public static boolean isOnline(Context context)
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+    }
 
     private void handleFacebookAccesToken(AccessToken accessToken) {
         progressBarFireBase.setVisibility(View.VISIBLE);
         btnFBLogin.setVisibility(View.GONE);
+        signInButton.setVisibility(View.GONE);
+        btnSignup.setVisibility(View.GONE);
+        btnLogIn.setVisibility(View.GONE);
+        etEmail.setVisibility(View.GONE);
+        etPassword.setVisibility(View.GONE);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -264,6 +274,12 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 }
                 progressBarFireBase.setVisibility(View.GONE);
                 btnFBLogin.setVisibility(View.VISIBLE);
+                btnSignup.setVisibility(View.VISIBLE);
+                btnLogIn.setVisibility(View.VISIBLE);
+                etEmail.setVisibility(View.VISIBLE);
+                signInButton.setVisibility(View.VISIBLE);
+                etPassword.setVisibility(View.VISIBLE);
+                btnFBLogin.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -272,13 +288,20 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         if(result.isSuccess()){
             firebasAuthwithGoogle(result.getSignInAccount());
         }else{
-
             Toast.makeText(getApplicationContext(), "Error gmail autenticacion",Toast.LENGTH_LONG).show();
         }
     }
 
     private void firebasAuthwithGoogle(GoogleSignInAccount signInAccount)
     {
+        progressBarFireBase.setVisibility(View.VISIBLE);
+        signInButton.setVisibility(View.GONE);
+        btnFBLogin.setVisibility(View.GONE);
+        btnSignup.setVisibility(View.GONE);
+        btnLogIn.setVisibility(View.GONE);
+        etEmail.setVisibility(View.GONE);
+        etPassword.setVisibility(View.GONE);
+
         AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -286,6 +309,14 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 if(!task.isSuccessful()){
                     Toast.makeText(getApplicationContext(),"No se realizo la autenticacion Firebase",Toast.LENGTH_LONG).show();
                 }
+                progressBarFireBase.setVisibility(View.GONE);
+                btnFBLogin.setVisibility(View.VISIBLE);
+                signInButton.setVisibility(View.VISIBLE);
+                btnSignup.setVisibility(View.VISIBLE);
+                btnLogIn.setVisibility(View.VISIBLE);
+                etEmail.setVisibility(View.VISIBLE);
+                etPassword.setVisibility(View.VISIBLE);
+                btnFBLogin.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -296,6 +327,13 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         Intent toRegister = new Intent(this , SignUp.class);
         toRegister.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(toRegister);
+    }
+
+    private void toNoInternet()
+    {
+        Intent toNoInternet = new Intent(this , NoInternet.class);
+        toNoInternet.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toNoInternet);
     }
 
 
@@ -346,8 +384,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         }
     }
 
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -358,7 +394,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     protected void onStop()
     {
         super.onStop();
-
         if(firebaseAuth != null) firebaseAuth.removeAuthStateListener(fireAuthStateListener);
     }
 

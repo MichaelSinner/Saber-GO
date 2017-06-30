@@ -1,13 +1,13 @@
 package com.example.michaelsinner.sabergo.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-
-
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,13 +16,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.michaelsinner.sabergo.R;
-import com.facebook.*;
+import com.facebook.AccessToken;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
@@ -45,7 +46,7 @@ import java.net.URL;
 public class MainMenu extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
-    private static final String TAG = "01" ;
+
     private Button btnPruebaDiagn;
     private Button btnPruebaDiaria;
     private Button btnSimulacro;
@@ -59,6 +60,7 @@ public class MainMenu extends AppCompatActivity
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
 
     private GoogleApiClient googleApiClient;
+    private static final String TAG ="error";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,15 +135,25 @@ public class MainMenu extends AppCompatActivity
         btnPruebaDiagn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startActivity(toPruebaDiagnostico());
+               if (isOnline(getApplicationContext())){
+                   startActivity(toPruebaDiagnostico());
+               }else{
+                   startActivity(toNoInternet());
+               }
+
             }
         });
 
         btnPruebaDiaria = (Button) findViewById(R.id.btnPruebasDiarias);
         btnPruebaDiaria.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(toPruebaEntrenamiento());
+            public void onClick(View view)
+            {
+                if (isOnline(getApplicationContext())){
+                    startActivity(toPruebaEntrenamiento());
+                }else{
+                    startActivity(toNoInternet());
+                }
             }
         });
 
@@ -149,10 +161,15 @@ public class MainMenu extends AppCompatActivity
         btnSimulacro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(toModuloLudica());
+
+                if (isOnline(getApplicationContext()))
+                {
+                    startActivity(toModuloLudica());
+                }else{
+                    startActivity(toNoInternet());
+                }
             }
         });
-
     }
 
     @Override
@@ -218,12 +235,30 @@ public class MainMenu extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.itmPruebaDiagnostico) {
-            startActivity(toPruebaDiagnostico());
-        } else if (id == R.id.itmPruebaDiaria) {
-            startActivity(toPruebaEntrenamiento());
-        } else if (id == R.id.itmLudica) {
-            startActivity(toModuloLudica());
+        if (id == R.id.itmPruebaDiagnostico)
+        {
+            if(isOnline(getApplicationContext()))
+            {
+                startActivity(toPruebaDiagnostico());
+            }else{
+                startActivity(toNoInternet());
+            }
+        } else if (id == R.id.itmPruebaDiaria)
+        {
+            if(isOnline(getApplicationContext()))
+            {
+                startActivity(toPruebaEntrenamiento());
+            }else{
+                startActivity(toNoInternet());
+            }
+        } else if (id == R.id.itmLudica)
+        {
+            if(isOnline(getApplicationContext()))
+            {
+                startActivity(toModuloLudica());
+            }else{
+                startActivity(toNoInternet());
+            }
         } else if (id == R.id.itmLogros) {
             startActivity(toAchievements());
         } else if (id == R.id.itmSettings) {
@@ -234,8 +269,14 @@ public class MainMenu extends AppCompatActivity
             exitApp();
         } else if (id == R.id.itmTutorial){
             startActivity(toTutorial());
-        }else if (id == R.id.nav_share){
-            startActivity(toShare());
+        }else if (id == R.id.nav_share)
+        {
+            if(isOnline(getApplicationContext()))
+            {
+                startActivity(toShare());
+            }else{
+                startActivity(toNoInternet());
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -243,6 +284,19 @@ public class MainMenu extends AppCompatActivity
         return true;
     }
 
+
+    public static boolean isOnline(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+
+    }
+
+    private Intent toNoInternet()
+    {
+        Intent toNoInternet = new Intent(MainMenu.this, NoInternet.class);
+        return  toNoInternet;
+    }
     private Intent toPruebaDiagnostico()
     {
         Intent toPruebaDiagnostico = new Intent(MainMenu.this, PruebaDiagnostico.class);

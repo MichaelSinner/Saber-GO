@@ -9,6 +9,10 @@
     --Signup
     <string name="strSubtittleSignUp">Crea tu cuenta</string>
 
+    -- No Internet
+    <string name="strNoInternet">Lo sentimos, pero necesitas estar conectado a internet para continuar.</string>
+    <string name="strVolverInternet">Volver</string>
+
     -- Menú Principal
     <string name="strSubtitMenu">Menú Principal</string>
     <string name="strBtnPruebaDiag">Exámen Diagnóstico</string>
@@ -16,7 +20,7 @@
     <string name="strBtnPruebaDiaria">Preguntas  rápidas</string>
     <string name="strBtnRegistrarse">Registrarse</string>
     <string name="strBtnTutorial">Tutorial</string>
-    <string name="strBtnLudica">Meteoro</string>
+    <string name="strBtnLudica">Meteoritos</string>
     <string name="strBtnLogros">Logros</string>
     <string name="strBtnPerfil">Perfil</string>
     <string name="strBtnConfiguracion">Configuración</string>

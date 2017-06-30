@@ -11,7 +11,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -57,15 +56,14 @@
         <activity
             android:name=".Activities.Tutorial"
             android:label="@string/title_activity_tutorial"
-            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".Activities.MainMenu"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Manifest Activity Acerca de -->
-        <activity android:name=".Activities.About"
-            android:theme="@style/AppTheme01"
-            android:parentActivityName=".Activities.MainMenu">
-
+        <activity
+            android:name=".Activities.About"
+            android:parentActivityName=".Activities.MainMenu"
+            android:theme="@style/AppTheme01">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,10 +72,10 @@
         </activity>
 
         <!-- Manifest Activity Logros -->
-        <activity android:name=".Activities.Achievements"
-            android:theme="@style/AppTheme01"
-            android:parentActivityName=".Activities.MainMenu">
-
+        <activity
+            android:name=".Activities.Achievements"
+            android:parentActivityName=".Activities.MainMenu"
+            android:theme="@style/AppTheme01">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -85,11 +83,11 @@
             </intent-filter>
         </activity>
 
-        <!-- Manifest Activity Compartir-->
-        <activity android:name=".Activities.Share"
-            android:theme="@style/AppTheme01"
-            android:parentActivityName=".Activities.MainMenu">
-
+        <!-- Manifest Activity Compartir -->
+        <activity
+            android:name=".Activities.Share"
+            android:parentActivityName=".Activities.MainMenu"
+            android:theme="@style/AppTheme01">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -101,31 +99,29 @@
         <activity
             android:name=".Activities.Settings"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".Activities.MainMenu"/>
+            android:parentActivityName=".Activities.MainMenu" />
         <activity android:name=".Activities.PruebaDiagnostico" />
 
         <!-- Manifest Activity Registrarse -->
-        <activity android:name=".Activities.SignUp"
+        <activity
+            android:name=".Activities.SignUp"
             android:label="Registrarse"
-            android:theme="@style/AppTheme01"
-            android:parentActivityName=".Activities.Login">
-
+            android:parentActivityName=".Activities.Login"
+            android:theme="@style/AppTheme01">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Activities.ModuloAR" />
 
         <!-- Manifest Activity Perfil -->
         <activity
             android:name=".Activities.Profile"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme01"
-            android:parentActivityName=".Activities.MainMenu">
-
+            android:parentActivityName=".Activities.MainMenu"
+            android:theme="@style/AppTheme01">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -134,17 +130,17 @@
         </activity>
 
         <!-- Manifest Activty Módulo Pruebas Diarias -->
-        <activity android:name=".Activities.ModuloPruebasDiarias"
-            android:theme="@style/AppTheme01"
-            android:parentActivityName=".Activities.MainMenu">
-
+        <activity
+            android:name=".Activities.ModuloPruebasDiarias"
+            android:parentActivityName=".Activities.MainMenu"
+            android:theme="@style/AppTheme01">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".Activities.NoInternet"></activity>
     </application>
 
 </manifest>

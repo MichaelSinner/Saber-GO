@@ -11,7 +11,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:id="@+id/appBarLayout">
 
 
         <android.support.v7.widget.Toolbar
@@ -33,9 +34,9 @@
         android:textColor="@color/colorTitle"
         tools:layout_editor_absoluteX="54dp"
         tools:layout_editor_absoluteY="16dp"
-        android:layout_above="@+id/tvSubtituloRegistro"
+        android:layout_below="@+id/appBarLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp" />
+        android:layout_marginTop="19dp" />
 
     <TextView
         android:id="@+id/tvSubtituloRegistro"
@@ -45,35 +46,31 @@
         android:text="@string/strSubtittleSignUp"
         tools:layout_editor_absoluteX="116dp"
         tools:layout_editor_absoluteY="81dp"
-        android:layout_above="@+id/etEmailSignUp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp" />
+        android:layout_below="@+id/tvTituloRegistro"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:id="@+id/etEmailSignUp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Correo Electrónico"
         android:inputType="textEmailAddress"
         tools:layout_editor_absoluteX="54dp"
         tools:layout_editor_absoluteY="154dp"
-        android:layout_above="@+id/etPasswordSignUp"
-        android:layout_alignStart="@+id/etPasswordSignUp"
-        android:layout_marginBottom="38dp" />
+        android:layout_below="@+id/tvSubtituloRegistro" />
 
     <EditText
         android:id="@+id/etPasswordSignUp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="contraseña"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="54dp"
         tools:layout_editor_absoluteY="216dp"
-        android:layout_above="@+id/btnSignUp"
-        android:layout_alignStart="@+id/tvTituloRegistro"
-        android:layout_marginBottom="22dp" />
+        android:layout_below="@+id/etEmailSignUp"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/btnSignUp"
@@ -82,8 +79,7 @@
         android:text="@string/strBtnRegistrarse"
         tools:layout_editor_absoluteX="103dp"
         tools:layout_editor_absoluteY="298dp"
-        android:layout_marginBottom="36dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/etPasswordSignUp"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
