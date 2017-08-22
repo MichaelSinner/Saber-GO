@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.michaelsinner.sabergo.Data.User;
 import com.example.michaelsinner.sabergo.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -45,6 +46,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,6 +82,10 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private EditText etEmail, etPassword;
     String emailUser, nameUser;
     private Bitmap imageUser;
+
+    //-- User Object ---------------------------------------------------------------------------- //
+    private DatabaseReference mDatabase;
+    private User userSaberGO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -131,15 +137,17 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 this.object = object;
                                 this.response = response;
+
                                 Log.v("Main", response.toString());
                                 setProfileToView(object);
                                 try {
+                                    userSaberGO = new User(object.getString("id"),object.getString("email"),object.getString("name"));
                                     emailUser = object.getString("email");
                                     nameUser = object.getString("name");
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                Toast.makeText(Login.this, "Bienvenido "+profile.getFirstName(), Toast.LENGTH_SHORT);
+                            //    Toast.makeText(Login.this, "Bienvenido "+profile.getFirstName(), Toast.LENGTH_SHORT);
 
                             }
                         });
@@ -162,6 +170,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             }
         });
         btnFBLogin.setTypeface(font);
+
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,15 +213,37 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         });
         btnLogIn.setTypeface(font);
 
+     //--- Listener State Firebase ------------------------------------------------------------//
         firebaseAuth = FirebaseAuth.getInstance();
         fireAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
+                Profile userFB = Profile.getCurrentProfile();
+                //String provider = user.getProviderId();
 
-                    toMenuPrincipal(nameUser,emailUser,imageUser);
+                if(user != null && userFB == null){
+
+                    userSaberGO = new User(user.getUid(),user.getEmail(), user.getDisplayName());
+
+                    Log.e("TAG","User : "+userSaberGO.getUserID());
+                    Log.e("TAG","email : "+userSaberGO.getUserEmail());
+                    Log.e("TAG","whololo : "+user.toString());
+                    Log.e("TAG","name : "+userSaberGO.getUserName());
+                    toMenuPrincipal(userSaberGO);
+                } else if(userFB!= null){
+
+                    userSaberGO.setUserID(user.getUid());
+
+                    Log.e("TAG","User : "+userSaberGO.getUserID());
+                    Log.e("TAG","email : "+userSaberGO.getUserEmail());
+                    //  Log.e("TAG","provider : "+provider);
+                    Log.e("TAG","whololo : "+user.toString());
+                    Log.e("TAG","name : "+userSaberGO.getUserName());
+                    toMenuPrincipal(userSaberGO);
                 }
+
+
             }
         };
 
@@ -256,7 +287,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
     }
 
-    private void handleFacebookAccesToken(AccessToken accessToken) {
+    private void handleFacebookAccesToken(final AccessToken accessToken) {
         progressBarFireBase.setVisibility(View.VISIBLE);
         btnFBLogin.setVisibility(View.GONE);
         signInButton.setVisibility(View.GONE);
@@ -265,13 +296,16 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         etEmail.setVisibility(View.GONE);
         etPassword.setVisibility(View.GONE);
 
-        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        final AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "Error Firebase",Toast.LENGTH_LONG).show();
                 }
+
+
+
                 progressBarFireBase.setVisibility(View.GONE);
                 btnFBLogin.setVisibility(View.VISIBLE);
                 btnSignup.setVisibility(View.VISIBLE);
@@ -283,6 +317,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             }
         });
     }
+
     private void handleGoogleAccesToken(GoogleSignInResult result)
     {
         if(result.isSuccess()){
@@ -337,15 +372,18 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     }
 
 
-    public void toMenuPrincipal(String nombre, String email, Bitmap image)
+    public void toMenuPrincipal(final User userSaberGO)
     {
-        Intent toMenuPrincipal = new Intent(Login.this , MainMenu.class);
-        toMenuPrincipal.putExtra("NOMBRE",nombre);
-        toMenuPrincipal.putExtra("EMAIL",email);
-        toMenuPrincipal.putExtra("IMAGE",image);
+        final Intent toMenuPrincipal = new Intent(Login.this , MainMenu.class);
+
+        toMenuPrincipal.putExtra("ID",userSaberGO.getUserID());
+        toMenuPrincipal.putExtra("NOMBRE",userSaberGO.getUserName());
+        toMenuPrincipal.putExtra("EMAIL",userSaberGO.getUserEmail());
+        toMenuPrincipal.putExtra("IMAGE",userSaberGO.getUserImageProfile());
+        Toast.makeText(this, "Bienvenido "+userSaberGO.getUserName(),Toast.LENGTH_SHORT).show();
         toMenuPrincipal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(toMenuPrincipal);
-    }
+ }
     public static Bitmap getFacebookProfilePicture(String userID) throws SocketException, SocketTimeoutException, MalformedURLException, IOException, Exception
     {
         String imageURL;

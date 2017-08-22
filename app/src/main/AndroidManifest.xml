@@ -117,17 +117,7 @@
         <activity android:name=".Activities.ModuloAR" />
 
         <!-- Manifest Activity Perfil -->
-        <activity
-            android:name=".Activities.Profile"
-            android:label="@string/title_activity_profile"
-            android:parentActivityName=".Activities.MainMenu"
-            android:theme="@style/AppTheme01">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <!-- Manifest Activty Módulo Pruebas Diarias -->
         <activity
@@ -140,7 +130,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.NoInternet"></activity>
+        <activity android:name=".Activities.NoInternet" />
+        <activity
+            android:name=".Activities.Profile"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

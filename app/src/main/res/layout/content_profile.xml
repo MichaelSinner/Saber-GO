@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/header_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:id="@+id/user_profile_photo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/profile_circular_border_imageview"
+            android:elevation="5dp"
+            android:padding="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile"
+            android:layout_above="@+id/linearLayout2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="76dp" />
+
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimarySG"
+            android:elevation="4dp"
+            android:paddingBottom="24dp"
+            android:layout_below="@+id/header_cover_image"
+            android:layout_alignParentStart="true">
+
+
+            <TextView
+                android:id="@+id/tvUserNameProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="55dp"
+                android:text="Aureliano Buendia"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvUserEmailProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="aureliocheveroni@gmail.com"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:layout_below="@+id/tvUserNameProfile"
+                android:layout_alignStart="@+id/tvUserNameProfile"
+                android:layout_alignEnd="@+id/tvUserNameProfile" />
+            <TextView
+                android:id="@+id/tvNivelProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nivel 23"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/tvRangoProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Rango: CABO"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout2">
+
+            <ProgressBar
+                android:id="@+id/pgbLevel"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:progress="75" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="1">
+                <Button
+                    android:id="@+id/btnPuntosLC"
+                    android:background="#a056c2"
+                    android:layout_width="56dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimarySG"
+                    android:text="35 LC"
+                    />
+
+                <Button
+                    android:id="@+id/btnPuntosIN"
+                    android:background="#ff3d3d"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimarySG"
+                    android:text="23 IN"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btnPuntosCN"
+                    android:background="#0fb400"
+                    android:layout_width="62dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimarySG"
+                    android:text="20 CN"
+                    android:layout_weight="6" />
+
+                <Button
+                    android:id="@+id/btnPuntosMT"
+                    android:layout_width="56dp"
+                    android:layout_height="wrap_content"
+                    android:background="#007bb4"
+                    android:text="23 MT"
+                    android:textColor="@color/colorPrimarySG" />
+
+                <Button
+                    android:id="@+id/btnPuntosCS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#741f00"
+                    android:text="75 CS"
+                    android:textColor="@color/colorPrimarySG" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnDinero"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:background="#FFFFFF00"
+                android:text=" SaberMoney : 1'875.635"
+                android:textColor="#000000" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="18dp"
+                    android:textColor="#000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  Número de exámenes Diagnóstico:" />
+                <TextView
+                    android:id="@+id/tvNumExamDiag"
+                    android:textSize="18dp"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="18dp"
+                    android:textColor="#000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  Logros desbloqueados:" />
+                <TextView
+                    android:id="@+id/tvNumLogros"
+                    android:textSize="18dp"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="7/45" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="18dp"
+                    android:textColor="#000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  Meteoritos Destruidos:" />
+                <TextView
+                    android:id="@+id/tvNumMeteoritos"
+                    android:textSize="18dp"
+                    android:textAlignment="textEnd"
+                    android:textColor="#ff6a00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="11" />
+            </LinearLayout>
+
+            <TextView
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  Preguntas de Matemáticas"
+                />
+
+            <ProgressBar
+                android:id="@+id/pbmat"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:progress="45"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  Preguntas de Lectura crítica"
+                />
+
+            <ProgressBar
+                android:id="@+id/pblc"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:progress="66"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  Preguntas de Ciencias Sociales"
+                />
+
+            <ProgressBar
+                android:id="@+id/pbcs"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:progress="80"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  Preguntas de Ciencias Naturales"
+                />
+
+            <ProgressBar
+                android:id="@+id/pbcn"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:progress="70"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  Preguntas de Inglés"
+                />
+
+            <ProgressBar
+                android:id="@+id/pbin"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:progress="12"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

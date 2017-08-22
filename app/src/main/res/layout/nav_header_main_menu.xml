@@ -35,8 +35,8 @@
         android:text="tvUserEmail" />
 
     <TextView
-        android:id="@+id/tvNivel"
-        android:text="Nivel 0"
+        android:id="@+id/tvUserNivel"
+        android:text="No Nivel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
