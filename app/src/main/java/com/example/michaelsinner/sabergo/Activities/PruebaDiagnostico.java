@@ -1,8 +1,9 @@
 package com.example.michaelsinner.sabergo.Activities;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,16 +13,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
-import com.example.michaelsinner.sabergo.Data.Pregunta;
+import com.example.michaelsinner.sabergo.Data.Question;
 import com.example.michaelsinner.sabergo.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -38,7 +45,7 @@ public class PruebaDiagnostico extends AppCompatActivity {
     private TextView tvTime;
     private TextView tvNumQuest;
     private com.example.michaelsinner.sabergo.Data.PruebaDiagnostico prueba;
-    private Pregunta pregunta;
+    private Question question;
     private LayoutInflater layoutInflater;
     private RelativeLayout relativeLayout;
 
@@ -46,6 +53,12 @@ public class PruebaDiagnostico extends AppCompatActivity {
     private int counterTime;
     private int selectedAnswer;
     private int numPregunta = 0;
+
+    private DatabaseReference mDatabase;
+    private static final String TAG ="error";
+
+
+    private ArrayList<Question> questionLista;
 
 
     @Override
@@ -55,11 +68,18 @@ public class PruebaDiagnostico extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_prueba_diagnostico);
-
         relativeLayout = (RelativeLayout) findViewById(R.id.relativeExmDiag);
 
         tvNumQuest = (TextView) findViewById(R.id.tvnumQuest);
+        tvTime = (TextView) findViewById(R.id.tvTime);
 
+        btnOpcionA = (Button) findViewById(R.id.btnOpcionA);
+        btnOpcionB = (Button) findViewById(R.id.btnOpcionB);
+        btnOpcionC = (Button) findViewById(R.id.btnOpcionC);
+        btnOpcionD = (Button) findViewById(R.id.btnOpcionD);
+        btnSendAnswer = (Button) findViewById(R.id.btnSendAnswer);
+
+        imgBtnQuestion = (ImageButton) findViewById(R.id.imgQuestion);
 
 
 
@@ -91,8 +111,7 @@ public class PruebaDiagnostico extends AppCompatActivity {
         selectedAnswer = 0;
         counterTime = 0;
 
-        tvTime = (TextView) findViewById(R.id.tvTime);
-        btnOpcionA = (Button) findViewById(R.id.btnOpcionA);
+
         btnOpcionA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +123,7 @@ public class PruebaDiagnostico extends AppCompatActivity {
 
             }
         });
-        btnOpcionB = (Button) findViewById(R.id.btnOpcionB);
+
         btnOpcionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,7 +135,7 @@ public class PruebaDiagnostico extends AppCompatActivity {
 
             }
         });
-        btnOpcionC = (Button) findViewById(R.id.btnOpcionC);
+
         btnOpcionC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,7 +147,7 @@ public class PruebaDiagnostico extends AppCompatActivity {
 
             }
         });
-        btnOpcionD = (Button) findViewById(R.id.btnOpcionD);
+
         btnOpcionD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,7 +159,7 @@ public class PruebaDiagnostico extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "D",Toast.LENGTH_LONG).show();
             }
         });
-        btnSendAnswer = (Button) findViewById(R.id.btnSendAnswer);
+
         btnSendAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -187,10 +206,186 @@ public class PruebaDiagnostico extends AppCompatActivity {
             }
         });
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference rfeQuestCompArea = mDatabase.child("QuestCompArea").child("CN");
+        final DatabaseReference rfeQuest = mDatabase.child("Question");
+
+        rfeQuestCompArea.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot message: dataSnapshot.getChildren())
+                {
+                    String keyPregunta = message.getKey();
+                    long value = (long) message.getValue();
+                    //DatabaseReference cases = mDatabase.child("Questions");
+
+                    rfeQuest.orderByChild("questionID").equalTo(value).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                          if(dataSnapshot.exists()){
+                                boolean b = dataSnapshot.getKey().isEmpty();
+                                Question pregunta = dataSnapshot.getValue(Question.class);
+                                //String info = String.valueOf(dataSnapshot.getValue());
+                                pregunta.getQuestionID();
+                                //list.add(pregunta);
+                                Log.e(TAG,"infoss : "+pregunta.getQuestionID()+" : "+b);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    //String jum = message.child(keyPregunta).toString();
+
+                    Log.e(TAG,"infos : "+keyPregunta+" : "+value);
+
+                    //System.out.print(idPregunta);
+                    //pregunta = message.getValue(Question.class);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+/*
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("QuestCompArea").child("CN");
+        final String keyPreguntas = mDatabase.getKey();
+
+        final String numbers[] = new String[10-1];
+
+
+
+
+        mDatabase.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot message: dataSnapshot.getChildren())
+                {
+                    String keyPregunta = message.getKey();
+                    DatabaseReference prueba = mDatabase.child(keyPregunta);
+                    String pruebaS = String.valueOf(message.getValue()) ;
+
+
+                    String jum = message.child(keyPregunta).toString();
+                    //String idPregunta =  message.child(keyPregunta)
+                    Log.e(TAG,"infos : "+keyPregunta+" : "+jum+" : "+pruebaS);
+
+                    //System.out.print(idPregunta);
+                    //pregunta = message.getValue(Question.class);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+*/
         //https://firebasestorage.googleapis.com/v0/b/saber-go.appspot.com/o/Preguntas%2F100001.PNG?alt=media&token=760379d8-8a71-4116-962c-45744bcac038
         //https://firebasestorage.googleapis.com/v0/b/saber-go.appspot.com/o/Preguntas%2F100002.PNG?alt=media&token=7a95d633-e45c-45f5-a477-8c502ce5397f
-        imgBtnQuestion = (ImageButton) findViewById(R.id.imgQuestion);
 
+
+
+    }
+
+    public void doExamDiagnostic(ArrayList<Question> questions){
+
+    }
+
+    private ArrayList<Question> createExam()
+    {
+        ArrayList<Question> questionCN = new ArrayList<>();
+        ArrayList<Question> questionCS = new ArrayList<>();
+        ArrayList<Question> questionLC = new ArrayList<>();
+        ArrayList<Question> questionMT = new ArrayList<>();
+        ArrayList<Question> questionIN = new ArrayList<>();
+        ArrayList<Question> arrayList = new ArrayList<>();
+
+        questionCN = getQuestions("CN", 12);
+        questionCS = getQuestions("CS", 10);
+        questionLC = getQuestions("LC", 8);
+        questionMT = getQuestions("MT", 10);
+        questionIN = getQuestions("IN", 10);
+
+
+
+
+
+        return arrayList;
+
+    }
+
+
+    private ArrayList<Question> getQuestions(String idArea, int tamArray)
+    {
+        final ArrayList<Question> list = new ArrayList<>();
+
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference rfeQuestCompArea = mDatabase.child("QuestCompArea").child(idArea);
+        final DatabaseReference rfeQuest = mDatabase.child("Question");
+
+        rfeQuestCompArea.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot message: dataSnapshot.getChildren())
+                {
+                    String keyPregunta = message.getKey();
+                    long value = (long) message.getValue();
+                    //DatabaseReference cases = mDatabase.child("Questions");
+
+                    rfeQuest.orderByChild("questionID").equalTo(value).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists())
+                            {
+                                Question pregunta = dataSnapshot.getValue(Question.class);
+                                list.add(pregunta);
+                                //String info = String.valueOf(dataSnapshot.getValue());
+                                Log.e(TAG,"infoss : "+pregunta.getQuestionID()+" : ");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    //String jum = message.child(keyPregunta).toString();
+
+                    Log.e(TAG,"infos : "+keyPregunta+" : "+value);
+
+                    //System.out.print(idPregunta);
+                    //pregunta = message.getValue(Question.class);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        for(int i=0; i<tamArray-1; i++)
+        {
+            int random = new Random().nextInt(list.size())+1;
+
+
+
+        }
+
+
+
+        return list;
 
     }
 
@@ -210,8 +405,8 @@ public class PruebaDiagnostico extends AppCompatActivity {
         Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/saber-go.appspot.com/o/Preguntas%2F100001.PNG?alt=media&token=760379d8-8a71-4116-962c-45744bcac038").into(imgBtnQuestion);
         PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(imgBtnQuestion);
         photoViewAttacher.update();
-        tvNumQuest.setText(String.valueOf(numPregunta)+"/50");
 
+        tvNumQuest.setText(String.valueOf(numPregunta)+"/50");
         btnOpcionD.setBackgroundColor(Color.GRAY);
         btnOpcionB.setBackgroundColor(Color.GRAY);
         btnOpcionC.setBackgroundColor(Color.GRAY);

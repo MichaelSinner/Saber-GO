@@ -61,12 +61,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-
-    //google objcts
+public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener
+{
+    //google objects
     private GoogleApiClient googleApiClient;
     private SignInButton signInButton;
-
     public static final int  SIGN_IN_CODE_GMAIL = 777;
 
     private LoginButton btnFBLogin;
