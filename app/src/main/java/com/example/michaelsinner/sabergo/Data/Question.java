@@ -6,14 +6,14 @@ package com.example.michaelsinner.sabergo.Data;
 
 public class Question
 {
-    private String questionID;
+    private long questionID;
     private String answer;
     private String questionURL;
     private String questionArea;
     private String questionCompetencia;
     private String questionToken;
 
-    public Question(String questionID, String answer, String questionURL, String questionArea, String questionCompetencia) {
+    public Question(long questionID, String answer, String questionURL, String questionArea, String questionCompetencia) {
         this.questionID = questionID;
         this.answer = answer;
         this.questionURL = questionURL;
@@ -21,15 +21,23 @@ public class Question
         this.questionCompetencia = questionCompetencia;
     }
 
-    public Question(){}
+    public Question(long questionID, String answer,  String questionURL){
+        this.questionID = questionID;
+        this.answer = answer;
+        this.questionURL = questionURL;
+    }
+
+    public  Question(){
+
+    }
 
 
 
-    public String getQuestionID() {
+    public long getQuestionID() {
         return questionID;
     }
 
-    public void setQuestionID(String questionID) {
+    public void setQuestionID(long questionID) {
         this.questionID = questionID;
     }
 

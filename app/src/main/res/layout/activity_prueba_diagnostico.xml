@@ -22,6 +22,7 @@
             android:id="@+id/tvTime"
             android:textColor="@color/colorTitle"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
             android:text="03:23" />
 
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="100290" />
+            android:text="Saber GO" />
 
         <Button
             android:id="@+id/btnSendAnswer"
@@ -53,6 +54,18 @@
             android:text="Enviar Respuesta"
             app:layout_constraintRight_toRightOf="parent"
             tools:layout_editor_absoluteY="341dp" />
+
+        <Button
+            android:id="@+id/btnIniciarExamen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="48dp"
+            android:text="Iniciar Examen"
+
+            tools:layout_editor_absoluteY="341dp"
+            android:layout_above="@+id/btnSendAnswer"
+            android:layout_alignStart="@+id/btnSendAnswer"
+            android:layout_marginBottom="141dp" />
 
         <ImageButton
             android:id="@+id/imgQuestion"

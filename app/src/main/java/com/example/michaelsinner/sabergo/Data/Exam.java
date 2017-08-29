@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Michael Sinner on 18/4/2017.
  */
 
-public class PruebaDiagnostico {
+public class Exam {
 
     private int numPreguntas = 50;
     private int numPreguntasCorrectas;
