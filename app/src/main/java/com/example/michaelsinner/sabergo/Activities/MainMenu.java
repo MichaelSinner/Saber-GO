@@ -46,7 +46,6 @@ import java.net.MalformedURLException;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
-import java.util.Map;
 
 
 public class MainMenu extends AppCompatActivity
@@ -93,58 +92,70 @@ public class MainMenu extends AppCompatActivity
         tvUserName = (TextView) viewNav.findViewById(R.id.tvUserNameMain);
         tvUserLevel = (TextView) viewNav.findViewById(R.id.tvUserNivel);
         prueba = (TextView) findViewById(R.id.tvPruebaMenu);
-
-
-
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        final String ID = (String) bundle.get("ID");
-        final String email = (String) bundle.get("EMAIL");
-        final String name = (String) bundle.get("NOMBRE");
-        final String image = (String) bundle.get("IMAGE");
 
-        //boolean exist;
-        //mDatabase = FirebaseDatabase.getInstance().getReference();
-        //exist = mDatabase.child("Student").child(ID).child("userEmail").toString();
-        //exist = mDatabase.child("Student").child(ID).child("userID").equals(ID);
+        if (bundle!=null){
+            final String ID = (String) bundle.get("ID");
+            final String email = (String) bundle.get("EMAIL");
+            final String name = (String) bundle.get("NOMBRE");
+            final String image = (String) bundle.get("IMAGE");
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Student");
 
-        mDatabase.orderByKey().equalTo(ID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            mDatabase = FirebaseDatabase.getInstance().getReference().child("Student");
 
-                if(!dataSnapshot.exists()){
-                    Log.e(TAG," exist : "+dataSnapshot.exists()+" | "+dataSnapshot.getChildren());
-                    user = new User(ID, email, "pass", name, image, 1, "Recluta", 0, 0, 0, 0, 0, 1000, 1, 0, 0, 0, 0, 0, 0, 0);
+            mDatabase.orderByKey().equalTo(ID).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    mDatabase.child(ID).setValue(user);
-                    tvUserName.setText(user.getUserName());
-                    tvUserEmail.setText(user.getUserEmail());
-                    tvUserLevel.setText("Nivel : "+user.getUserNivel());
-                    prueba.setText(user.getUserID());
-                    Log.e(TAG,"Estudiante creado : "+user.toString());
-                }else{
-                    Log.e(TAG," exist : "+dataSnapshot.exists()+" | "+dataSnapshot.getChildren());
-                    for (DataSnapshot message: dataSnapshot.getChildren())
-                    {
-                        user = message.getValue(User.class);
+                    if(!dataSnapshot.exists()){
+                        Log.e(TAG," exist : "+dataSnapshot.exists()+" | "+dataSnapshot.getChildren());
+                        user = new User(ID, email, "pass", name, image, 1, "Recluta", 0, 0, 0, 0, 0, 1000, 1, 0, 0, 0, 0, 0, 0, 0);
+
+                        mDatabase.child(ID).setValue(user);
                         tvUserName.setText(user.getUserName());
                         tvUserEmail.setText(user.getUserEmail());
                         tvUserLevel.setText("Nivel : "+user.getUserNivel());
                         prueba.setText(user.getUserID());
-                        Log.e(TAG,"Estudiante Capturado : "+user.toString());
+                        Log.e(TAG,"Estudiante creado : "+user.toString());
+                    }else{
+                        Log.e(TAG," exist : "+dataSnapshot.exists()+" | "+dataSnapshot.getChildren());
+                        for (DataSnapshot message: dataSnapshot.getChildren())
+                        {
+                            user = message.getValue(User.class);
+                            tvUserName.setText(user.getUserName());
+                            tvUserEmail.setText(user.getUserEmail());
+                            tvUserLevel.setText("Nivel : "+user.getUserNivel());
+                            prueba.setText(user.getUserID());
+                            Log.e(TAG,"Estudiante Capturado : "+user.toString());
+                        }
                     }
+              }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
                 }
+            });
+        }else {
 
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+            if(user != null){
+                String ID = user.getUid();
+                String Name = user.getDisplayName();
+                String Email = user.getEmail();
+                String image = "Default";
+                loadPerfil(ID);
+
+            }else {
+               goLoginScreen();
             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+      }
+
+
 
 /*
         if(exist){
@@ -189,7 +200,6 @@ public class MainMenu extends AppCompatActivity
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 Intent intent = getIntent();
-                Bundle bundle = intent.getExtras();
                 FirebaseUser userf = firebaseAuth.getCurrentUser();
 
                 if(userf!=null && user!=null){
@@ -278,33 +288,26 @@ public class MainMenu extends AppCompatActivity
 
     }
 
-    public void loadPerfil(final String UID, final String email, final String name, final String imageProfile)
+    public void loadPerfil(final String UID)
     {
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
-        mDatabase.child("Student").child(UID).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Student");
+        mDatabase.orderByKey().equalTo(UID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                boolean exist = mDatabase.child("Student").child(UID).child("userID").equals(UID);
-                for (DataSnapshot child : dataSnapshot.getChildren()){
-                    if (!exist){
-                        User newUser = new User(UID,email,"pass",name,imageProfile,1,"Recluta",0,0,0,0,0,1000,1,0,1,7,2,3,1,1);
-                        mDatabase.child("Student").child(UID).setValue(newUser);
-                        exist = true;
-                    } else {
-                        Object object = child.getValue();
-                        //String uID = ((Map)object).get("userID").toString();
-                        String uID = (String) child.child("userID").getValue();
-                        String uName = ((Map)object).get("userName").toString();
-                        String uEmail = ((Map)object).get("userEmail").toString();
-                        String uLevel = ((Map)object).get("userNivel").toString();
-                        prueba.setText(uID);
-                        tvUserName.setText(uName);
-                        tvUserEmail.setText(uEmail);
-                    }
 
+                if(!dataSnapshot.exists()){
+
+                }else{
+
+                    for (DataSnapshot message: dataSnapshot.getChildren())
+                    {
+                        user = message.getValue(User.class);
+                        tvUserName.setText(user.getUserName());
+                        tvUserEmail.setText(user.getUserEmail());
+                        tvUserLevel.setText("Nivel : "+user.getUserNivel());
+                        prueba.setText(user.getUserID());
+                        Log.e(TAG,"Estudiante Capturado : "+user.toString());
+                    }
                 }
             }
 
@@ -313,6 +316,7 @@ public class MainMenu extends AppCompatActivity
 
             }
         });
+
     }
 
     /*
@@ -608,7 +612,6 @@ public class MainMenu extends AppCompatActivity
         toPerfil.putExtra("MONEY",userSended.getUserDinero());
         toPerfil.putExtra("NUM_ED",userSended.getNumExamDiagnostic());
         toPerfil.putExtra("NUM_MD",userSended.getNumMeteoritosDestruidos());
-
         toPerfil.putExtra("NUM_LC",userSended.getUserImageProfile());
         toPerfil.putExtra("NUM_MT",userSended.getUserImageProfile());
         toPerfil.putExtra("NUM_CS",userSended.getUserImageProfile());

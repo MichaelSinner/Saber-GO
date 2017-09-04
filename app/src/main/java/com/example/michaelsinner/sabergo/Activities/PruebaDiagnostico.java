@@ -1,11 +1,11 @@
 package com.example.michaelsinner.sabergo.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,8 +31,9 @@ import java.util.Random;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-public class PruebaDiagnostico extends AppCompatActivity {
-
+public class PruebaDiagnostico extends AppCompatActivity
+{
+    private RelativeLayout relativeLayout;
     private ImageButton imgBtnQuestion;
     private PopupWindow popAnswerTrue;
     private PopupWindow popAnswerfalse;
@@ -45,16 +46,27 @@ public class PruebaDiagnostico extends AppCompatActivity {
     private TextView tvTime;
     private TextView tvNumQuest;
     private TextView tvIDQuest;
+
     private Exam prueba;
     private Question question;
-    private LayoutInflater layoutInflater;
-    private RelativeLayout relativeLayout;
-
 
     private int counterTime;
     private int selectedAnswer;
     private int numPregunta = 0;
     private int counterQuestion;
+
+    private  int numAnswerTrue;
+    private  int numRight_LC;
+    private  int numRight_MT;
+    private  int numRight_CS;
+    private  int numRight_CN;
+    private  int numRight_IN;
+
+    private final int TOTAL_QUEST_CN = 12;
+    private final int TOTAL_QUEST_LC = 8;
+    private final int TOTAL_QUEST_CS = 10;
+    private final int TOTAL_QUEST_MT = 10;
+    private final int TOTAL_QUEST_IN = 10;
 
     private DatabaseReference mDatabase;
     private static final String TAG = "error";
@@ -114,6 +126,7 @@ public class PruebaDiagnostico extends AppCompatActivity {
             getQuestions(questionCS_list,"CS");
             getQuestions(questionMT_list,"MT");
             getQuestions(questionLC_list,"LC");
+            getQuestions(questionIN_list,"IN");
         }
 
         btnIniciarExamen.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +138,7 @@ public class PruebaDiagnostico extends AppCompatActivity {
                 printArray(question_All);
                 counterQuestion = question_All.size() - 1;
                 question = question_All.get(counterQuestion);
+
                 tvIDQuest.setVisibility(View.VISIBLE);
                 tvNumQuest.setVisibility(View.VISIBLE);
                 tvTime.setVisibility(View.VISIBLE);
@@ -214,15 +228,15 @@ public class PruebaDiagnostico extends AppCompatActivity {
                         counterQuestion--;
                     }
 
-                    qrecived = question_All.get(counterQuestion);
-                    numPregunta++;
-                    updateUI(qrecived);
+                    if(counterQuestion<0){
+                        btnSendAnswer.setText("Ver resultados ...");
+                        toResults();
+                    }else {
+                        qrecived = question_All.get(counterQuestion);
+                        numPregunta++;
+                        updateUI(qrecived);
+                    }
                 }
-
-                if(counterQuestion<0){
-                    Log.e(TAG,"Finish Exam");
-                }
-
             }
         });
 
@@ -322,7 +336,7 @@ public class PruebaDiagnostico extends AppCompatActivity {
     {
         random = new Random();
 
-        int tamanoCN = 12; int tamanoLC = 5; int tamanoCS = 10; int tamanoIN = 1; int tamanoMT = 5;
+        int tamanoCN = 2; int tamanoLC = 2; int tamanoCS = 2; int tamanoIN = 2; int tamanoMT = 2;
 
         Collections.shuffle(arrayCN , random);
         Collections.shuffle(arrayMT , random);
@@ -344,6 +358,10 @@ public class PruebaDiagnostico extends AppCompatActivity {
         }
         for(int i =0; i<tamanoMT;i++){
             Question questionSend = arrayMT.get(i);
+            question_All.add(questionSend);
+        }
+        for(int i =0; i<tamanoIN;i++){
+            Question questionSend = arrayIN.get(i);
             question_All.add(questionSend);
         }
 
@@ -372,6 +390,14 @@ public class PruebaDiagnostico extends AppCompatActivity {
         btnOpcionA.setBackgroundColor(Color.GRAY);
         selectedAnswer = 0;
 
+    }
+
+    public void toResults()
+    {
+        Intent toResults = new Intent(this , ResultsExam.class);
+
+        toResults.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toResults);
     }
 
 

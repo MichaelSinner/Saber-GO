@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/background05"
+    android:layout_height="wrap_content"
+    tools:context="com.example.michaelsinner.sabergo.Activities.ResultsExam">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultados"
+            android:textColor="#ffffff"
+            android:textSize="40dp" />
+
+        <ImageButton
+            android:id="@+id/imgResultExam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_launcher"/>
+
+        <ProgressBar
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:id="@+id/progressBar"
+            android:progress="66"
+            android:progressBackgroundTint="#FF0000"
+            android:layout_gravity="center_horizontal"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/linearrepcorr"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Número de respuestas correctas" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  33"
+                android:textAlignment="textEnd"
+                android:textColor="#19e722"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Número de respuestas incorrectas" />
+
+            <TextView
+                android:textSize="16dp"
+                android:textAlignment="textEnd"
+                android:textColor="#ff0000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Preguntas de Matemáticas correctas" />
+            <TextView
+                android:textSize="16dp"
+                android:textAlignment="textEnd"
+                android:textColor="#ff6f00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="8" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Preguntas de Lectura Crítica correctas" />
+            <TextView
+                android:textSize="16dp"
+                android:textAlignment="textEnd"
+                android:textColor="#ff6f00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="8" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Preguntas de Ciecias Sociales correctas" />
+            <TextView
+                android:textSize="16dp"
+                android:textAlignment="textEnd"
+                android:textColor="#ff6f00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Preguntas de Ciencias Naturales correctas" />
+
+            <TextView
+                android:textSize="16dp"
+                android:textAlignment="textEnd"
+                android:textColor="#ff6f00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Preguntas de Inglés correctas" />
+            <TextView
+                android:textSize="16dp"
+                android:textAlignment="textEnd"
+                android:textColor="#ff6f00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Tiempo del examen diagnóstico" />
+            <TextView
+                android:textSize="16dp"
+                android:textAlignment="textEnd"
+                android:textColor="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="33'15''" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimarySG"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvRecompensas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recompensas"
+            android:textColor="#deab2c"
+            android:textSize="30dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Fragmentos de LC" />
+            <TextView
+                android:textSize="18dp"
+                android:textAlignment="textEnd"
+                android:textColor="#a056c2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+8" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Fragmentos de MT" />
+            <TextView
+                android:textSize="18dp"
+                android:textAlignment="textEnd"
+                android:textColor="#ff3d3d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+8" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Fragmentos de CS" />
+            <TextView
+                android:textSize="18dp"
+                android:textAlignment="textEnd"
+                android:textColor="#741f00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Fragmentos de CN" />
+            <TextView
+                android:textSize="18dp"
+                android:textAlignment="textEnd"
+                android:textColor="#0fb400"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+4" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Fragmentos de IN" />
+            <TextView
+                android:textSize="18dp"
+                android:textAlignment="textEnd"
+                android:textColor="#007bb4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  SaberMoney" />
+            <TextView
+                android:textSize="18dp"
+                android:textAlignment="textEnd"
+                android:textColor="#FFFFFF00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+16500" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Puntos de experiencia" />
+
+            <TextView
+                android:textSize="18dp"
+                android:textAlignment="textEnd"
+                android:textColor="#00ff00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+50" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnVolverMenu"
+            android:text="Continuar"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+</ScrollView>
