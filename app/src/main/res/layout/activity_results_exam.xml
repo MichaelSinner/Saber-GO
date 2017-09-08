@@ -222,7 +222,7 @@
             <TextView
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
-                android:textColor="#a056c2"
+                android:textColor="#9d00ff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="+8" />
@@ -241,7 +241,7 @@
             <TextView
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
-                android:textColor="#ff3d3d"
+                android:textColor="#fa1414"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="+8" />
@@ -260,7 +260,7 @@
             <TextView
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
-                android:textColor="#741f00"
+                android:textColor="#ff6a00"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="+10" />
@@ -279,7 +279,7 @@
             <TextView
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
-                android:textColor="#0fb400"
+                android:textColor="#0b8300"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="+4" />
@@ -298,7 +298,7 @@
             <TextView
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
-                android:textColor="#007bb4"
+                android:textColor="#5ccbff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="+3" />

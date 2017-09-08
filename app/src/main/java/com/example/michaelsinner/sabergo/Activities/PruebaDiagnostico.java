@@ -3,9 +3,11 @@ package com.example.michaelsinner.sabergo.Activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -28,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -71,6 +74,7 @@ public class PruebaDiagnostico extends AppCompatActivity
     private DatabaseReference mDatabase;
     private static final String TAG = "error";
 
+    private static final String FORMAT = "%02d:%02d:%02d";
 
     private ArrayList<Question> question_All;
     private ArrayList<Question> questionCN_list;
@@ -88,6 +92,11 @@ public class PruebaDiagnostico extends AppCompatActivity
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // Hide appbar
+        getSupportActionBar().hide();
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View customView = inflater.inflate(R.layout.actionbar_home, null);
+
         setContentView(R.layout.activity_prueba_diagnostico);
 
         relativeLayout = (RelativeLayout) findViewById(R.id.relativeExmDiag);
@@ -274,6 +283,22 @@ public class PruebaDiagnostico extends AppCompatActivity
         //https://firebasestorage.googleapis.com/v0/b/saber-go.appspot.com/o/Preguntas%2F100002.PNG?alt=media&token=7a95d633-e45c-45f5-a477-8c502ce5397f
         */
 
+        new CountDownTimer(30000*10, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+               // tvTime.setText("seconds remaining: " + millisUntilFinished / 1000);
+
+                tvTime.setText(""+String.format(FORMAT,TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+            }
+
+            public void onFinish() {
+                tvTime.setText("done!");
+            }
+        }.start();
 
 
 
@@ -403,53 +428,6 @@ public class PruebaDiagnostico extends AppCompatActivity
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

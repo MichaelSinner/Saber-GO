@@ -45,7 +45,7 @@ public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvPreguntaDiaria = (TextView) itemView.findViewById(R.id.tvPreguntaTitulo);
+            //tvPreguntaDiaria = (TextView) itemView.findViewById(R.id.tvPreguntaTitulo);
 
         }
     }

@@ -31,7 +31,10 @@ public class Question
 
     }
 
-
+    public Question(long questionID, String questionArea) {
+        this.questionID = questionID;
+        this.questionArea = questionArea;
+    }
 
     public long getQuestionID() {
         return questionID;

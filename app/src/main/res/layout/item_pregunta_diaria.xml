@@ -1,18 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#ffe7e7"
+    android:layout_width="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:layout_height="wrap_content">
 
+ <TextView
+     android:id="@+id/tvPregunta_PD"
+     android:layout_width="wrap_content"
+     android:text="Pregunta "
+     android:padding="5dp"
+     android:layout_height="wrap_content" />
     <TextView
-        android:id="@+id/tvPreguntaTitulo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:textColor="#fa1414"
+        android:id="@+id/tvIDQuest_PD"
+        android:textSize="23dp"
+        android:layout_width="wrap_content"
+        android:text="MT00023"
+
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/tvPregunta_PD" />
+    <TextView
+        android:id="@+id/tvArea_PD"
+        android:layout_width="wrap_content"
+        android:text="Área: Matemáticas"
         android:padding="10dp"
-        android:textSize="30dp"
-        android:text="Example"
-         />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPregunta_PD"
+        android:layout_alignParentStart="true" />
 
-    <View style="@style/Divider"/>
+    <TextView
+        android:id="@+id/tvPuntos_PD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Puntos"
+        android:textSize="15dp"
+        android:textColor="#0004ff"
+        android:layout_marginEnd="16dp"
+        android:layout_alignBottom="@+id/tvArea_PD"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/tvPuntosEXP_PD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+2 EXP"
+        android:textSize="15dp"
+        android:textColor="#00ff00"
+        android:layout_below="@+id/tvPuntos_PD"
+        android:layout_toStartOf="@+id/tvPuntos_PD" />
+    <TextView
+        android:id="@+id/tvPuntosFRG_PD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+1 MT"
+        android:textSize="15dp"
+        android:textColor="#fa1414"
+        android:layout_below="@+id/tvPuntos_PD"
+        android:layout_alignParentEnd="true" />
+
+    <View style="@style/Divider"
+        android:id="@+id/view"
+        android:layout_below="@+id/tvPuntosFRG_PD"/>
 
 
-</LinearLayout>
+</RelativeLayout>

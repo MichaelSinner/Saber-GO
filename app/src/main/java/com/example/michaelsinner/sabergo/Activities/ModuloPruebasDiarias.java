@@ -1,12 +1,12 @@
 package com.example.michaelsinner.sabergo.Activities;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.example.michaelsinner.sabergo.Fragments.PreguntaDiaria_CN;
@@ -27,7 +27,6 @@ public class ModuloPruebasDiarias extends AppCompatActivity
     private ViewPager viewPager;
 
     String[] datos = new String[]{"Element1","Element2","Element3","Element4","Element5","Element6","Element7","Element8","Element9"};
-
 
 
     @Override
@@ -61,6 +60,7 @@ public class ModuloPruebasDiarias extends AppCompatActivity
         adapter.addFragment(new PreguntaDiaria_RN(),"Aleatorio");
         viewPager.setAdapter(adapter);
     }
+
 
 
     class ViewPagerAdapter extends FragmentPagerAdapter{
