@@ -1,5 +1,7 @@
 package com.example.michaelsinner.sabergo.Data;
 
+import java.util.HashMap;
+
 /**
  * Created by Michael Sinner on 13/8/2017.
  */
@@ -13,6 +15,7 @@ public class User
     private String userName;
     private String userImageProfile;
     private boolean doExamDiagnostic;
+    private HashMap<String,Object> map;
 
     /*- User Game Info -*/
     private int userNivel;
@@ -37,8 +40,9 @@ public class User
 
     public User()
     {
-
+        super();
     }
+
     public User(String userID, String userEmail, String userName)
     {
         this.userID = userID;
@@ -46,6 +50,65 @@ public class User
         this.userName = userName;
     }
 
+    public User(String userID, String userEmail, String userPassword, String userName, String userImageProfile, int userNivel, String userRango, int puntosLC, int puntosMT, int puntosIN, int puntosCN, int puntosCS, int userDinero, int progressLevelExp, int numExamDiagnostic, int numMeteoritosDestruidos, int numPreguntasMT, int numPreguntasLC, int numPreguntasCS, int numPreguntasCN, int numPreguntasIN, boolean doExamDiagnostic) {
+        this.userID = userID;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.userImageProfile = userImageProfile;
+        this.doExamDiagnostic = doExamDiagnostic;
+        this.userNivel = userNivel;
+        this.userRango = userRango;
+        this.puntosLC = puntosLC;
+        this.puntosMT = puntosMT;
+        this.puntosIN = puntosIN;
+        this.puntosCN = puntosCN;
+        this.puntosCS = puntosCS;
+        this.userDinero = userDinero;
+        this.progressLevelExp = progressLevelExp;
+        this.numExamDiagnostic = numExamDiagnostic;
+        this.numMeteoritosDestruidos = numMeteoritosDestruidos;
+        this.numPreguntasMT = numPreguntasMT;
+        this.numPreguntasLC = numPreguntasLC;
+        this.numPreguntasCS = numPreguntasCS;
+        this.numPreguntasCN = numPreguntasCN;
+        this.numPreguntasIN = numPreguntasIN;
+    }
+
+    public HashMap<String,Object> toMap(){
+
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("userID",userID);
+        result.put("userEmail",userEmail);
+        result.put("userPassword",userPassword);
+        result.put("userName",userName);
+        result.put("userImageProfile",userImageProfile);
+        result.put("doExamDiagnostic",doExamDiagnostic);
+        result.put("userNivel",userNivel);
+        result.put("userRango",userRango);
+        result.put("puntosLC",puntosLC);
+        result.put("puntosMT",puntosMT);
+        result.put("puntosCS",puntosCS);
+        result.put("puntosCN",puntosCN);
+        result.put("puntosIN",puntosIN);
+        result.put("userDinero",userDinero);
+        result.put("progressLevelExp",progressLevelExp);
+        result.put("numExamDiagnostic",numExamDiagnostic);
+        result.put("numMeteoritosDestruidos",numMeteoritosDestruidos);
+        result.put("numPreguntasMT",numPreguntasMT);
+        result.put("numPreguntasLC",numPreguntasLC);
+        result.put("numPreguntasCS",numPreguntasCS);
+        result.put("numPreguntasCN",numPreguntasCN);
+        result.put("numPreguntasIN",numPreguntasIN);
+        result.put("doExamDiagnostic",doExamDiagnostic);
+
+
+
+        return result;
+
+    }
+
+    /*
     public User(String userID, String userEmail, String userPassword, String userName, String userImageProfile, int userNivel, String userRango, int puntosLC, int puntosMT, int puntosIN, int puntosCN, int puntosCS, int userDinero, int progressLevelExp, int numExamDiagnostic, int numMeteoritosDestruidos, int numPreguntasMT, int numPreguntasLC, int numPreguntasCS, int numPreguntasCN, int numPreguntasIN) {
         this.userID = userID;
         this.userEmail = userEmail;
@@ -70,7 +133,7 @@ public class User
         this.numPreguntasCN = numPreguntasCN;
         this.numPreguntasIN = numPreguntasIN;
     }
-
+*/
     /*- Getters and Setters -*/
     public String getUserID() {
         return userID;
@@ -251,5 +314,30 @@ public class User
     @Override
     public String toString() {
         return "User :"+getUserName()+" "+getUserEmail()+" "+getUserRango()+" "+getUserNivel();
+    }
+
+    public void setValues(User values) {
+        userID = values.userID;
+        userEmail = values.userEmail;
+        userPassword = values.userPassword;
+        userName = values.userName;
+        userImageProfile = values.userImageProfile;
+        doExamDiagnostic = values.doExamDiagnostic;
+        userNivel = values.userNivel;
+        userRango = values.userRango;
+        puntosLC = values.puntosLC;
+        puntosMT = values.puntosMT;
+        puntosIN = values.puntosIN;
+        puntosCN = values.puntosCN;
+        puntosCS = values.puntosCS;
+        userDinero = values.userDinero;
+        progressLevelExp = values.progressLevelExp;
+        numExamDiagnostic = values.numExamDiagnostic;
+        numMeteoritosDestruidos = values.numMeteoritosDestruidos;
+        numPreguntasMT = values.numPreguntasMT;
+        numPreguntasLC = values.numPreguntasLC;
+        numPreguntasCS = values.numPreguntasCS;
+        numPreguntasCN = values.numPreguntasCN;
+        numPreguntasIN = values.numPreguntasIN;
     }
 }

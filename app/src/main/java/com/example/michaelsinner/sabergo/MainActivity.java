@@ -16,8 +16,6 @@ import android.widget.TextView;
 
 import com.example.michaelsinner.sabergo.Activities.Index;
 import com.example.michaelsinner.sabergo.Utilities.GeneradorExmDiagno;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -38,7 +36,7 @@ public class MainActivity extends Activity
         setContentView(R.layout.activity_main);
         printHashKey();
 
-        generador = new GeneradorExmDiagno(50,10,8,7,12,10,3);
+      //  generador = new GeneradorExmDiagno(50,10,8,7,12,10,3);
 
         /*
         * se referencia la parte logica y visual del Button btnStart y se implenta su evento del click

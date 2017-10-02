@@ -9,16 +9,17 @@ import android.view.MenuItem;
 
 import com.example.michaelsinner.sabergo.R;
 
-public class About extends AppCompatActivity {
+public class About extends AppCompatActivity
+{
 
     private Toolbar toolbar;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Acerca de");
@@ -26,13 +27,15 @@ public class About extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
-        }else if(id == android.R.id.home){
+        }else if(id == android.R.id.home)
+        {
             Intent intent = NavUtils.getParentActivityIntent(this);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             NavUtils.navigateUpTo(this,intent);

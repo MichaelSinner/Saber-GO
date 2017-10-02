@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 public class Profile extends AppCompatActivity
 {
@@ -78,10 +79,11 @@ public class Profile extends AppCompatActivity
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        String ID = bundle.getString("ID");
+        String userSrting = bundle.getString("USER");
+        User triaded = new Gson().fromJson(userSrting, User.class);
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Student");
-        mDatabase.orderByKey().equalTo(ID).addValueEventListener(new ValueEventListener() {
+        mDatabase.orderByKey().equalTo(triaded.getUserID()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {

@@ -39,6 +39,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,19 +57,23 @@ public class MainMenu extends AppCompatActivity
     private Button btnSimulacro;
     private Button btnPerfil;
 
+
+    private Bundle allInfo;
+
     private String userName, userEmail;
     private User user;
 
     private ImageView ivUserImagProfile;
-    TextView tvUserName, tvUserEmail, tvUserLevel, prueba;
+    TextView tvUserName, tvUserEmail, tvUserLevel, prueba, tvPruebaUpdate;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
     private DatabaseReference mDatabase;
+    private DatabaseReference userReference;
 
 
     private GoogleApiClient googleApiClient;
-    private static final String TAG ="error";
+    private static final String TAG = "error";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,139 +83,48 @@ public class MainMenu extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Menú Principal");
 
+        Log.e(TAG, "On Create");
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
                 requestEmail().build();
 
-        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
+        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View viewNav = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        tvUserEmail = (TextView)  viewNav.findViewById(R.id.tvUserEmailMain);
+        tvUserEmail = (TextView) viewNav.findViewById(R.id.tvUserEmailMain);
         tvUserName = (TextView) viewNav.findViewById(R.id.tvUserNameMain);
         tvUserLevel = (TextView) viewNav.findViewById(R.id.tvUserNivel);
         prueba = (TextView) findViewById(R.id.tvPruebaMenu);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
+        tvPruebaUpdate = (TextView) findViewById(R.id.tvPruebaUpdate);
 
-        if (bundle!=null){
-            final String ID = (String) bundle.get("ID");
-            final String email = (String) bundle.get("EMAIL");
-            final String name = (String) bundle.get("NOMBRE");
-            final String image = (String) bundle.get("IMAGE");
-
-
-            mDatabase = FirebaseDatabase.getInstance().getReference().child("Student");
-
-            mDatabase.orderByKey().equalTo(ID).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    if(!dataSnapshot.exists()){
-                        Log.e(TAG," exist : "+dataSnapshot.exists()+" | "+dataSnapshot.getChildren());
-                        user = new User(ID, email, "pass", name, image, 1, "Recluta", 0, 0, 0, 0, 0, 1000, 1, 0, 0, 0, 0, 0, 0, 0);
-
-                        mDatabase.child(ID).setValue(user);
-                        tvUserName.setText(user.getUserName());
-                        tvUserEmail.setText(user.getUserEmail());
-                        tvUserLevel.setText("Nivel : "+user.getUserNivel());
-                        prueba.setText(user.getUserID());
-                        Log.e(TAG,"Estudiante creado : "+user.toString());
-                    }else{
-                        Log.e(TAG," exist : "+dataSnapshot.exists()+" | "+dataSnapshot.getChildren());
-                        for (DataSnapshot message: dataSnapshot.getChildren())
-                        {
-                            user = message.getValue(User.class);
-                            tvUserName.setText(user.getUserName());
-                            tvUserEmail.setText(user.getUserEmail());
-                            tvUserLevel.setText("Nivel : "+user.getUserNivel());
-                            prueba.setText(user.getUserID());
-                            Log.e(TAG,"Estudiante Capturado : "+user.toString());
-                        }
-                    }
-              }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }else {
-
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-            if(user != null){
-                String ID = user.getUid();
-                String Name = user.getDisplayName();
-                String Email = user.getEmail();
-                String image = "Default";
-                loadPerfil(ID);
-
-            }else {
-               goLoginScreen();
-            }
-
-
-      }
-
-
-
-/*
-        if(exist){
-            mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("Student").child(ID).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    user = new User();
-
-                    String uID = (String) dataSnapshot.child("userID").getValue();
-
-                    user.setUserID(uID);
-                    String uName = (String) dataSnapshot.child("userName").getValue();
-                    Log.e(TAG," name : "+uName);
-                    user.setUserName(uName);
-                    String uEmail = (String) dataSnapshot.child("userEmail").getValue();
-                    user.setUserEmail(uEmail);
-
-                    Log.e(TAG,"Estudiante capturado : "+user.toString());
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-        }else{
-            user = new User(ID, email, "pass", name, image, 1, "Recluta", 0, 0, 0, 0, 0, 1000, 1, 0, 0, 0, 0, 0, 0, 0);
-            mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("Student").child(ID).setValue(user);
-            Log.e(TAG,"Estudiante creado : "+user.toString());
-
-
-
-        }
-*/
 
         fireAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                Intent intent = getIntent();
+
                 FirebaseUser userf = firebaseAuth.getCurrentUser();
 
-                if(userf!=null && user!=null){
+                if (userf != null && user != null) {
+                    Log.e(TAG, "cambiosito");
 
-
-                }else{
-                    goLoginScreen();;
+                } else {
+                    goLoginScreen();
+                    ;
                 }
             }
         };
 
+        mDatabase = FirebaseDatabase.getInstance().getReference("Student");
+
+        String stringUser;
+        allInfo = getIntent().getExtras();
+        stringUser = allInfo.getString("USER");
+
+        user = new Gson().fromJson(stringUser, User.class);
 
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -220,18 +134,15 @@ public class MainMenu extends AppCompatActivity
         toggle.syncState();
 
 
-
-
-
         btnPruebaDiagn = (Button) findViewById(R.id.btnPruebaDiagnostico);
         btnPruebaDiagn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if (isOnline(getApplicationContext())){
-                   startActivity(toPruebaDiagnostico());
-               }else{
-                   startActivity(toNoInternet());
-               }
+                if (isOnline(getApplicationContext())) {
+                    startActivity(toPruebaDiagnostico());
+                } else {
+                    startActivity(toNoInternet());
+                }
 
             }
         });
@@ -239,11 +150,10 @@ public class MainMenu extends AppCompatActivity
         btnPruebaDiaria = (Button) findViewById(R.id.btnPruebasDiarias);
         btnPruebaDiaria.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                if (isOnline(getApplicationContext())){
+            public void onClick(View view) {
+                if (isOnline(getApplicationContext())) {
                     startActivity(toPruebaEntrenamiento());
-                }else{
+                } else {
                     startActivity(toNoInternet());
                 }
             }
@@ -254,12 +164,13 @@ public class MainMenu extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                if (isOnline(getApplicationContext()))
-                {
-                    startActivity(toModuloLudica());
-                }else{
-                    startActivity(toNoInternet());
-                }
+            if (isOnline(getApplicationContext())) {
+                //startActivity(toModuloLudica());
+                updateProfile(user.getUserID());
+
+            } else {
+                startActivity(toNoInternet());
+            }
             }
         });
 
@@ -267,29 +178,58 @@ public class MainMenu extends AppCompatActivity
         btnPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isOnline(getApplicationContext()))
-                {
+                if (isOnline(getApplicationContext())) {
                     startActivity(toPerfil(user));
-                }else{
+                } else {
                     startActivity(toNoInternet());
                 }
             }
         });
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(TAG,"ON Resume");
+
+
+            /*
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            */
 
     }
 
 
-    public void CrearUsuario(String userID,String userEmail ,String name, String imageProfile)
+    public boolean updateProfile(String id)
     {
 
+        tvPruebaUpdate = (TextView) findViewById(R.id.tvPruebaUpdate);
+        //allInfo = getIntent().getExtras();
+        //stringUser = allInfo.getString("USER");
+        DatabaseReference df = FirebaseDatabase.getInstance().getReference("Student").child(id);
+        //User userUpdated =new Gson().fromJson(stringUser, User.class);
+        int numAcum = user.getNumExamDiagnostic();
+        numAcum++;
+        user.setNumExamDiagnostic(numAcum);
+        df.setValue(user);
+
+       // tvPruebaUpdate.setText(user.getNumExamDiagnostic());
 
 
+        Toast.makeText(getApplicationContext(),"Información usuario actualizado",Toast.LENGTH_SHORT).show();
+        return true;
     }
 
+    //public void
+
+
+
+    /*
     public void loadPerfil(final String UID)
     {
+
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Student");
         mDatabase.orderByKey().equalTo(UID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -302,11 +242,8 @@ public class MainMenu extends AppCompatActivity
                     for (DataSnapshot message: dataSnapshot.getChildren())
                     {
                         user = message.getValue(User.class);
-                        tvUserName.setText(user.getUserName());
-                        tvUserEmail.setText(user.getUserEmail());
-                        tvUserLevel.setText("Nivel : "+user.getUserNivel());
-                        prueba.setText(user.getUserID());
-                        Log.e(TAG,"Estudiante Capturado : "+user.toString());
+
+
                     }
                 }
             }
@@ -319,140 +256,104 @@ public class MainMenu extends AppCompatActivity
 
     }
 
-    /*
-    public void loadProfile(final String ID, final String email, final String name,final String imageProfile)
-    {
+*/
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //firebaseAuth.addAuthStateListener(fireAuthStateListener);
+        Log.e(TAG, "On Start");
+/*
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user = null;
+                for (DataSnapshot message: dataSnapshot.getChildren()){
+                    user = message.getValue(User.class);
+                    tvUserName.setText(user.getUserName());
+                    tvUserEmail.setText(user.getUserEmail());
+                    tvUserLevel.setText("Nivel : "+user.getUserNivel());
+                    prueba.setText(user.getUserID());
+                    tvPruebaUpdate.setText(user.getNumExamDiagnostic());
+                    return;
+                }
+            }
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-        Log.e(TAG,"mensjae importante si es true : "+mDatabase.child("Student").child(ID).getKey());
+            }
+        });
+        */
 
-        boolean exist = mDatabase.child("Student").child(ID).equals(ID);
-        if(!exist){
-            User user = new User(ID,email,"pass",name,imageProfile,1,"Recluta",0,0,0,0,0,1000,1,0,1,7,2,3,1,1);
+
+
+        if (allInfo != null) {
+            final String ID = (String) allInfo.get("ID");
+            final String email = (String) allInfo.get("EMAIL");
+            final String name = (String) allInfo.get("NOMBRE");
+            final String image = (String) allInfo.get("IMAGE");
             mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("Student").child(ID).setValue(user);
-            tvUserName.setText(name);
-            tvUserEmail.setText(email);
-            prueba.setText(ID);
-            exist = true;
-        }else{
+
+            userReference = mDatabase.child("Student");
 
 
-            mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("Student").child(ID).addValueEventListener(new ValueEventListener() {
+            userReference.orderByKey().equalTo(ID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
+                    if (!dataSnapshot.exists()) {
+                        user = new User(ID, email, "pass", name, image, 1, "Recluta", 0, 0, 0, 0, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, false);
+                        //user = new User(ID, email, "pass", name, image, 1, "Recluta", 0, 0, 0, 0, 0, 1000, 1, 0, 0, 0, 0, 0, 0, 0);
 
+                        userReference.child(ID).setValue(user);
+                        tvUserName.setText(user.getUserName());
+                        tvUserEmail.setText(user.getUserEmail());
+                        tvUserLevel.setText("Nivel : " + user.getUserNivel());
+                        prueba.setText(user.getUserID());
+                        Log.e(TAG, "Estudiante creado : " + user.toString());
+                        return;
+                    } else {
 
-                } for (DataSnapshot dtSnapshot1: dataSnapshot.getChildren())
-                    {
-                        User user = new User();
-                        user.setUserID((String) dtSnapshot1.child("userID").getValue());
-                        user.setUserNivel((Integer) dtSnapshot1.child("userNivel").getValue());
-                        user.setDoExamDiagnostic((Boolean) dtSnapshot1.child("doExamDiagnostic").getValue());
-                        user.setUserName((String) dtSnapshot1.child("userName").getValue());
-                        user.setUserEmail((String) dtSnapshot1.child("userEmail").getValue());
-                        user.setUserNivel((Integer) dtSnapshot1.child("userNivel").getValue());
-                        user.setUserRango((String) dtSnapshot1.child("userRango").getValue());
-                        user.setUserDinero((Integer) dtSnapshot1.child("userDinero").getValue());
-                        user.setProgressLevelExp((Integer) dtSnapshot1.child("progressLevelExp").getValue());
-                        user.setNumMeteoritosDestruidos((Integer) dtSnapshot1.child("numMeteoritosDrestruidos").getValue());
-                        user.setNumExamDiagnostic((Integer) dtSnapshot1.child("numExamDiagnostic").getValue());
-                        user.setPuntosCN((Integer) dtSnapshot1.child("puntosCN").getValue());
-                        user.setPuntosCS((Integer) dtSnapshot1.child("puntosCS").getValue());
-                        user.setPuntosIN((Integer) dtSnapshot1.child("puntosIN").getValue());
-                        user.setPuntosLC((Integer) dtSnapshot1.child("puntosLC").getValue());
-                        user.setPuntosMT((Integer) dtSnapshot1.child("puntosMT").getValue());
-                        user.setNumPreguntasCN((Integer) dtSnapshot1.child("numPreguntasCN").getValue());
-                        user.setNumPreguntasCS((Integer) dtSnapshot1.child("numPreguntasCS").getValue());
-                        user.setNumPreguntasIN((Integer) dtSnapshot1.child("numPreguntasIN").getValue());
-                        user.setNumPreguntasLC((Integer) dtSnapshot1.child("numPreguntasLC").getValue());
-                        user.setNumPreguntasMT((Integer) dtSnapshot1.child("numPreguntasMT").getValue());
-
-                        Log.e(TAG,"Usuario recogido : "+user.toString());
-
+                        Log.e(TAG, " exist : " + dataSnapshot.exists() + " | " + dataSnapshot.getChildren());
+                        for (DataSnapshot message : dataSnapshot.getChildren()) {
+                            user = message.getValue(User.class);
+                            tvUserName.setText(user.getUserName());
+                            tvUserEmail.setText(user.getUserEmail());
+                            tvUserLevel.setText("Nivel : " + user.getUserNivel());
+                            prueba.setText(user.getUserID());
+                            tvPruebaUpdate.setText(String.valueOf(user.getNumExamDiagnostic()));
+                            Log.e(TAG, "Estudiante Capturado de fire : " + user.toString());
+                            return;
+                        }
                     }
+                }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
             });
+        } else {
+
+           // user = new Gson().fromJson(stringUser, User.class);
+            Log.e(TAG, "NO entro");
+            if (user != null) {
+
+                String ID = user.getUserID();
+                tvUserName.setText(user.getUserName());
+                tvUserEmail.setText(user.getUserEmail());
+                tvUserLevel.setText("Nivel : " + user.getUserNivel());
+                prueba.setText(user.getUserID());
+                Log.e(TAG, "Estudiante Capturado del bundle: " + user.toString());
+//                loadPerfil(ID);
+
+            } else {
+
+                goLoginScreen();
+            }
         }
 
-
     }
-    */
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //firebaseAuth.addAuthStateListener(fireAuthStateListener);
-
-        /*
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        ValueEventListener valueEventListener = mDatabase.child("Student").child(ID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot dtSnapshot1: dataSnapshot.getChildren())
-                {
-                    User user = new User();
-                    user.setUserID((String) dtSnapshot1.child("userID").getValue());
-                    user.setUserNivel((Integer) dtSnapshot1.child("userNivel").getValue());
-                    user.setDoExamDiagnostic((Boolean) dtSnapshot1.child("doExamDiagnostic").getValue());
-                    user.setUserName((String) dtSnapshot1.child("userName").getValue());
-                    user.setUserEmail((String) dtSnapshot1.child("userEmail").getValue());
-                    user.setUserNivel((Integer) dtSnapshot1.child("userNivel").getValue());
-                    user.setUserRango((String) dtSnapshot1.child("userRango").getValue());
-                    user.setUserDinero((Integer) dtSnapshot1.child("userDinero").getValue());
-                    user.setProgressLevelExp((Integer) dtSnapshot1.child("progressLevelExp").getValue());
-                    user.setNumMeteoritosDestruidos((Integer) dtSnapshot1.child("numMeteoritosDrestruidos").getValue());
-                    user.setNumExamDiagnostic((Integer) dtSnapshot1.child("numExamDiagnostic").getValue());
-                    user.setPuntosCN((Integer) dtSnapshot1.child("puntosCN").getValue());
-                    user.setPuntosCS((Integer) dtSnapshot1.child("puntosCS").getValue());
-                    user.setPuntosIN((Integer) dtSnapshot1.child("puntosIN").getValue());
-                    user.setPuntosLC((Integer) dtSnapshot1.child("puntosLC").getValue());
-                    user.setPuntosMT((Integer) dtSnapshot1.child("puntosMT").getValue());
-                    user.setNumPreguntasCN((Integer) dtSnapshot1.child("numPreguntasCN").getValue());
-                    user.setNumPreguntasCS((Integer) dtSnapshot1.child("numPreguntasCS").getValue());
-                    user.setNumPreguntasIN((Integer) dtSnapshot1.child("numPreguntasIN").getValue());
-                    user.setNumPreguntasLC((Integer) dtSnapshot1.child("numPreguntasLC").getValue());
-                    user.setNumPreguntasMT((Integer) dtSnapshot1.child("numPreguntasMT").getValue());
-
-                    Log.e(TAG,"Usuario recogido : "+user.toString());
-                    tvUserEmail.setText(user.getUserEmail());
-                    tvUserName.setText(user.getUserName());
-                    tvUserLevel.setText("Nivel :"+user.getUserNivel());
-                    prueba.setText(user.getUserID());
-
-                }
-
-
-
-
-
-
-
-
-                tvUserEmail.setText(user.getUserEmail());
-                tvUserName.setText(user.getUserName());
-                tvUserLevel.setText("Nivel :"+user.getUserNivel());
-                prueba.setText(user.getUserID());
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        mDatabase.addValueEventListener(valueEventListener);
-        */
-    }
-
-
 
     @Override
     protected void onStop() {
@@ -576,6 +477,8 @@ public class MainMenu extends AppCompatActivity
     private Intent toPruebaDiagnostico()
     {
         Intent toPruebaDiagnostico = new Intent(MainMenu.this, PruebaDiagnostico.class);
+        toPruebaDiagnostico.putExtra("ID",user.getUserID());
+        toPruebaDiagnostico.putExtra("USER",new Gson().toJson(user));
         return  toPruebaDiagnostico;
     }
     private Intent toPruebaEntrenamiento(){
@@ -596,6 +499,7 @@ public class MainMenu extends AppCompatActivity
     public Intent toPerfil(User userSended)
     {
         Intent toPerfil = new Intent(MainMenu.this, Profile.class);
+        toPerfil.putExtra("USER", new Gson().toJson(userSended));
         toPerfil.putExtra("ID",userSended.getUserID());
         toPerfil.putExtra("NOMBRE",userSended.getUserName());
         toPerfil.putExtra("EMAIL",userSended.getUserEmail());
@@ -701,5 +605,30 @@ public class MainMenu extends AppCompatActivity
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("UserSaved",new Gson().toJson(user));
+        Log.e(TAG,"On savedInstance");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.e(TAG,"On restore");
+        String dataReceived = savedInstanceState.getString("UserSaved");
+        //user = new Gson().fromJson(dataReceived, User.class);
+
+    }
+
+
+
+    @Override
+    protected void onRestart() {
+        Log.e(TAG,"On restart");
+        super.onRestart();
+
+    }
 }
 

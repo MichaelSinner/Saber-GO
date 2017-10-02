@@ -32,7 +32,7 @@ public class AdapterQuestion extends RecyclerView.Adapter<AdapterQuestion.Adapte
     public void onBindViewHolder(AdapterQuiestionViewHolder holder, int position) {
         Question question = list.get(position);
         holder.tvIDQUest.setText("MT000"+String.valueOf(question.getQuestionID()));
-        holder.tvArea.setText("Área : "+question.getQuestionArea());
+        holder.tvArea.setText("Área : "+question.getArea());
     }
 
     @Override

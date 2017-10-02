@@ -46,7 +46,6 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,10 +66,10 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private GoogleApiClient googleApiClient;
     private SignInButton signInButton;
     public static final int  SIGN_IN_CODE_GMAIL = 777;
+    public static final String TAG = "1" ;
 
     private LoginButton btnFBLogin;
     private CallbackManager callbackManager;
-    //private ProfilePictureView profilePictureView;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener fireAuthStateListener;
@@ -83,7 +82,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private Bitmap imageUser;
 
     //-- User Object ---------------------------------------------------------------------------- //
-    private DatabaseReference mDatabase;
+
     private User userSaberGO;
 
     @Override
@@ -94,7 +93,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         getSupportActionBar().hide();
         LayoutInflater inflater = LayoutInflater.from(this);
         View customView = inflater.inflate(R.layout.actionbar_home, null);
-
 
         progressBarFireBase = (ProgressBar) findViewById(R.id.prgBarFirebase);
         callbackManager = CallbackManager.Factory.create();
@@ -109,7 +107,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         signInButton = (SignInButton) findViewById(R.id.btnSignInGoogle);
         btnFBLogin = (LoginButton) findViewById(R.id.button_fbLogin);
 
-
         tvTitleLogin = (TextView) findViewById(R.id.tvTitleLogin);
         Typeface font = Typeface.createFromAsset(getAssets(),"fonts/Sanlabello.ttf");
         tvTitleLogin.setTypeface(font);
@@ -118,6 +115,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         permissions.add("public_profile");
         permissions.add("email");
         permissions.add("user_birthday");
+
         btnFBLogin.setReadPermissions(permissions);
         btnFBLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -146,7 +144,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                            //    Toast.makeText(Login.this, "Bienvenido "+profile.getFirstName(), Toast.LENGTH_SHORT);
+
+                                Toast.makeText(Login.this, "Bienvenido "+profile.getFirstName(), Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -160,12 +159,12 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
             @Override
             public void onCancel() {
-                Toast.makeText(Login.this, "Login Cancel", Toast.LENGTH_LONG);
+                Toast.makeText(Login.this, "Login Facebook Cancel", Toast.LENGTH_LONG);
             }
 
             @Override
             public void onError(FacebookException error) {
-                Toast.makeText(Login.this, "Login Cancel", Toast.LENGTH_LONG);
+                Toast.makeText(Login.this, "Login Facebook Error "+error, Toast.LENGTH_LONG);
             }
         });
         btnFBLogin.setTypeface(font);
@@ -185,27 +184,26 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         etPassword = (EditText) findViewById(R.id.etPassword);
         tvprueba = (TextView) findViewById(R.id.textViewPrueba);
 
-
         btnLogIn = (Button) findViewById(R.id.btnIniciarSesion);
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String strUserEmail = etEmail.getText().toString();
-                String strUserPass = etPassword.getText().toString();
+            String strUserEmail = etEmail.getText().toString();
+            String strUserPass = etPassword.getText().toString();
 
-                if(TextUtils.isEmpty(strUserEmail)||TextUtils.isEmpty(strUserPass)){
-                    Toast.makeText(getApplicationContext(),"Escribe tu correo y contraseña para iniciar sesión",Toast.LENGTH_SHORT).show();
-                    etEmail.setError("Escribe tu correo aquí");
-                    etPassword.setError("Escribe tu contraseña");
-                    return;
+            if(TextUtils.isEmpty(strUserEmail)||TextUtils.isEmpty(strUserPass)){
+                Toast.makeText(getApplicationContext(),"Escribe tu correo y contraseña para iniciar sesión",Toast.LENGTH_SHORT).show();
+                etEmail.setError("Escribe tu correo aquí");
+                etPassword.setError("Escribe tu contraseña");
+                return;
 
-                }else if(isOnline(getApplicationContext())){
-                    toLogin(etEmail.getText().toString(),etPassword.getText().toString());
-                    tvprueba.setText(etEmail.getText());
-                }else{
-                    toNoInternet();
-                }
+            }else if(isOnline(getApplicationContext())){
+                toLogin(etEmail.getText().toString(),etPassword.getText().toString());
+                tvprueba.setText(etEmail.getText());
+            }else{
+                toNoInternet();
+            }
 
 
             }
@@ -215,47 +213,33 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
      //--- Listener State Firebase ------------------------------------------------------------//
         firebaseAuth = FirebaseAuth.getInstance();
         fireAuthStateListener = new FirebaseAuth.AuthStateListener() {
+
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 Profile userFB = Profile.getCurrentProfile();
-                //String provider = user.getProviderId();
 
-                if(user != null && userFB == null){
-
+                if(user != null && userFB == null)
+                {
                     userSaberGO = new User(user.getUid(),user.getEmail(), user.getDisplayName());
-
-                    Log.e("TAG","User : "+userSaberGO.getUserID());
-                    Log.e("TAG","email : "+userSaberGO.getUserEmail());
-                    Log.e("TAG","whololo : "+user.toString());
-                    Log.e("TAG","name : "+userSaberGO.getUserName());
                     toMenuPrincipal(userSaberGO);
+
                 } else if(userFB!= null){
 
                     userSaberGO.setUserID(user.getUid());
-
-                    Log.e("TAG","User : "+userSaberGO.getUserID());
-                    Log.e("TAG","email : "+userSaberGO.getUserEmail());
-                    //  Log.e("TAG","provider : "+provider);
-                    Log.e("TAG","whololo : "+user.toString());
-                    Log.e("TAG","name : "+userSaberGO.getUserName());
                     toMenuPrincipal(userSaberGO);
                 }
-
-
             }
         };
 
-
         btnSignup = (Button) findViewById(R.id.btnToRegister);
         btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toRegister();   
-            }
-        });
+                @Override
+                public void onClick(View view) {
+                    toRegister();
+                }
+            });
         btnSignup.setTypeface(font);
-
     }
 
     private void setProfileToView(JSONObject object)
@@ -279,6 +263,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             e.printStackTrace();
         }
     }
+
     public static boolean isOnline(Context context)
     {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -286,7 +271,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
     }
 
-    private void handleFacebookAccesToken(final AccessToken accessToken) {
+    private void handleFacebookAccesToken(final AccessToken accessToken)
+    {
         progressBarFireBase.setVisibility(View.VISIBLE);
         btnFBLogin.setVisibility(View.GONE);
         signInButton.setVisibility(View.GONE);
@@ -299,20 +285,21 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (!task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Error Firebase",Toast.LENGTH_LONG).show();
-                }
 
+            if (!task.isSuccessful())
+            {
+                Toast.makeText(getApplicationContext(), "Error Firebase",Toast.LENGTH_LONG).show();
+            }
 
+            progressBarFireBase.setVisibility(View.GONE);
+            btnFBLogin.setVisibility(View.VISIBLE);
+            btnSignup.setVisibility(View.VISIBLE);
+            btnLogIn.setVisibility(View.VISIBLE);
+            etEmail.setVisibility(View.VISIBLE);
+            signInButton.setVisibility(View.VISIBLE);
+            etPassword.setVisibility(View.VISIBLE);
+            btnFBLogin.setVisibility(View.VISIBLE);
 
-                progressBarFireBase.setVisibility(View.GONE);
-                btnFBLogin.setVisibility(View.VISIBLE);
-                btnSignup.setVisibility(View.VISIBLE);
-                btnLogIn.setVisibility(View.VISIBLE);
-                etEmail.setVisibility(View.VISIBLE);
-                signInButton.setVisibility(View.VISIBLE);
-                etPassword.setVisibility(View.VISIBLE);
-                btnFBLogin.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -340,17 +327,19 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(!task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(),"No se realizo la autenticacion Firebase",Toast.LENGTH_LONG).show();
-                }
-                progressBarFireBase.setVisibility(View.GONE);
-                btnFBLogin.setVisibility(View.VISIBLE);
-                signInButton.setVisibility(View.VISIBLE);
-                btnSignup.setVisibility(View.VISIBLE);
-                btnLogIn.setVisibility(View.VISIBLE);
-                etEmail.setVisibility(View.VISIBLE);
-                etPassword.setVisibility(View.VISIBLE);
-                btnFBLogin.setVisibility(View.VISIBLE);
+
+            if(!task.isSuccessful()){
+                Toast.makeText(getApplicationContext(),"No se realizo la autenticacion a Firebase",Toast.LENGTH_LONG).show();
+            }
+
+            progressBarFireBase.setVisibility(View.GONE);
+            btnFBLogin.setVisibility(View.VISIBLE);
+            signInButton.setVisibility(View.VISIBLE);
+            btnSignup.setVisibility(View.VISIBLE);
+            btnLogIn.setVisibility(View.VISIBLE);
+            etEmail.setVisibility(View.VISIBLE);
+            etPassword.setVisibility(View.VISIBLE);
+            btnFBLogin.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -396,9 +385,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
     private void toLogin(String emailEditText, String passwordEditText)
     {
-
         firebaseAuth.signInWithEmailAndPassword(emailEditText,passwordEditText).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            public static final String TAG = "1" ;
+
 
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -422,7 +410,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
         firebaseAuth.addAuthStateListener(fireAuthStateListener);
     }

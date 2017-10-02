@@ -100,7 +100,7 @@
             android:name=".Activities.Settings"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".Activities.MainMenu" />
-        <activity android:name=".Activities.PruebaDiagnostico" />
+
 
         <!-- Manifest Activity Registrarse -->
         <activity
@@ -122,7 +122,30 @@
             android:parentActivityName=".Activities.MainMenu"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.ResultsExam"></activity>
+
+        <!-- Manifest Activty Resultados Examen Diagnóstico -->
+        <activity
+            android:name=".Activities.ResultsExam"
+            android:label="Resultados"
+            android:parentActivityName=".Activities.MainMenu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+        <!-- Manifest Activty Resultados Examen Diagnóstico -->
+        <activity
+            android:name=".Activities.PruebaDiagnostico"
+            android:label="Examen Diagnostico"
+            android:parentActivityName=".Activities.MainMenu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+         </activity>
 
         <!-- Manifest Activty Módulo Pruebas Diarias -->
         <activity

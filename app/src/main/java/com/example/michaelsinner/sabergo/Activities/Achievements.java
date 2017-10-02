@@ -10,12 +10,15 @@ import android.view.MenuItem;
 import com.example.michaelsinner.sabergo.Data.Achievments;
 import com.example.michaelsinner.sabergo.R;
 
-public class Achievements extends AppCompatActivity {
+public class Achievements extends AppCompatActivity
+{
 
     private Achievments data;
     private Toolbar toolbar;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
 
@@ -26,11 +29,11 @@ public class Achievements extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
         }else if(id == android.R.id.home){
             Intent intent = NavUtils.getParentActivityIntent(this);

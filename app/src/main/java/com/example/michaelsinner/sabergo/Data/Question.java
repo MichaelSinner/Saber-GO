@@ -6,41 +6,47 @@ package com.example.michaelsinner.sabergo.Data;
 
 public class Question
 {
-    private long questionID;
+    private int questionID;
     private String answer;
     private String questionURL;
-    private String questionArea;
+    private String area;
     private String questionCompetencia;
-    private String questionToken;
+    private String questionKey;
 
-    public Question(long questionID, String answer, String questionURL, String questionArea, String questionCompetencia) {
+    public Question(int questionID, String answer, String questionArea){
+        this.questionID = questionID;
+        this.answer = answer;
+        this.area = questionArea;
+    }
+
+    public Question(int questionID, String answer, String questionURL, String questionArea, String questionKey) {
         this.questionID = questionID;
         this.answer = answer;
         this.questionURL = questionURL;
-        this.questionArea = questionArea;
-        this.questionCompetencia = questionCompetencia;
-    }
+        this.area = questionArea;
 
+    }
+/*
     public Question(long questionID, String answer,  String questionURL){
         this.questionID = questionID;
         this.answer = answer;
         this.questionURL = questionURL;
     }
-
+*/
     public  Question(){
 
     }
 
-    public Question(long questionID, String questionArea) {
+    public Question(int questionID, String questionArea) {
         this.questionID = questionID;
-        this.questionArea = questionArea;
+        this.area = questionArea;
     }
 
     public long getQuestionID() {
         return questionID;
     }
 
-    public void setQuestionID(long questionID) {
+    public void setQuestionID(int questionID) {
         this.questionID = questionID;
     }
 
@@ -60,12 +66,12 @@ public class Question
         this.questionURL = questionURL;
     }
 
-    public String getQuestionArea() {
-        return questionArea;
+    public String getArea() {
+        return area;
     }
 
-    public void setQuestionArea(String questionArea) {
-        this.questionArea = questionArea;
+    public void setArea(String questionArea) {
+        this.area = questionArea;
     }
 
     public String getQuestionCompetencia() {
@@ -76,11 +82,16 @@ public class Question
         this.questionCompetencia = questionCompetencia;
     }
 
-    public String getQuestionToken() {
-        return questionToken;
+    public String getQuestionKey() {
+        return questionKey;
     }
 
-    public void setQuestionToken(String questionToken) {
-        this.questionToken = questionToken;
+    public void setQuestionKey(String questionToken) {
+        this.questionKey = questionToken;
+    }
+
+    @Override
+    public String toString() {
+        return "Quest :"+getQuestionKey()+" ID : "+getQuestionID()+" Answ : "+getAnswer()+" are : "+getArea();
     }
 }

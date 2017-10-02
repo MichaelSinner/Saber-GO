@@ -23,7 +23,8 @@ public class Index extends Activity
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user != null){
+        if(user != null)
+        {
             String ID = user.getUid();
             String Name = user.getDisplayName();
             String Email = user.getEmail();
@@ -33,7 +34,6 @@ public class Index extends Activity
         }else {
             goLoginScreen();
         }
-
     }
 
     private void goLoginScreen()
@@ -50,7 +50,6 @@ public class Index extends Activity
         toMenuPrincial.putExtra("NOMBRE",Nombre);
         toMenuPrincial.putExtra("EMAIL",Email);
         toMenuPrincial.putExtra("IMAGE",Image);
-
         toMenuPrincial.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(toMenuPrincial);
     }

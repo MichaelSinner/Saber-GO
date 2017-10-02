@@ -29,7 +29,7 @@
         <ProgressBar
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:id="@+id/progressBar"
+            android:id="@+id/pbRightWrong"
             android:progress="66"
             android:progressBackgroundTint="#FF0000"
             android:layout_gravity="center_horizontal"
@@ -50,7 +50,7 @@
                 android:text="  Número de respuestas correctas" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tvResRightAnsw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="  33"
@@ -72,6 +72,7 @@
                 android:text="  Número de respuestas incorrectas" />
 
             <TextView
+                android:id="@+id/tvResWrongAnsw"
                 android:textSize="16dp"
                 android:textAlignment="textEnd"
                 android:textColor="#ff0000"
@@ -91,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Preguntas de Matemáticas correctas" />
             <TextView
+                android:id="@+id/tvResMT"
                 android:textSize="16dp"
                 android:textAlignment="textEnd"
                 android:textColor="#ff6f00"
@@ -110,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Preguntas de Lectura Crítica correctas" />
             <TextView
+                android:id="@+id/tvResLC"
                 android:textSize="16dp"
                 android:textAlignment="textEnd"
                 android:textColor="#ff6f00"
@@ -129,6 +132,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Preguntas de Ciecias Sociales correctas" />
             <TextView
+                android:id="@+id/tvResCS"
                 android:textSize="16dp"
                 android:textAlignment="textEnd"
                 android:textColor="#ff6f00"
@@ -149,6 +153,7 @@
                 android:text="  Preguntas de Ciencias Naturales correctas" />
 
             <TextView
+                android:id="@+id/tvResCN"
                 android:textSize="16dp"
                 android:textAlignment="textEnd"
                 android:textColor="#ff6f00"
@@ -168,6 +173,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Preguntas de Inglés correctas" />
             <TextView
+                android:id="@+id/tvResIN"
                 android:textSize="16dp"
                 android:textAlignment="textEnd"
                 android:textColor="#ff6f00"
@@ -187,6 +193,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Tiempo del examen diagnóstico" />
             <TextView
+                android:id="@+id/tvResTime"
                 android:textSize="16dp"
                 android:textAlignment="textEnd"
                 android:textColor="#ffffff"
@@ -220,6 +227,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Fragmentos de LC" />
             <TextView
+                android:id="@+id/tvResFragLC"
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
                 android:textColor="#9d00ff"
@@ -239,6 +247,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Fragmentos de MT" />
             <TextView
+                android:id="@+id/tvResFragMT"
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
                 android:textColor="#fa1414"
@@ -258,6 +267,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Fragmentos de CS" />
             <TextView
+                android:id="@+id/tvResFragCS"
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
                 android:textColor="#ff6a00"
@@ -277,6 +287,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Fragmentos de CN" />
             <TextView
+                android:id="@+id/tvResFragCN"
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
                 android:textColor="#0b8300"
@@ -296,6 +307,7 @@
                 android:layout_height="wrap_content"
                 android:text="  Fragmentos de IN" />
             <TextView
+                android:id="@+id/tvResFragIN"
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
                 android:textColor="#5ccbff"
@@ -314,13 +326,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  SaberMoney" />
+
             <TextView
-                android:textSize="18dp"
-                android:textAlignment="textEnd"
-                android:textColor="#FFFFFF00"
+                android:id="@+id/tvResMoney"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+16500" />
+                android:text="+16500"
+                android:textAlignment="textEnd"
+                android:textColor="#FFFFFF00"
+                android:textSize="18dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -335,6 +349,7 @@
                 android:text="  Puntos de experiencia" />
 
             <TextView
+                android:id="@+id/tvResExp"
                 android:textSize="18dp"
                 android:textAlignment="textEnd"
                 android:textColor="#00ff00"
@@ -350,6 +365,15 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/tvSagrado"
+            android:textSize="40dp"
+            android:text="prueba"
+            />
 
 
     </LinearLayout>
