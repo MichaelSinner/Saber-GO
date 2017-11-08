@@ -12,6 +12,12 @@ import android.view.ViewGroup;
 import com.example.michaelsinner.sabergo.Data.Question;
 import com.example.michaelsinner.sabergo.R;
 import com.example.michaelsinner.sabergo.Utilities.AdapterQuestion;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -22,8 +28,21 @@ public class PreguntaDiaria_MT extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<Question> list;
     private AdapterQuestion adapter;
+    private DatabaseReference databaseReference;
 
     public PreguntaDiaria_MT() {
+
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        loadDatos();
+
+        super.onCreate(savedInstanceState);
+
 
     }
 
@@ -38,7 +57,7 @@ public class PreguntaDiaria_MT extends Fragment {
         ln.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(ln);
 
-        loadDatos();
+        //loadDatos();
         iniciarAdaptador();
         recyclerView.setAdapter(adapter);
 
@@ -49,22 +68,40 @@ public class PreguntaDiaria_MT extends Fragment {
 
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-    }
-
-    public void loadDatos(){
+    public void loadDatos() {
         list = new ArrayList<>();
-        list.add(new Question(2,"MT"));
-        list.add(new Question(3,"MT"));
-        list.add(new Question(4,"MT"));
-        list.add(new Question(26,"MT"));
-        list.add(new Question(22,"MT"));
+        int num = 10;
+
+
+        DatabaseReference refQuestions = databaseReference.child("Question");
+
+        Query query = refQuestions.orderByChild("area").equalTo("MT").limitToLast(6);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                    for(DataSnapshot quest: dataSnapshot.getChildren()){
+                        Question question = quest.getValue(Question.class);
+                        question.setQuestionKey(quest.getKey());
+                        list.add(question);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        query = null;
+
+
     }
 
-    public void iniciarAdaptador(){
+    public void iniciarAdaptador() {
         adapter = new AdapterQuestion(list);
     }
 }

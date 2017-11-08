@@ -14,6 +14,4 @@ public class Profile {
     private int progressNivelUser;
 
 
-
-
 }

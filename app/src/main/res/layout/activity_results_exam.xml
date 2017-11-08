@@ -11,6 +11,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
@@ -24,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_launcher" />
 
         <ProgressBar
             android:paddingLeft="5dp"
@@ -42,7 +43,9 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes01"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
@@ -65,6 +68,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tvRes02"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
@@ -85,12 +89,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes03"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Preguntas de Matemáticas correctas" />
+
             <TextView
                 android:id="@+id/tvResMT"
                 android:textSize="16dp"
@@ -105,12 +112,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes04"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Preguntas de Lectura Crítica correctas" />
+
             <TextView
                 android:id="@+id/tvResLC"
                 android:textSize="16dp"
@@ -125,12 +135,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes05"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Preguntas de Ciecias Sociales correctas" />
+
             <TextView
                 android:id="@+id/tvResCS"
                 android:textSize="16dp"
@@ -142,10 +155,13 @@
         </LinearLayout>
 
         <LinearLayout
+
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes06"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
@@ -166,12 +182,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes07"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Preguntas de Inglés correctas" />
+
             <TextView
                 android:id="@+id/tvResIN"
                 android:textSize="16dp"
@@ -186,12 +205,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes08"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Tiempo del examen diagnóstico" />
+
             <TextView
                 android:id="@+id/tvResTime"
                 android:textSize="16dp"
@@ -220,12 +242,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes09"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Fragmentos de LC" />
+
             <TextView
                 android:id="@+id/tvResFragLC"
                 android:textSize="18dp"
@@ -240,12 +265,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes10"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Fragmentos de MT" />
+
             <TextView
                 android:id="@+id/tvResFragMT"
                 android:textSize="18dp"
@@ -260,12 +288,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes11"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Fragmentos de CS" />
+
             <TextView
                 android:id="@+id/tvResFragCS"
                 android:textSize="18dp"
@@ -280,12 +311,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes12"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Fragmentos de CN" />
+
             <TextView
                 android:id="@+id/tvResFragCN"
                 android:textSize="18dp"
@@ -300,12 +334,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes13"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Fragmentos de IN" />
+
             <TextView
                 android:id="@+id/tvResFragIN"
                 android:textSize="18dp"
@@ -320,7 +357,9 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes14"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
@@ -341,7 +380,9 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:id="@+id/tvRes15"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
@@ -361,19 +402,12 @@
 
         <Button
             android:id="@+id/btnVolverMenu"
-            android:text="Continuar"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/tvSagrado"
-            android:textSize="40dp"
-            android:text="prueba"
-            />
+            android:layout_weight="1"
+            android:background="@drawable/btn_results_exm"
+            android:text="Continuar" />
 
 
     </LinearLayout>

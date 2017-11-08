@@ -8,7 +8,7 @@ import android.os.Parcelable;
  */
 
 public class QuestionModel implements Parcelable {
-   // private final String idQuestion;
+    // private final String idQuestion;
     //private final String areaQuestion;
 
 

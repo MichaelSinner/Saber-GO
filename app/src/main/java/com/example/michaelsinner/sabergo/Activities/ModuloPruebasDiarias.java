@@ -23,18 +23,16 @@ import com.example.michaelsinner.sabergo.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModuloPruebasDiarias extends AppCompatActivity
-{
+public class ModuloPruebasDiarias extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    String[] datos = new String[]{"Element1","Element2","Element3","Element4","Element5","Element6","Element7","Element8","Element9"};
+    String[] datos = new String[]{"Element1", "Element2", "Element3", "Element4", "Element5", "Element6", "Element7", "Element8", "Element9"};
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modulo_pruebas_diarias);
 
@@ -47,7 +45,6 @@ public class ModuloPruebasDiarias extends AppCompatActivity
         setupViewPager(viewPager);
 
 
-
         tabLayout = (TabLayout) findViewById(R.id.tabsPreguntas);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -55,36 +52,32 @@ public class ModuloPruebasDiarias extends AppCompatActivity
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new PreguntaDiaria_CN(),"Ciencias Naturales");
-        adapter.addFragment(new PreguntaDiaria_CS(),"Ciencias Sociales");
-        adapter.addFragment(new PreguntaDiaria_IN(),"Inglés");
-        adapter.addFragment(new PreguntaDiaria_LC(),"Lectura Crítica");
-        adapter.addFragment(new PreguntaDiaria_MT(),"Matemáticas");
-        adapter.addFragment(new PreguntaDiaria_RN(),"Aleatorio");
+        adapter.addFragment(new PreguntaDiaria_CN(), "Ciencias Naturales");
+        adapter.addFragment(new PreguntaDiaria_CS(), "Ciencias Sociales");
+        adapter.addFragment(new PreguntaDiaria_IN(), "Inglés");
+        adapter.addFragment(new PreguntaDiaria_LC(), "Lectura Crítica");
+        adapter.addFragment(new PreguntaDiaria_MT(), "Matemáticas");
+        adapter.addFragment(new PreguntaDiaria_RN(), "Aleatorio");
         viewPager.setAdapter(adapter);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings)
-        {
+        if (id == R.id.action_settings) {
             return true;
-        }else if(id == android.R.id.home)
-        {
+        } else if (id == android.R.id.home) {
             Intent intent = NavUtils.getParentActivityIntent(this);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            NavUtils.navigateUpTo(this,intent);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            NavUtils.navigateUpTo(this, intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
 
-
-    class ViewPagerAdapter extends FragmentPagerAdapter{
+    class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentsTitle = new ArrayList<>();
 
@@ -107,7 +100,7 @@ public class ModuloPruebasDiarias extends AppCompatActivity
             return mFragmentsTitle.get(position);
         }
 
-        public void addFragment(Fragment fragment, String title){
+        public void addFragment(Fragment fragment, String title) {
             mFragments.add(fragment);
             mFragmentsTitle.add(title);
         }

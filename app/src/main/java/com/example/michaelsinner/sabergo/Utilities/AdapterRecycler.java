@@ -12,18 +12,15 @@ import com.example.michaelsinner.sabergo.R;
  * Created by Michael Sinner on 15/6/2017.
  */
 
-public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHolder>
-{
+public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHolder> {
     private String[] data;
 
-    public AdapterRecycler(String[] list)
-    {
+    public AdapterRecycler(String[] list) {
         this.data = list;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pregunta_diaria, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
@@ -39,8 +36,7 @@ public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHo
         return data.length;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvPreguntaDiaria;
 
         public ViewHolder(View itemView) {

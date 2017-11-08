@@ -46,12 +46,14 @@
 
         <Button
             android:id="@+id/btnSendAnswer"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgQuestion"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="48dp"
             android:text="Enviar Respuesta"
+            android:textColor="#000000"
+            android:background="#ffffff"
             app:layout_constraintRight_toRightOf="parent"
             tools:layout_editor_absoluteY="341dp" />
 
@@ -60,64 +62,107 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="48dp"
-            android:text="Iniciar Examen"
 
+            android:text="Iniciar Examen"
+            android:textColor="#ffffff"
+            android:textSize="16dp"
             tools:layout_editor_absoluteY="341dp"
-            android:layout_above="@+id/btnSendAnswer"
-            android:layout_alignStart="@+id/btnSendAnswer"
-            android:layout_marginBottom="141dp" />
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/btnOpcionA" />
 
         <ImageButton
             android:id="@+id/imgQuestion"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="400dp"
             android:layout_below="@+id/tvTime"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@color/black_overlay"
             tools:layout_editor_absoluteX="8dp" />
 
-        <Button
-            android:id="@+id/btnOpcionD"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnSendAnswer"
-            android:layout_toEndOf="@+id/btnOpcionC"
-            android:text="D"
-            tools:layout_editor_absoluteX="238dp"
-            tools:layout_editor_absoluteY="389dp" />
+        <LinearLayout
+            android:layout_below="@id/btnSendAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btnOpcionA"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/btnSendAnswer"
-            android:layout_marginStart="7dp"
-            android:text="A"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="389dp" />
 
-        <Button
-            android:id="@+id/btnOpcionB"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btnOpcionA"
-            android:layout_alignBottom="@+id/btnOpcionA"
-            android:layout_toEndOf="@+id/btnOpcionA"
-            android:text="B"
-            tools:layout_editor_absoluteX="76dp"
-            tools:layout_editor_absoluteY="389dp" />
+            <Button
+                android:id="@+id/btnOpcionA"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/btnSendAnswer"
+                android:layout_marginStart="7dp"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:text="A"
+                android:textColor="#000000"
+                android:background="@drawable/btn_opciones"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="389dp" />
 
-        <Button
-            android:id="@+id/btnOpcionC"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btnOpcionB"
-            android:layout_alignBottom="@+id/btnOpcionB"
-            android:layout_toEndOf="@+id/btnOpcionB"
-            android:text="C"
-            tools:layout_editor_absoluteX="164dp"
-            tools:layout_editor_absoluteY="389dp" />
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnOpcionB"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btnOpcionA"
+                android:layout_alignBottom="@+id/btnOpcionA"
+                android:layout_toEndOf="@+id/btnOpcionA"
+                android:layout_weight="1"
+                android:text="B"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                android:background="@drawable/btn_opciones"
+                tools:layout_editor_absoluteX="76dp"
+                tools:layout_editor_absoluteY="389dp" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnOpcionC"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btnOpcionB"
+                android:layout_alignBottom="@+id/btnOpcionB"
+                android:layout_toEndOf="@+id/btnOpcionB"
+                android:layout_weight="1"
+                android:text="C"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                android:background="@drawable/btn_opciones"
+                tools:layout_editor_absoluteX="164dp"
+                tools:layout_editor_absoluteY="389dp" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+
+
+
+            <Button
+                android:id="@+id/btnOpcionD"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnSendAnswer"
+                android:layout_toEndOf="@+id/btnOpcionC"
+                android:layout_weight="1"
+                android:text="D"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                android:background="@drawable/btn_opciones"
+                tools:layout_editor_absoluteX="238dp"
+                tools:layout_editor_absoluteY="389dp" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 </ScrollView>

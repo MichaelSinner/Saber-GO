@@ -10,18 +10,19 @@
         <ImageView
             android:id="@+id/header_cover_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:scaleType="centerCrop"
+            android:background="@drawable/background05"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 
-        <ImageButton
-            android:id="@+id/user_profile_photo"
+        <ImageView
+            android:id="@+id/ivImageProfilePerfil"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="@drawable/profile_circular_border_imageview"
             android:elevation="5dp"
-            android:padding="20dp"
+            android:padding="2dp"
             android:scaleType="centerCrop"
             android:src="@drawable/profile"
             android:layout_above="@+id/linearLayout2"
@@ -41,32 +42,35 @@
 
             <TextView
                 android:id="@+id/tvUserNameProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="55dp"
                 android:text="Aureliano Buendia"
                 android:textColor="#fff"
-                android:textSize="16sp"
+
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvUserEmailProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignEnd="@+id/tvUserNameProfile"
+                android:layout_alignStart="@+id/tvUserNameProfile"
+                android:layout_below="@+id/tvUserNameProfile"
+                android:layout_centerHorizontal="true"
                 android:text="aureliocheveroni@gmail.com"
                 android:textColor="#fff"
-                android:textSize="14sp"
-                android:layout_below="@+id/tvUserNameProfile"
-                android:layout_alignStart="@+id/tvUserNameProfile"
-                android:layout_alignEnd="@+id/tvUserNameProfile" />
+                android:textSize="18dp" />
+
             <TextView
                 android:id="@+id/tvNivelProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nivel 23"
                 android:textColor="#fff"
-                android:textSize="14sp"
+                android:textSize="16dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />
 
@@ -77,7 +81,7 @@
 
                 android:text="Rango: CABO"
                 android:textColor="#fff"
-                android:textSize="14sp"
+                android:textSize="16dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true" />
 
@@ -105,56 +109,60 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:weightSum="1">
-                <Button
-                    android:id="@+id/btnPuntosLC"
-                    android:background="#a056c2"
-                    android:layout_width="56dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimarySG"
-                    android:text="35 LC"
-                    />
+                android:weightSum="5">
 
                 <Button
                     android:id="@+id/btnPuntosIN"
-                    android:background="#ff3d3d"
-                    android:layout_width="70dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimarySG"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_frag_in"
                     android:text="23 IN"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/btnPuntosCN"
-                    android:background="#0fb400"
-                    android:layout_width="62dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimarySG"
-                    android:text="20 CN"
-                    android:layout_weight="6" />
+                    android:textColor="#ffffff" />
 
                 <Button
                     android:id="@+id/btnPuntosMT"
-                    android:layout_width="56dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="#007bb4"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_frag_mt"
                     android:text="23 MT"
-                    android:textColor="@color/colorPrimarySG" />
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/btnPuntosCN"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:background="@drawable/btn_frag_cn"
+                    android:text="20 CN"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/btnPuntosLC"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_frag_lc"
+                    android:text="35 LC"
+                    android:textColor="#ffffff" />
 
                 <Button
                     android:id="@+id/btnPuntosCS"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="#741f00"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_frag_cs"
                     android:text="75 CS"
-                    android:textColor="@color/colorPrimarySG" />
+                    android:textColor="#ffffff" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/btnDinero"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
-                android:background="#FFFFFF00"
+                android:background="@drawable/btn_dinero_profile"
                 android:text=" SaberMoney : 1'875.635"
                 android:textColor="#000000" />
 
@@ -162,12 +170,15 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
+                    android:id="@+id/tvText01"
                     android:textSize="18dp"
                     android:textColor="#000000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="  Número de exámenes Diagnóstico:" />
+
                 <TextView
                     android:id="@+id/tvNumExamDiag"
                     android:textSize="18dp"
@@ -182,12 +193,15 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
+                    android:id="@+id/tvText02"
                     android:textSize="18dp"
                     android:textColor="#000000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="  Logros desbloqueados:" />
+
                 <TextView
                     android:id="@+id/tvNumLogros"
                     android:textSize="18dp"
@@ -195,19 +209,22 @@
                     android:textColor="#000000"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="7/45" />
+                    android:text="2/9" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
+                    android:id="@+id/tvText03"
                     android:textSize="18dp"
                     android:textColor="#000000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="  Meteoritos Destruidos:" />
+
                 <TextView
                     android:id="@+id/tvNumMeteoritos"
                     android:textSize="18dp"
@@ -220,11 +237,11 @@
 
             <TextView
                 android:textSize="18dp"
+                android:id="@+id/tvText04"
                 android:textColor="#000000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="  Preguntas de Matemáticas"
-                />
+                android:text="  Preguntas de Matemáticas" />
 
             <ProgressBar
                 android:id="@+id/pbmat"
@@ -235,11 +252,11 @@
 
             <TextView
                 android:textSize="18dp"
+                android:id="@+id/tvText05"
                 android:textColor="#000000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="  Preguntas de Lectura crítica"
-                />
+                android:text="  Preguntas de Lectura crítica" />
 
             <ProgressBar
                 android:id="@+id/pblc"
@@ -249,12 +266,12 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tvText06"
                 android:textSize="18dp"
                 android:textColor="#000000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="  Preguntas de Ciencias Sociales"
-                />
+                android:text="  Preguntas de Ciencias Sociales" />
 
             <ProgressBar
                 android:id="@+id/pbcs"
@@ -264,12 +281,12 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tvText07"
                 android:textSize="18dp"
                 android:textColor="#000000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="  Preguntas de Ciencias Naturales"
-                />
+                android:text="  Preguntas de Ciencias Naturales" />
 
             <ProgressBar
                 android:id="@+id/pbcn"
@@ -279,12 +296,12 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tvText08"
                 android:textSize="18dp"
                 android:textColor="#000000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="  Preguntas de Inglés"
-                />
+                android:text="  Preguntas de Inglés" />
 
             <ProgressBar
                 android:id="@+id/pbin"

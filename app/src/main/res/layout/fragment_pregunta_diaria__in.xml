@@ -5,10 +5,9 @@
     tools:context="com.example.michaelsinner.sabergo.Fragments.PreguntaDiaria_IN">
 
 
- <android.support.v7.widget.RecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_pregunta_IN"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

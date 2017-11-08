@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/background05"
+    android:layout_height="match_parent"
+    tools:context="com.example.michaelsinner.sabergo.Activities.ResultsPreg">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultados"
+            android:textColor="#ffffff"
+            android:textSize="40dp" />
+
+        <ImageButton
+            android:id="@+id/imgResultExam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_launcher" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvRes01"
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Número de respuestas correctas" />
+
+            <TextView
+                android:id="@+id/tvResRightAnsw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  1"
+                android:textAlignment="textEnd"
+                android:textColor="#19e722"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvRes02"
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Respuesta Correcta" />
+
+            <TextView
+                android:id="@+id/tvResWrongAnsw"
+                android:textSize="16dp"
+                android:textAlignment="textEnd"
+                android:textColor="#ff0000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimarySG"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvRecompensas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recompensas"
+            android:textColor="#deab2c"
+            android:textSize="30dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvRes03"
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Experiencia obtenida" />
+
+            <TextView
+                android:id="@+id/tvResExp"
+                android:textSize="18dp"
+                android:textAlignment="textEnd"
+                android:textColor="#9d00ff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+8" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvRes04"
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Número de Fragmentos" />
+
+            <TextView
+                android:id="@+id/tvResFrag"
+                android:textSize="18dp"
+                android:textAlignment="textEnd"
+                android:textColor="#fa1414"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+8" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnVolverMenuPD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/btn_results_exm"
+            android:text="Continuar" />
+
+
+    </LinearLayout>
+
+</ScrollView>

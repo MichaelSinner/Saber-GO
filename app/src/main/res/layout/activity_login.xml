@@ -4,7 +4,7 @@
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background01"
+    android:background="@color/colorPrimarySG"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -12,41 +12,50 @@
     tools:context="com.example.michaelsinner.sabergo.Activities.Login">
 
     <TextView
-        android:text="@string/strTitulo"
+        android:text="@string/strTituloLogin"
         android:textColor="@color/colorTitle"
-        android:textSize="55dp"
+        android:textSize="70dp"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvTitleLogin"
-        android:layout_below="@+id/prgBarFirebase"
-        android:layout_centerHorizontal="true" />
-
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/prgBarFirebase" />
 
     <Button
-        android:text="@string/strBtnIniciarSesion"
+        android:id="@+id/btnIniciarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnIniciarSesion"
+        android:textAllCaps="false"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/etPassword"
-        android:layout_alignEnd="@+id/etPassword"
-        android:layout_alignStart="@+id/etPassword" />
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:shadowColor="#575655"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="3"
+        android:background="@drawable/btn_shape02"
+        android:textSize="45dp"
+        android:text="@string/strBtnIniciarSesion" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/button_fbLogin"
-        android:layout_width="wrap_content"
+        android:textSize="35dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnSignInGoogle"
-
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@+id/btnSignInGoogle"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp" />
 
     <com.google.android.gms.common.SignInButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/btnSignInGoogle"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/btnIniciarSesion"
-        android:layout_alignEnd="@+id/btnIniciarSesion"
-        android:layout_alignParentStart="true" />
+        android:layout_alignStart="@+id/prgBarFirebase" />
 
     <ProgressBar
         android:id="@+id/prgBarFirebase"
@@ -57,30 +66,35 @@
         android:paddingEnd="2022dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:ellipsize="start"
+        android:gravity="start"
         android:ems="10"
         android:hint="Correo electrónico"
         android:inputType="textEmailAddress"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
         android:layout_below="@+id/tvTitleLogin"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:layout_alignStart="@+id/etEmail"
         android:layout_below="@+id/etEmail"
-        android:layout_alignEnd="@+id/etEmail" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/textViewPrueba"
@@ -92,19 +106,39 @@
 
     <Button
         android:id="@+id/btnToRegister"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/strBtnRegistrarse"
+        android:textAllCaps="false"
         android:layout_above="@+id/textViewPrueba"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/btnIniciarSesion"
+        android:layout_alignStart="@+id/btnIniciarSesion"
+        android:background="@drawable/btn_shape02"
+        android:text="@string/strBtnRegistrarse"
+        android:textColor="#ffffff"
+        android:shadowColor="#575655"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="2"
+        android:textSize="45dp"
+    />
 
     <TextView
         android:id="@+id/tvYear"
+        android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textViewPrueba"
         android:layout_centerHorizontal="true"
         android:text="@string/strYear" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background"
+        android:layout_above="@+id/etEmail"
+        android:layout_toStartOf="@+id/button_fbLogin"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tvTitleLogin" />
 
 
 </RelativeLayout>

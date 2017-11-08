@@ -101,7 +101,6 @@
             android:label="@string/title_activity_settings"
             android:parentActivityName=".Activities.MainMenu" />
 
-
         <!-- Manifest Activity Registrarse -->
         <activity
             android:name=".Activities.SignUp"
@@ -119,9 +118,9 @@
         <!-- Manifest Activity Perfil -->
         <activity
             android:name=".Activities.Profile"
-            android:parentActivityName=".Activities.MainMenu"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".Activities.MainMenu"
+            android:theme="@style/AppTheme01" />
 
         <!-- Manifest Activty Resultados Examen Diagnóstico -->
         <activity
@@ -133,7 +132,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
         <!-- Manifest Activty Resultados Examen Diagnóstico -->
         <activity
@@ -145,7 +143,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-         </activity>
+        </activity>
 
         <!-- Manifest Activty Módulo Pruebas Diarias -->
         <activity
@@ -158,9 +156,20 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Activities.NoInternet" />
 
+        <activity android:name=".Activities.PreguntaDiaria" />
 
+        <activity
+            android:name=".Activities.ResultsPreg"
+            android:parentActivityName=".Activities.MainMenu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

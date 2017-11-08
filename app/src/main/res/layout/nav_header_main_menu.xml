@@ -14,29 +14,43 @@
 
 
     <ImageView
-        android:id="@+id/imgProfile"
+        android:id="@+id/imgProfileMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
-    <TextView
-        android:id="@+id/tvUserNameMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="tvUserName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvUserNameMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tvUserName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+        <Space
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvUserNivel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="No Nivel" />
+
+    </LinearLayout>
+
+
 
     <TextView
         android:id="@+id/tvUserEmailMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="tvUserEmail" />
-
-    <TextView
-        android:id="@+id/tvUserNivel"
-        android:text="No Nivel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -15,9 +15,9 @@
 
     -- Menú Principal
     <string name="strSubtitMenu">Menú Principal</string>
-    <string name="strBtnPruebaDiag">Exámen Diagnóstico</string>
+    <string name="strBtnPruebaDiag">Examen Diagnóstico</string>
     <string name="strBtnIniciarSesion">Iniciar sesión</string>
-    <string name="strBtnPruebaDiaria">Preguntas  rápidas</string>
+    <string name="strBtnPruebaDiaria">Preguntas Rápidas</string>
     <string name="strBtnRegistrarse">Registrarse</string>
     <string name="strBtnTutorial">Tutorial</string>
     <string name="strBtnLudica">Meteoritos</string>
@@ -38,7 +38,8 @@
     <string name="strTime">00:00</string>
 
     -- Common
-    <string name="strTitulo">Saber Go</string>
+    <string name="strTitulo">Saber GO</string>
+    <string name="strTituloLogin"><u>Saber GO</u></string>
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

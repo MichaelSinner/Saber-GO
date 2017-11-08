@@ -40,6 +40,7 @@ public class SignUp extends AppCompatActivity {
     private ProgressBar progressBarFireBase;
     private TextView tvSubtitle, tvTitle;
     EditText etEmail, etPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,7 @@ public class SignUp extends AppCompatActivity {
         getSupportActionBar().setTitle("Registrarse");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/Sanlabello.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Sanlabello.ttf");
         tvTitle = (TextView) findViewById(R.id.tvTituloRegistro);
         tvTitle.setTypeface(font);
         tvSubtitle = (TextView) findViewById(R.id.tvSubtituloRegistro);
@@ -63,7 +64,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
+                if (user != null) {
                     toMenuPrincipal();
                 }
             }
@@ -76,16 +77,16 @@ public class SignUp extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String strEmail = etEmail.getText().toString();
-            String strPassword = etPassword.getText().toString();
+                String strEmail = etEmail.getText().toString();
+                String strPassword = etPassword.getText().toString();
 
-                if(TextUtils.isEmpty(strEmail)||TextUtils.isEmpty(strPassword)){
+                if (TextUtils.isEmpty(strEmail) || TextUtils.isEmpty(strPassword)) {
                     etEmail.setError("Escribe tu correo aquí");
                     etPassword.setError("Escribe tu contraseña");
                     return;
-                }else if(isOnline(getApplicationContext())){
-                    toLogin(strEmail,strPassword);
-                }else{
+                } else if (isOnline(getApplicationContext())) {
+                    toLogin(strEmail, strPassword);
+                } else {
                     startActivity(toNoInternet());
                 }
 
@@ -96,31 +97,30 @@ public class SignUp extends AppCompatActivity {
 
 
     }
-    private Intent toNoInternet()
-    {
+
+    private Intent toNoInternet() {
         Intent toNoInternet = new Intent(SignUp.this, NoInternet.class);
-        return  toNoInternet;
+        return toNoInternet;
     }
 
-    private void toLogin(String emailEditText, String passwordEditText)
-    {
+    private void toLogin(String emailEditText, String passwordEditText) {
 
-            firebaseAuth.createUserWithEmailAndPassword(emailEditText,passwordEditText).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                public static final String TAG = "1" ;
+        firebaseAuth.createUserWithEmailAndPassword(emailEditText, passwordEditText).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            public static final String TAG = "1";
 
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(!task.isSuccessful()){
-                        Log.d(TAG, "FAILED");
-                        Toast.makeText(getApplicationContext(), "Error al intentar registrar ",Toast.LENGTH_LONG);
-                    }
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (!task.isSuccessful()) {
+                    Log.d(TAG, "FAILED");
+                    Toast.makeText(getApplicationContext(), "Error al intentar registrar ", Toast.LENGTH_LONG);
                 }
-            });
+            }
+        });
 
     }
-    public void toMenuPrincipal()
-    {
-        Intent toMenuPrincial = new Intent(this , MainMenu.class);
+
+    public void toMenuPrincipal() {
+        Intent toMenuPrincial = new Intent(this, MainMenu.class);
         toMenuPrincial.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(toMenuPrincial);
     }
@@ -135,7 +135,7 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode,resultCode,data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -157,10 +157,10 @@ public class SignUp extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }else if(id == android.R.id.home){
+        } else if (id == android.R.id.home) {
             Intent intent = NavUtils.getParentActivityIntent(this);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            NavUtils.navigateUpTo(this,intent);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            NavUtils.navigateUpTo(this, intent);
             return true;
         }
 

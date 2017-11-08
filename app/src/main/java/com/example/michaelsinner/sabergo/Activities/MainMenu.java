@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,9 +27,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.michaelsinner.sabergo.Data.User;
 import com.example.michaelsinner.sabergo.R;
 import com.facebook.login.LoginManager;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
@@ -34,6 +41,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,20 +58,21 @@ import java.net.URL;
 
 
 public class MainMenu extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
     private Button btnPruebaDiagn;
     private Button btnPruebaDiaria;
     private Button btnSimulacro;
     private Button btnPerfil;
 
-
     private Bundle allInfo;
+
 
     private String userName, userEmail;
     private User user;
 
     private ImageView ivUserImagProfile;
+    Uri photoUrl;
     TextView tvUserName, tvUserEmail, tvUserLevel, prueba, tvPruebaUpdate;
 
     private FirebaseAuth firebaseAuth;
@@ -94,12 +103,16 @@ public class MainMenu extends AppCompatActivity
         View viewNav = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
 
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Sanlabello.ttf");
+        Typeface font2 = Typeface.createFromAsset(getAssets(), "fonts/IndieFlower.ttf");
+
 
         tvUserEmail = (TextView) viewNav.findViewById(R.id.tvUserEmailMain);
         tvUserName = (TextView) viewNav.findViewById(R.id.tvUserNameMain);
         tvUserLevel = (TextView) viewNav.findViewById(R.id.tvUserNivel);
         prueba = (TextView) findViewById(R.id.tvPruebaMenu);
         tvPruebaUpdate = (TextView) findViewById(R.id.tvPruebaUpdate);
+        ivUserImagProfile = (ImageView) viewNav.findViewById(R.id.imgProfileMenu);
 
 
         fireAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -113,7 +126,7 @@ public class MainMenu extends AppCompatActivity
 
                 } else {
                     goLoginScreen();
-                    ;
+
                 }
             }
         };
@@ -135,6 +148,7 @@ public class MainMenu extends AppCompatActivity
 
 
         btnPruebaDiagn = (Button) findViewById(R.id.btnPruebaDiagnostico);
+        btnPruebaDiagn.setTypeface(font2);
         btnPruebaDiagn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,6 +162,7 @@ public class MainMenu extends AppCompatActivity
         });
 
         btnPruebaDiaria = (Button) findViewById(R.id.btnPruebasDiarias);
+        btnPruebaDiaria.setTypeface(font2);
         btnPruebaDiaria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -160,21 +175,23 @@ public class MainMenu extends AppCompatActivity
         });
 
         btnSimulacro = (Button) findViewById(R.id.btnMeteoros);
+        btnSimulacro.setTypeface(font2);
         btnSimulacro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-            if (isOnline(getApplicationContext())) {
-                //startActivity(toModuloLudica());
-                updateProfile(user.getUserID());
+                if (isOnline(getApplicationContext())) {
+                    //startActivity(toModuloLudica());
+                    updateProfile(user.getUserID());
 
-            } else {
-                startActivity(toNoInternet());
-            }
+                } else {
+                    startActivity(toNoInternet());
+                }
             }
         });
 
         btnPerfil = (Button) findViewById(R.id.btnPerfil);
+        btnPerfil.setTypeface(font2);
         btnPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,7 +209,7 @@ public class MainMenu extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e(TAG,"ON Resume");
+        Log.e(TAG, "ON Resume");
 
 
             /*
@@ -202,8 +219,7 @@ public class MainMenu extends AppCompatActivity
     }
 
 
-    public boolean updateProfile(String id)
-    {
+    public boolean updateProfile(String id) {
 
         tvPruebaUpdate = (TextView) findViewById(R.id.tvPruebaUpdate);
         //allInfo = getIntent().getExtras();
@@ -215,15 +231,14 @@ public class MainMenu extends AppCompatActivity
         user.setNumExamDiagnostic(numAcum);
         df.setValue(user);
 
-       // tvPruebaUpdate.setText(user.getNumExamDiagnostic());
+        // tvPruebaUpdate.setText(user.getNumExamDiagnostic());
 
 
-        Toast.makeText(getApplicationContext(),"Información usuario actualizado",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Información usuario actualizado", Toast.LENGTH_SHORT).show();
         return true;
     }
 
     //public void
-
 
 
     /*
@@ -286,15 +301,46 @@ public class MainMenu extends AppCompatActivity
         */
 
 
-
         if (allInfo != null) {
-            final String ID = (String) allInfo.get("ID");
+
             final String email = (String) allInfo.get("EMAIL");
             final String name = (String) allInfo.get("NOMBRE");
+
+
+
             final String image = (String) allInfo.get("IMAGE");
+
+            FirebaseUser userF = FirebaseAuth.getInstance().getCurrentUser();
+            final String ID = userF.getUid();
+            if (userF != null) {
+                for (UserInfo profile : userF.getProviderData()) {
+                    // Id of the provider (ex: google.com)
+                    String providerId = profile.getProviderId();
+
+                    photoUrl = profile.getPhotoUrl();
+//                    Log.e(TAG, String.valueOf(photoUrl));
+                };
+
+
+            }
+
+           // Glide.with(this).load(photoUrl).fitCenter().override(120,120).into(ivUserImagProfile);
+
+            Glide.with(this).load(photoUrl).asBitmap().into(new BitmapImageViewTarget(ivUserImagProfile) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                    RoundedBitmapDrawableFactory.create(getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    ivUserImagProfile.setImageDrawable(circularBitmapDrawable);
+                }
+            });
+
             mDatabase = FirebaseDatabase.getInstance().getReference();
 
             userReference = mDatabase.child("Student");
+
+
 
 
             userReference.orderByKey().equalTo(ID).addValueEventListener(new ValueEventListener() {
@@ -335,7 +381,7 @@ public class MainMenu extends AppCompatActivity
             });
         } else {
 
-           // user = new Gson().fromJson(stringUser, User.class);
+            // user = new Gson().fromJson(stringUser, User.class);
             Log.e(TAG, "NO entro");
             if (user != null) {
 
@@ -358,20 +404,18 @@ public class MainMenu extends AppCompatActivity
     @Override
     protected void onStop() {
         super.onStop();
-        if(firebaseAuth != null) firebaseAuth.removeAuthStateListener(fireAuthStateListener);
+        if (firebaseAuth != null) firebaseAuth.removeAuthStateListener(fireAuthStateListener);
     }
 
-    public static Bitmap getFacebookProfilePicture(String userID) throws SocketException, SocketTimeoutException, MalformedURLException, IOException, Exception
-    {
+    public static Bitmap getFacebookProfilePicture(String userID) throws SocketException, SocketTimeoutException, MalformedURLException, IOException, Exception {
         String imageURL;
         Bitmap bitmap = null;
-        imageURL = "http://graph.facebook.com/"+userID+"/picture?type=large";
+        imageURL = "http://graph.facebook.com/" + userID + "/picture?type=large";
         InputStream in = (InputStream) new URL(imageURL).getContent();
         bitmap = BitmapFactory.decodeStream(in);
 
         return bitmap;
     }
-
 
 
     @Override
@@ -412,28 +456,22 @@ public class MainMenu extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.itmPruebaDiagnostico)
-        {
-            if(isOnline(getApplicationContext()))
-            {
+        if (id == R.id.itmPruebaDiagnostico) {
+            if (isOnline(getApplicationContext())) {
                 startActivity(toPruebaDiagnostico());
-            }else{
+            } else {
                 startActivity(toNoInternet());
             }
-        } else if (id == R.id.itmPruebaDiaria)
-        {
-            if(isOnline(getApplicationContext()))
-            {
+        } else if (id == R.id.itmPruebaDiaria) {
+            if (isOnline(getApplicationContext())) {
                 startActivity(toPruebaEntrenamiento());
-            }else{
+            } else {
                 startActivity(toNoInternet());
             }
-        } else if (id == R.id.itmLudica)
-        {
-            if(isOnline(getApplicationContext()))
-            {
+        } else if (id == R.id.itmLudica) {
+            if (isOnline(getApplicationContext())) {
                 startActivity(toModuloLudica());
-            }else{
+            } else {
                 startActivity(toNoInternet());
             }
         } else if (id == R.id.itmLogros) {
@@ -444,14 +482,12 @@ public class MainMenu extends AppCompatActivity
             startActivity(toAbout());
         } else if (id == R.id.itmExit) {
             exitApp();
-        } else if (id == R.id.itmTutorial){
+        } else if (id == R.id.itmTutorial) {
             startActivity(toTutorial());
-        }else if (id == R.id.nav_share)
-        {
-            if(isOnline(getApplicationContext()))
-            {
+        } else if (id == R.id.nav_share) {
+            if (isOnline(getApplicationContext())) {
                 startActivity(toShare());
-            }else{
+            } else {
                 startActivity(toNoInternet());
             }
         }
@@ -469,58 +505,58 @@ public class MainMenu extends AppCompatActivity
 
     }
 
-    private Intent toNoInternet()
-    {
+    private Intent toNoInternet() {
         Intent toNoInternet = new Intent(MainMenu.this, NoInternet.class);
-        return  toNoInternet;
-    }
-    private Intent toPruebaDiagnostico()
-    {
-        Intent toPruebaDiagnostico = new Intent(MainMenu.this, PruebaDiagnostico.class);
-        toPruebaDiagnostico.putExtra("ID",user.getUserID());
-        toPruebaDiagnostico.putExtra("USER",new Gson().toJson(user));
-        return  toPruebaDiagnostico;
-    }
-    private Intent toPruebaEntrenamiento(){
-        Intent toPruebaEntrenamiento = new Intent(MainMenu.this, ModuloPruebasDiarias.class);
-        return  toPruebaEntrenamiento;
-    }
-    private Intent toModuloLudica(){
-        Intent toModuloLudica = new Intent(MainMenu.this, ModuloAR.class);
-        return  toModuloLudica;
+        return toNoInternet;
     }
 
-    public Intent toTutorial()
-    {
+    private Intent toPruebaDiagnostico() {
+        Intent toPruebaDiagnostico = new Intent(MainMenu.this, PruebaDiagnostico.class);
+        toPruebaDiagnostico.putExtra("ID", user.getUserID());
+        toPruebaDiagnostico.putExtra("USER", new Gson().toJson(user));
+        return toPruebaDiagnostico;
+    }
+
+    private Intent toPruebaEntrenamiento() {
+        Intent toPruebaEntrenamiento = new Intent(MainMenu.this, ModuloPruebasDiarias.class);
+        toPruebaEntrenamiento.putExtra("USER", new Gson().toJson(user));
+        return toPruebaEntrenamiento;
+    }
+
+    private Intent toModuloLudica() {
+        Intent toModuloLudica = new Intent(MainMenu.this, ModuloAR.class);
+        return toModuloLudica;
+    }
+
+    public Intent toTutorial() {
         Intent toTutorial = new Intent(MainMenu.this, Tutorial.class);
         return toTutorial;
     }
 
-    public Intent toPerfil(User userSended)
-    {
+    public Intent toPerfil(User userSended) {
         Intent toPerfil = new Intent(MainMenu.this, Profile.class);
         toPerfil.putExtra("USER", new Gson().toJson(userSended));
-        toPerfil.putExtra("ID",userSended.getUserID());
-        toPerfil.putExtra("NOMBRE",userSended.getUserName());
-        toPerfil.putExtra("EMAIL",userSended.getUserEmail());
-        toPerfil.putExtra("IMAGE",userSended.getUserImageProfile());
-        toPerfil.putExtra("RANGO",userSended.getUserRango());
-        toPerfil.putExtra("NIVEL",userSended.getUserNivel());
-        toPerfil.putExtra("PRB_EXP",userSended.getProgressLevelExp());
-        toPerfil.putExtra("DO_ED",userSended.isDoExamDiagnostic());
-        toPerfil.putExtra("PUNTOS_LC",userSended.getPuntosLC());
-        toPerfil.putExtra("PUNTOS_MT",userSended.getPuntosMT());
-        toPerfil.putExtra("PUNTOS_CN",userSended.getPuntosCN());
-        toPerfil.putExtra("PUNTOS_CS",userSended.getPuntosCS());
-        toPerfil.putExtra("PUNTOS_IN",userSended.getPuntosIN());
-        toPerfil.putExtra("MONEY",userSended.getUserDinero());
-        toPerfil.putExtra("NUM_ED",userSended.getNumExamDiagnostic());
-        toPerfil.putExtra("NUM_MD",userSended.getNumMeteoritosDestruidos());
-        toPerfil.putExtra("NUM_LC",userSended.getUserImageProfile());
-        toPerfil.putExtra("NUM_MT",userSended.getUserImageProfile());
-        toPerfil.putExtra("NUM_CS",userSended.getUserImageProfile());
-        toPerfil.putExtra("NUM_CN",userSended.getUserImageProfile());
-        toPerfil.putExtra("NUM_IN",userSended.getUserImageProfile());
+        toPerfil.putExtra("ID", userSended.getUserID());
+        toPerfil.putExtra("NOMBRE", userSended.getUserName());
+        toPerfil.putExtra("EMAIL", userSended.getUserEmail());
+        toPerfil.putExtra("IMAGE", userSended.getUserImageProfile());
+        toPerfil.putExtra("RANGO", userSended.getUserRango());
+        toPerfil.putExtra("NIVEL", userSended.getUserNivel());
+        toPerfil.putExtra("PRB_EXP", userSended.getProgressLevelExp());
+        toPerfil.putExtra("DO_ED", userSended.isDoExamDiagnostic());
+        toPerfil.putExtra("PUNTOS_LC", userSended.getPuntosLC());
+        toPerfil.putExtra("PUNTOS_MT", userSended.getPuntosMT());
+        toPerfil.putExtra("PUNTOS_CN", userSended.getPuntosCN());
+        toPerfil.putExtra("PUNTOS_CS", userSended.getPuntosCS());
+        toPerfil.putExtra("PUNTOS_IN", userSended.getPuntosIN());
+        toPerfil.putExtra("MONEY", userSended.getUserDinero());
+        toPerfil.putExtra("NUM_ED", userSended.getNumExamDiagnostic());
+        toPerfil.putExtra("NUM_MD", userSended.getNumMeteoritosDestruidos());
+        toPerfil.putExtra("NUM_LC", userSended.getUserImageProfile());
+        toPerfil.putExtra("NUM_MT", userSended.getUserImageProfile());
+        toPerfil.putExtra("NUM_CS", userSended.getUserImageProfile());
+        toPerfil.putExtra("NUM_CN", userSended.getUserImageProfile());
+        toPerfil.putExtra("NUM_IN", userSended.getUserImageProfile());
 
 
         startActivity(toPerfil);
@@ -528,22 +564,23 @@ public class MainMenu extends AppCompatActivity
 
         return toPerfil;
     }
-    public Intent toAbout(){
+
+    public Intent toAbout() {
         Intent toAbout = new Intent(MainMenu.this, About.class);
-        return  toAbout;
+        return toAbout;
     }
 
-    public  Intent toAchievements(){
+    public Intent toAchievements() {
         Intent toAchievements = new Intent(MainMenu.this, Achievements.class);
-        return  toAchievements;
+        return toAchievements;
     }
 
-    public  Intent toShare(){
+    public Intent toShare() {
         Intent toShare = new Intent(MainMenu.this, Share.class);
-        return  toShare;
+        return toShare;
     }
-    private void goLoginScreen()
-    {
+
+    private void goLoginScreen() {
         final Intent intent = new Intent(this, Login.class);
         FirebaseAuth.getInstance().signOut();
         LoginManager.getInstance().logOut();
@@ -551,49 +588,51 @@ public class MainMenu extends AppCompatActivity
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                if(status.isSuccess()){
+                if (status.isSuccess()) {
 
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
 
-                }else{
-                    Toast.makeText(getApplicationContext(),"Error al cerrar sesion Google",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error al cerrar sesion Google", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
 
     }
-    public Intent toSettings(){
+
+    public Intent toSettings() {
         Intent toSettings = new Intent(MainMenu.this, Settings.class);
-        return  toSettings;
+        return toSettings;
     }
-    private void exitApp(){
+
+    private void exitApp() {
         FirebaseAuth.getInstance().signOut();
         LoginManager.getInstance().logOut();
 
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                if(status.isSuccess()){
+                if (status.isSuccess()) {
                     goLoginScreen();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Error al cerrar sesion Google",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error al cerrar sesion Google", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
     }
 
-    public void revoke(View view){
+    public void revoke(View view) {
         FirebaseAuth.getInstance().signOut();
         Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                if(status.isSuccess()){
+                if (status.isSuccess()) {
                     goLoginScreen();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Error al revocar sesion Google",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error al revocar sesion Google", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -609,24 +648,23 @@ public class MainMenu extends AppCompatActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putString("UserSaved",new Gson().toJson(user));
-        Log.e(TAG,"On savedInstance");
+        outState.putString("UserSaved", new Gson().toJson(user));
+        Log.e(TAG, "On savedInstance");
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        Log.e(TAG,"On restore");
+        Log.e(TAG, "On restore");
         String dataReceived = savedInstanceState.getString("UserSaved");
         //user = new Gson().fromJson(dataReceived, User.class);
 
     }
 
 
-
     @Override
     protected void onRestart() {
-        Log.e(TAG,"On restart");
+        Log.e(TAG, "On restart");
         super.onRestart();
 
     }

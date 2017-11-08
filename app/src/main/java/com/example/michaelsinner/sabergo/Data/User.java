@@ -1,21 +1,25 @@
 package com.example.michaelsinner.sabergo.Data;
 
+import android.net.Uri;
+
+import java.net.URI;
 import java.util.HashMap;
 
 /**
  * Created by Michael Sinner on 13/8/2017.
  */
 
-public class User
-{
+public class User {
     /*- User Info -*/
     private String userID;
     private String userEmail;
     private String userPassword;
     private String userName;
     private String userImageProfile;
+    private Uri imageProfile;
+    //private URI imageProfile;
     private boolean doExamDiagnostic;
-    private HashMap<String,Object> map;
+    private HashMap<String, Object> map;
 
     /*- User Game Info -*/
     private int userNivel;
@@ -38,16 +42,23 @@ public class User
     private int numPreguntasIN;
 
 
-    public User()
-    {
+    public User() {
         super();
     }
 
-    public User(String userID, String userEmail, String userName)
-    {
+    public User(String userID, String userEmail, String userName) {
         this.userID = userID;
         this.userEmail = userEmail;
         this.userName = userName;
+
+    }
+
+    public User(String userID, String userEmail, String userName, Uri imagePhoto) {
+        this.userID = userID;
+        this.userEmail = userEmail;
+        this.userName = userName;
+        this.imageProfile = imagePhoto;
+
     }
 
     public User(String userID, String userEmail, String userPassword, String userName, String userImageProfile, int userNivel, String userRango, int puntosLC, int puntosMT, int puntosIN, int puntosCN, int puntosCS, int userDinero, int progressLevelExp, int numExamDiagnostic, int numMeteoritosDestruidos, int numPreguntasMT, int numPreguntasLC, int numPreguntasCS, int numPreguntasCN, int numPreguntasIN, boolean doExamDiagnostic) {
@@ -75,33 +86,32 @@ public class User
         this.numPreguntasIN = numPreguntasIN;
     }
 
-    public HashMap<String,Object> toMap(){
+    public HashMap<String, Object> toMap() {
 
         HashMap<String, Object> result = new HashMap<>();
-        result.put("userID",userID);
-        result.put("userEmail",userEmail);
-        result.put("userPassword",userPassword);
-        result.put("userName",userName);
-        result.put("userImageProfile",userImageProfile);
-        result.put("doExamDiagnostic",doExamDiagnostic);
-        result.put("userNivel",userNivel);
-        result.put("userRango",userRango);
-        result.put("puntosLC",puntosLC);
-        result.put("puntosMT",puntosMT);
-        result.put("puntosCS",puntosCS);
-        result.put("puntosCN",puntosCN);
-        result.put("puntosIN",puntosIN);
-        result.put("userDinero",userDinero);
-        result.put("progressLevelExp",progressLevelExp);
-        result.put("numExamDiagnostic",numExamDiagnostic);
-        result.put("numMeteoritosDestruidos",numMeteoritosDestruidos);
-        result.put("numPreguntasMT",numPreguntasMT);
-        result.put("numPreguntasLC",numPreguntasLC);
-        result.put("numPreguntasCS",numPreguntasCS);
-        result.put("numPreguntasCN",numPreguntasCN);
-        result.put("numPreguntasIN",numPreguntasIN);
-        result.put("doExamDiagnostic",doExamDiagnostic);
-
+        result.put("userID", userID);
+        result.put("userEmail", userEmail);
+        result.put("userPassword", userPassword);
+        result.put("userName", userName);
+        result.put("userImageProfile", userImageProfile);
+        result.put("doExamDiagnostic", doExamDiagnostic);
+        result.put("userNivel", userNivel);
+        result.put("userRango", userRango);
+        result.put("puntosLC", puntosLC);
+        result.put("puntosMT", puntosMT);
+        result.put("puntosCS", puntosCS);
+        result.put("puntosCN", puntosCN);
+        result.put("puntosIN", puntosIN);
+        result.put("userDinero", userDinero);
+        result.put("progressLevelExp", progressLevelExp);
+        result.put("numExamDiagnostic", numExamDiagnostic);
+        result.put("numMeteoritosDestruidos", numMeteoritosDestruidos);
+        result.put("numPreguntasMT", numPreguntasMT);
+        result.put("numPreguntasLC", numPreguntasLC);
+        result.put("numPreguntasCS", numPreguntasCS);
+        result.put("numPreguntasCN", numPreguntasCN);
+        result.put("numPreguntasIN", numPreguntasIN);
+        result.put("doExamDiagnostic", doExamDiagnostic);
 
 
         return result;
@@ -313,7 +323,7 @@ public class User
 
     @Override
     public String toString() {
-        return "User :"+getUserName()+" "+getUserEmail()+" "+getUserRango()+" "+getUserNivel();
+        return "User :" + getUserName() + " " + getUserEmail() + " " + getUserRango() + " " + getUserNivel();
     }
 
     public void setValues(User values) {

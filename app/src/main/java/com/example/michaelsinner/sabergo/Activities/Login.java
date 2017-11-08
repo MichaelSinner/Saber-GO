@@ -60,13 +60,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener
-{
+public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     //google objects
     private GoogleApiClient googleApiClient;
     private SignInButton signInButton;
-    public static final int  SIGN_IN_CODE_GMAIL = 777;
-    public static final String TAG = "1" ;
+    public static final int SIGN_IN_CODE_GMAIL = 777;
+    public static final String TAG = "1";
 
     private LoginButton btnFBLogin;
     private CallbackManager callbackManager;
@@ -86,8 +85,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private User userSaberGO;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
@@ -102,13 +100,14 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 requestEmail().build();
 
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).
-                addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions).build();
+                addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions).build();
 
         signInButton = (SignInButton) findViewById(R.id.btnSignInGoogle);
         btnFBLogin = (LoginButton) findViewById(R.id.button_fbLogin);
 
         tvTitleLogin = (TextView) findViewById(R.id.tvTitleLogin);
-        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/Sanlabello.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Sanlabello.ttf");
+        Typeface font2 = Typeface.createFromAsset(getAssets(), "fonts/IndieFlower.ttf");
         tvTitleLogin.setTypeface(font);
 
         List<String> permissions = new ArrayList<>();
@@ -138,14 +137,14 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                                 Log.v("Main", response.toString());
                                 setProfileToView(object);
                                 try {
-                                    userSaberGO = new User(object.getString("id"),object.getString("email"),object.getString("name"));
+                                    userSaberGO = new User(object.getString("id"), object.getString("email"), object.getString("name"));
                                     emailUser = object.getString("email");
                                     nameUser = object.getString("name");
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
 
-                                Toast.makeText(Login.this, "Bienvenido "+profile.getFirstName(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "Bienvenido " + profile.getFirstName(), Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -164,24 +163,29 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
             @Override
             public void onError(FacebookException error) {
-                Toast.makeText(Login.this, "Login Facebook Error "+error, Toast.LENGTH_LONG);
+                Toast.makeText(Login.this, "Login Facebook Error " + error, Toast.LENGTH_LONG);
             }
         });
-        btnFBLogin.setTypeface(font);
+        btnFBLogin.setTypeface(font2);
+
+
 
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-                startActivityForResult(intent,SIGN_IN_CODE_GMAIL);
+                startActivityForResult(intent, SIGN_IN_CODE_GMAIL);
             }
         });
         signInButton.setColorScheme(SignInButton.COLOR_DARK);
 
 
+
         etEmail = (EditText) findViewById(R.id.etEmail);
+        etEmail.setTypeface(font2);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        etPassword.setTypeface(font2);
         tvprueba = (TextView) findViewById(R.id.textViewPrueba);
 
         btnLogIn = (Button) findViewById(R.id.btnIniciarSesion);
@@ -189,28 +193,28 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             @Override
             public void onClick(View view) {
 
-            String strUserEmail = etEmail.getText().toString();
-            String strUserPass = etPassword.getText().toString();
+                String strUserEmail = etEmail.getText().toString();
+                String strUserPass = etPassword.getText().toString();
 
-            if(TextUtils.isEmpty(strUserEmail)||TextUtils.isEmpty(strUserPass)){
-                Toast.makeText(getApplicationContext(),"Escribe tu correo y contraseña para iniciar sesión",Toast.LENGTH_SHORT).show();
-                etEmail.setError("Escribe tu correo aquí");
-                etPassword.setError("Escribe tu contraseña");
-                return;
+                if (TextUtils.isEmpty(strUserEmail) || TextUtils.isEmpty(strUserPass)) {
+                    Toast.makeText(getApplicationContext(), "Escribe tu correo y contraseña para iniciar sesión", Toast.LENGTH_SHORT).show();
+                    etEmail.setError("Escribe tu correo aquí");
+                    etPassword.setError("Escribe tu contraseña");
+                    return;
 
-            }else if(isOnline(getApplicationContext())){
-                toLogin(etEmail.getText().toString(),etPassword.getText().toString());
-                tvprueba.setText(etEmail.getText());
-            }else{
-                toNoInternet();
-            }
+                } else if (isOnline(getApplicationContext())) {
+                    toLogin(etEmail.getText().toString(), etPassword.getText().toString());
+                    tvprueba.setText(etEmail.getText());
+                } else {
+                    toNoInternet();
+                }
 
 
             }
         });
-        btnLogIn.setTypeface(font);
+        btnLogIn.setTypeface(font2);
 
-     //--- Listener State Firebase ------------------------------------------------------------//
+        //--- Listener State Firebase ------------------------------------------------------------//
         firebaseAuth = FirebaseAuth.getInstance();
         fireAuthStateListener = new FirebaseAuth.AuthStateListener() {
 
@@ -219,12 +223,15 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 Profile userFB = Profile.getCurrentProfile();
 
-                if(user != null && userFB == null)
-                {
-                    userSaberGO = new User(user.getUid(),user.getEmail(), user.getDisplayName());
+                if (user != null && userFB == null) {
+                    userSaberGO = new User(user.getUid(), user.getEmail(), user.getDisplayName());
                     toMenuPrincipal(userSaberGO);
 
-                } else if(userFB!= null){
+
+
+
+
+                } else if (userFB != null) {
 
                     userSaberGO.setUserID(user.getUid());
                     toMenuPrincipal(userSaberGO);
@@ -234,16 +241,15 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         btnSignup = (Button) findViewById(R.id.btnToRegister);
         btnSignup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    toRegister();
-                }
-            });
-        btnSignup.setTypeface(font);
+            @Override
+            public void onClick(View view) {
+                toRegister();
+            }
+        });
+        btnSignup.setTypeface(font2);
     }
 
-    private void setProfileToView(JSONObject object)
-    {
+    private void setProfileToView(JSONObject object) {
         try {
             emailUser = object.getString("email");
             imageUser = getFacebookProfilePicture(object.getString("id"));
@@ -264,15 +270,13 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         }
     }
 
-    public static boolean isOnline(Context context)
-    {
+    public static boolean isOnline(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
     }
 
-    private void handleFacebookAccesToken(final AccessToken accessToken)
-    {
+    private void handleFacebookAccesToken(final AccessToken accessToken) {
         progressBarFireBase.setVisibility(View.VISIBLE);
         btnFBLogin.setVisibility(View.GONE);
         signInButton.setVisibility(View.GONE);
@@ -286,35 +290,32 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-            if (!task.isSuccessful())
-            {
-                Toast.makeText(getApplicationContext(), "Error Firebase",Toast.LENGTH_LONG).show();
-            }
+                if (!task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Error Firebase", Toast.LENGTH_LONG).show();
+                }
 
-            progressBarFireBase.setVisibility(View.GONE);
-            btnFBLogin.setVisibility(View.VISIBLE);
-            btnSignup.setVisibility(View.VISIBLE);
-            btnLogIn.setVisibility(View.VISIBLE);
-            etEmail.setVisibility(View.VISIBLE);
-            signInButton.setVisibility(View.VISIBLE);
-            etPassword.setVisibility(View.VISIBLE);
-            btnFBLogin.setVisibility(View.VISIBLE);
+                progressBarFireBase.setVisibility(View.GONE);
+                btnFBLogin.setVisibility(View.VISIBLE);
+                btnSignup.setVisibility(View.VISIBLE);
+                btnLogIn.setVisibility(View.VISIBLE);
+                etEmail.setVisibility(View.VISIBLE);
+                signInButton.setVisibility(View.VISIBLE);
+                etPassword.setVisibility(View.VISIBLE);
+                btnFBLogin.setVisibility(View.VISIBLE);
 
             }
         });
     }
 
-    private void handleGoogleAccesToken(GoogleSignInResult result)
-    {
-        if(result.isSuccess()){
+    private void handleGoogleAccesToken(GoogleSignInResult result) {
+        if (result.isSuccess()) {
             firebasAuthwithGoogle(result.getSignInAccount());
-        }else{
-            Toast.makeText(getApplicationContext(), "Error gmail autenticacion",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Error gmail autenticacion", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void firebasAuthwithGoogle(GoogleSignInAccount signInAccount)
-    {
+    private void firebasAuthwithGoogle(GoogleSignInAccount signInAccount) {
         progressBarFireBase.setVisibility(View.VISIBLE);
         signInButton.setVisibility(View.GONE);
         btnFBLogin.setVisibility(View.GONE);
@@ -328,71 +329,67 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-            if(!task.isSuccessful()){
-                Toast.makeText(getApplicationContext(),"No se realizo la autenticacion a Firebase",Toast.LENGTH_LONG).show();
-            }
+                if (!task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "No se realizo la autenticacion a Firebase", Toast.LENGTH_LONG).show();
+                }
 
-            progressBarFireBase.setVisibility(View.GONE);
-            btnFBLogin.setVisibility(View.VISIBLE);
-            signInButton.setVisibility(View.VISIBLE);
-            btnSignup.setVisibility(View.VISIBLE);
-            btnLogIn.setVisibility(View.VISIBLE);
-            etEmail.setVisibility(View.VISIBLE);
-            etPassword.setVisibility(View.VISIBLE);
-            btnFBLogin.setVisibility(View.VISIBLE);
+                progressBarFireBase.setVisibility(View.GONE);
+                btnFBLogin.setVisibility(View.VISIBLE);
+                signInButton.setVisibility(View.VISIBLE);
+                btnSignup.setVisibility(View.VISIBLE);
+                btnLogIn.setVisibility(View.VISIBLE);
+                etEmail.setVisibility(View.VISIBLE);
+                etPassword.setVisibility(View.VISIBLE);
+                btnFBLogin.setVisibility(View.VISIBLE);
             }
         });
     }
 
 
-    private void toRegister()
-    {
-        Intent toRegister = new Intent(this , SignUp.class);
+    private void toRegister() {
+        Intent toRegister = new Intent(this, SignUp.class);
         toRegister.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(toRegister);
     }
 
-    private void toNoInternet()
-    {
-        Intent toNoInternet = new Intent(this , NoInternet.class);
+    private void toNoInternet() {
+        Intent toNoInternet = new Intent(this, NoInternet.class);
         toNoInternet.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(toNoInternet);
     }
 
 
-    public void toMenuPrincipal(final User userSaberGO)
-    {
-        final Intent toMenuPrincipal = new Intent(Login.this , MainMenu.class);
+    public void toMenuPrincipal(final User userSaberGO) {
+        final Intent toMenuPrincipal = new Intent(Login.this, MainMenu.class);
 
-        toMenuPrincipal.putExtra("ID",userSaberGO.getUserID());
-        toMenuPrincipal.putExtra("NOMBRE",userSaberGO.getUserName());
-        toMenuPrincipal.putExtra("EMAIL",userSaberGO.getUserEmail());
-        toMenuPrincipal.putExtra("IMAGE",userSaberGO.getUserImageProfile());
-        Toast.makeText(this, "Bienvenido "+userSaberGO.getUserName(),Toast.LENGTH_SHORT).show();
+        toMenuPrincipal.putExtra("ID", userSaberGO.getUserID());
+        toMenuPrincipal.putExtra("NOMBRE", userSaberGO.getUserName());
+        toMenuPrincipal.putExtra("EMAIL", userSaberGO.getUserEmail());
+        toMenuPrincipal.putExtra("IMAGE", userSaberGO.getUserImageProfile());
+        Toast.makeText(this, "Bienvenido " + userSaberGO.getUserName(), Toast.LENGTH_SHORT).show();
         toMenuPrincipal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(toMenuPrincipal);
- }
-    public static Bitmap getFacebookProfilePicture(String userID) throws SocketException, SocketTimeoutException, MalformedURLException, IOException, Exception
-    {
+    }
+
+    public static Bitmap getFacebookProfilePicture(String userID) throws SocketException, SocketTimeoutException, MalformedURLException, IOException, Exception {
         String imageURL;
         Bitmap bitmap = null;
-        imageURL = "http://graph.facebook.com/"+userID+"/picture?type=large";
+        imageURL = "http://graph.facebook.com/" + userID + "/picture?type=large";
         InputStream in = (InputStream) new URL(imageURL).getContent();
         bitmap = BitmapFactory.decodeStream(in);
 
         return bitmap;
     }
 
-    private void toLogin(String emailEditText, String passwordEditText)
-    {
-        firebaseAuth.signInWithEmailAndPassword(emailEditText,passwordEditText).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+    private void toLogin(String emailEditText, String passwordEditText) {
+        firebaseAuth.signInWithEmailAndPassword(emailEditText, passwordEditText).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
 
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(!task.isSuccessful()){
+                if (!task.isSuccessful()) {
                     Log.d(TAG, "FAILED");
-                    Toast.makeText(getApplicationContext(), "Error email auntenticacion",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error email auntenticacion", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -401,26 +398,24 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode,resultCode,data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == SIGN_IN_CODE_GMAIL){
-            GoogleSignInResult result  = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+        if (requestCode == SIGN_IN_CODE_GMAIL) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleGoogleAccesToken(result);
         }
     }
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(fireAuthStateListener);
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         super.onStop();
-        if(firebaseAuth != null) firebaseAuth.removeAuthStateListener(fireAuthStateListener);
+        if (firebaseAuth != null) firebaseAuth.removeAuthStateListener(fireAuthStateListener);
     }
 
     @Override

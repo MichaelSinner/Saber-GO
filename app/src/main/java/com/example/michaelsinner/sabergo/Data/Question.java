@@ -4,8 +4,7 @@ package com.example.michaelsinner.sabergo.Data;
  * Created by Michael Sinner on 18/4/2017.
  */
 
-public class Question
-{
+public class Question {
     private int questionID;
     private String answer;
     private String questionURL;
@@ -13,7 +12,7 @@ public class Question
     private String questionCompetencia;
     private String questionKey;
 
-    public Question(int questionID, String answer, String questionArea){
+    public Question(int questionID, String answer, String questionArea) {
         this.questionID = questionID;
         this.answer = answer;
         this.area = questionArea;
@@ -26,14 +25,15 @@ public class Question
         this.area = questionArea;
 
     }
-/*
-    public Question(long questionID, String answer,  String questionURL){
-        this.questionID = questionID;
-        this.answer = answer;
-        this.questionURL = questionURL;
-    }
-*/
-    public  Question(){
+
+    /*
+        public Question(long questionID, String answer,  String questionURL){
+            this.questionID = questionID;
+            this.answer = answer;
+            this.questionURL = questionURL;
+        }
+    */
+    public Question() {
 
     }
 
@@ -92,6 +92,6 @@ public class Question
 
     @Override
     public String toString() {
-        return "Quest :"+getQuestionKey()+" ID : "+getQuestionID()+" Answ : "+getAnswer()+" are : "+getArea();
+        return "Quest :" + getQuestionKey() + " ID : " + getQuestionID() + " Answ : " + getAnswer() + " are : " + getArea();
     }
 }

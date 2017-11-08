@@ -7,6 +7,5 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_pregunta_MT"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 </RelativeLayout>

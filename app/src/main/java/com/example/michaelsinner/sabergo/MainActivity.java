@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.michaelsinner.sabergo.Activities.Index;
@@ -21,33 +22,36 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
-public class MainActivity extends Activity
-{
+public class MainActivity extends Activity {
 
     Button btnStart;
+    ImageView imNube01, imNube02;
     TextView tvInicio;
     GeneradorExmDiagno generador;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        printHashKey();
 
-      //  generador = new GeneradorExmDiagno(50,10,8,7,12,10,3);
+        imNube01 = (ImageView) findViewById(R.id.ivNube00);
+        imNube01.setVisibility(View.VISIBLE);
+        imNube02 = (ImageView) findViewById(R.id.ivNube01);
+        imNube02.setVisibility(View.VISIBLE);
+
+        //printHashKey();
+
+        //  generador = new GeneradorExmDiagno(50,10,8,7,12,10,3);
 
         /*
         * se referencia la parte logica y visual del Button btnStart y se implenta su evento del click
         * */
-        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/Sanlabello.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Sanlabello.ttf");
         btnStart = (Button) findViewById(R.id.btnStart);
-        btnStart.setOnClickListener(new View.OnClickListener()
-        {
+        btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 startActivity(toIndex());
             }
         });
@@ -56,8 +60,7 @@ public class MainActivity extends Activity
 
     }
 
-    public void printHashKey()
-    {
+    public void printHashKey() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo("com.example.michaelsinner.sabergo", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
@@ -71,8 +74,8 @@ public class MainActivity extends Activity
             e.printStackTrace();
         }
     }
-    public Intent toIndex()
-    {
+
+    public Intent toIndex() {
         Intent toIndex = new Intent(MainActivity.this, Index.class);
         return toIndex;
     }

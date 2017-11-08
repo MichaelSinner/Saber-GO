@@ -5,6 +5,6 @@ package com.example.michaelsinner.sabergo.Data;
  */
 
 public class Achievments {
-    private boolean achienment01 , achienment02, achienment03, achienment04 , achienment05 , achienment06, achienment07 , achienment08 , achienment09 , achienment10;
+    private boolean achienment01, achienment02, achienment03, achienment04, achienment05, achienment06, achienment07, achienment08, achienment09, achienment10;
 
 }
