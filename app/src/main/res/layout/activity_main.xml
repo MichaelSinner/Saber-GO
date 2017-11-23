@@ -5,19 +5,30 @@
     android:id="@+id/activity_main"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context="com.example.michaelsinner.sabergo.MainActivity"
+    android:background="@color/colorPrimarySG"
+    tools:context="com.uan.michaelsinner.sabergo.MainActivity"
     android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/ivNube01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:visibility="visible"
+        app:srcCompat="@drawable/nube01"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <ImageView
         android:id="@+id/ivNube00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#d5f567"
-        app:srcCompat="@drawable/nube02"
+        android:background="@android:color/transparent"
         android:visibility="visible"
-        android:layout_alignParentStart="true"
+        app:srcCompat="@drawable/nube02"
+        android:layout_below="@+id/btnStart"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        android:layout_marginTop="23dp" />
 
     <Button
         android:id="@+id/btnStart"
@@ -28,22 +39,24 @@
         android:text="@string/strTitulo"
         android:textAllCaps="false"
         android:textColor="#ffffff"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:textSize="70dp"
         tools:textStyle="normal|bold"
-        android:layout_above="@+id/ivNube01"
-        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/ivNube00" />
+        android:layout_alignParentStart="true" />
 
-    <ImageView
-        android:id="@+id/ivNube01"
+    <TextView
+        android:id="@+id/tvSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#d5f567"
-        android:visibility="visible"
-        app:srcCompat="@drawable/nube01"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="(Pulse aquí para continuar)"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/btnStart"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

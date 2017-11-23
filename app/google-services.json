@@ -49,6 +49,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72261182313:android:b5348d130eed46d0",
+        "android_client_info": {
+          "package_name": "com.uan.michaelsinner.sabergo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72261182313-n9rdf69ejc9gsiv532159to32fjktdae.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uan.michaelsinner.sabergo",
+            "certificate_hash": "f6e30e8a3e48e758f8f6d66887b955c848b120db"
+          }
+        },
+        {
+          "client_id": "72261182313-kher2c36mn77df5hl44h5a33vrb8o3pn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk0gDH2ta1EySxr2V6gLBjLObTH9xh6xE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72261182313-kher2c36mn77df5hl44h5a33vrb8o3pn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@drawable/btn_shape02"
+    android:background="@color/colorPrimarySG"
     android:layout_width="match_parent"
     android:paddingTop="10dp"
     android:layout_marginTop="8dp"
@@ -45,9 +45,8 @@
         android:text="Puntos"
         android:textSize="15dp"
         android:textColor="#0004ff"
-        android:layout_marginEnd="16dp"
         android:layout_alignBottom="@+id/tvArea_PD"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignEnd="@+id/tvIDQuest_PD" />
 
     <TextView
         android:id="@+id/tvPuntosEXP_PD"
@@ -56,8 +55,8 @@
         android:text="+2 EXP"
         android:textSize="15dp"
         android:textColor="#00ff00"
-        android:layout_below="@+id/tvPuntos_PD"
-        android:layout_toStartOf="@+id/tvPuntos_PD" />
+        android:layout_toStartOf="@+id/tvPuntos_PD"
+        android:layout_below="@+id/tvPuntos_PD" />
 
     <TextView
         android:id="@+id/tvPuntosFRG_PD"
@@ -67,12 +66,7 @@
         android:textSize="15dp"
         android:textColor="#fa1414"
         android:layout_below="@+id/tvPuntos_PD"
-        android:layout_alignParentEnd="true" />
-
-    <View
-        style="@style/Divider"
-        android:id="@+id/view"
-        android:layout_below="@+id/tvPuntosFRG_PD" />
-
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/tvIDQuest_PD" />
 
 </RelativeLayout>

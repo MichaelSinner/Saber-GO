@@ -2,12 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.michaelsinner.sabergo.Fragments.PreguntaDiaria_CS">
+    tools:context="com.uan.michaelsinner.sabergo.Fragments.PreguntaDiaria_CS">
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_pregunta_CS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tvWaiter"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:text="Deslice hacia el final para cargar las preguntas"
+        android:layout_below="@+id/rv_pregunta_CS"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

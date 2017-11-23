@@ -9,5 +9,13 @@
     <color name="colorAnswerTrue">#03c100</color>
     <color name="colorAnswerFalse">#f41717</color>
 
+    <color name="colorCS">#741f00</color>
+    <color name="colorCN">#0fb400</color>
+    <color name="colorMT">#007bb4</color>
+    <color name="colorLC">#9d00ff</color>
+    <color name="colorIN">#ff3d3d</color>
+
+
+
 
 </resources>

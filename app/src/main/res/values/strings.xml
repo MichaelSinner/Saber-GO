@@ -39,7 +39,7 @@
 
     -- Common
     <string name="strTitulo">Saber GO</string>
-    <string name="strTituloLogin"><u>Saber GO</u></string>
+    <string name="strTituloLogin">Saber GO</string>
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

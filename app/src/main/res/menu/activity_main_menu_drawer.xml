@@ -22,18 +22,11 @@
             android:id="@+id/itmLogros"
             android:icon="@drawable/ic_action_logros"
             android:title="@string/strBtnLogros" />
-        <item
-            android:id="@+id/itmSettings"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/strBtnConfiguracion" />
+
     </group>
 
     <item android:title="Otros">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/strBtnCompartir" />
             <item
                 android:id="@+id/itmAbout"
                 android:icon="@drawable/ic_action_about"

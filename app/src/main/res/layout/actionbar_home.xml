@@ -16,19 +16,19 @@
         android:id="@+id/ivIconoActionBar"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
         android:layout_marginLeft="8dp"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:id="@+id/ivExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
         android:background="@null"
-        android:src="@android:drawable/ic_notification_clear_all" />
+        android:src="@android:drawable/ic_notification_clear_all"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

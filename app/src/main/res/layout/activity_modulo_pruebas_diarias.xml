@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.michaelsinner.sabergo.Activities.ModuloPruebasDiarias">
+    tools:context="com.uan.michaelsinner.sabergo.Activities.ModuloPruebasDiarias">
     <!--
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -54,6 +54,7 @@
             app:tabGravity="fill" />
 
     </android.support.design.widget.AppBarLayout>
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPagerPD"
