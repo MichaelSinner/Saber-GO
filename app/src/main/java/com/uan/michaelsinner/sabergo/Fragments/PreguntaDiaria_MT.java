@@ -58,7 +58,7 @@ public class PreguntaDiaria_MT extends Fragment {
 
         //loadDatos();
         iniciarAdaptador();
-        recyclerView.setBackgroundColor(R.drawable.btn_frag_mt);
+        //recyclerView.setBackgroundColor(R.drawable.btn_frag_mt);
         recyclerView.setAdapter(adapter);
 
         //adapter = new AdapterQuestion(list);

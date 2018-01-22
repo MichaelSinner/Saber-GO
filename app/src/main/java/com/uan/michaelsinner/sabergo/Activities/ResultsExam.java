@@ -38,11 +38,10 @@ public class ResultsExam extends AppCompatActivity {
     private TextView tvNumRightAnswers, tvNumWrongAnswers, tvNumMT, tvNumCS, tvNumCN, tvNumIN, tvNumLC,
             tvFragMT, tvFragCS, tvFragCN, tvFragIN, tvFragLC, tvTime, tvExp, tvMoney;
     private TextView tvPrueba;
+    private TextView tvTitle, tvEarn;
     private TextView tvRes01, tvRes02, tvRes03, tvRes04, tvRes05, tvRes06, tvRes07, tvRes08, tvRes09, tvRes10, tvRes11, tvRes12, tvRes13, tvRes14, tvRes15;
     private ProgressBar progressBar;
     private ImageView imageScore;
-
-
 
     private final int TOTAL_QUESTIONS = 30;
     private int rightAnswer;
@@ -54,6 +53,7 @@ public class ResultsExam extends AppCompatActivity {
     private int questIN;
     private int money;
     private int experience;
+    private int time;
 
     long numExams;
     long numQuestionsMT;
@@ -181,6 +181,12 @@ public class ResultsExam extends AppCompatActivity {
         tvMoney.setTypeface(font2);
         tvExp = (TextView) findViewById(R.id.tvResExp);
         tvExp.setTypeface(font2);
+
+        tvTitle = (TextView) findViewById(R.id.tvTitleRPD);
+        tvTitle.setTypeface(font2);
+
+        tvEarn = (TextView) findViewById(R.id.tvRecompensasPD);
+        tvEarn.setTypeface(font2);
         //tvPrueba = (TextView) findViewById(R.id.tvSagrado);
 
         Bundle bundle = getIntent().getExtras();
@@ -195,6 +201,7 @@ public class ResultsExam extends AppCompatActivity {
         questCS = (int) bundle.get("right_CS");
         questCN = (int) bundle.get("right_CN");
         questIN = (int) bundle.get("right_IN");
+        time = (int) bundle.get("Seconds");
         money = rightAnswer * 500;
         experience = rightAnswer + 10;
 
@@ -314,6 +321,14 @@ public class ResultsExam extends AppCompatActivity {
         tvFragLC.setText("+" + String.valueOf(questLC));
         tvExp.setText("+" + String.valueOf(experience));
         tvMoney.setText("+" + String.valueOf(money));
+
+        if (time>60){
+            int minutues = time % 60;
+            tvTime.setText(minutues+"'"+time+"''");
+        }else{
+            tvTime.setText("0'"+time+"''");
+        }
+
     }
 
     @Override

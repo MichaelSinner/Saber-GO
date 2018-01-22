@@ -13,6 +13,8 @@
             android:layout_height="150dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
             android:background="@drawable/background05"
             android:scaleType="centerCrop" />
 
@@ -24,7 +26,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="76dp"
             android:background="@drawable/profile_circular_border_imageview"
-            android:elevation="5dp"
+            android:elevation="10dp"
             android:padding="2dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_profile_default" />
@@ -160,6 +162,13 @@
                     android:textColor="#ffffff" />
             </LinearLayout>
 
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tvInfofragments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="IN: Inglés  MT: Matemáticas  CS: Ciencias Sociales  CN: Ciencias Naturales  LC: Lectura Crítica" />
+
             <Button
                 android:id="@+id/btnDinero"
                 android:layout_width="match_parent"
@@ -170,149 +179,278 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvText01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Número de exámenes Diagnóstico:"
-                    android:textColor="#000000"
-                    android:textSize="18dp" />
-
-                <TextView
-                    android:id="@+id/tvNumExamDiag"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimarySG"
+                android:paddingTop="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:background="@color/colorTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textAlignment="textEnd"
-                    android:textColor="#000000"
-                    android:textSize="18dp" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvText02"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Logros desbloqueados:"
-                    android:textColor="#000000"
-                    android:textSize="18dp" />
+                    <TextView
+                        android:id="@+id/tvText01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Número de exámenes:"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
 
-                <TextView
-                    android:id="@+id/tvNumLogros"
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/tvNumExamDiag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.02"
+                        android:text="5"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
+
+                 </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="2/9"
-                    android:textAlignment="textEnd"
-                    android:textColor="#000000"
-                    android:textSize="18dp" />
-            </LinearLayout>
+                    android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvText02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Logros desbloqueados:"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
 
-                <TextView
-                    android:id="@+id/tvText03"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Meteoritos Destruidos:"
-                    android:textColor="#000000"
-                    android:textSize="18dp" />
+                    <TextView
+                        android:id="@+id/tvNumLogros"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2/9"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
 
-                <TextView
-                    android:id="@+id/tvNumMeteoritos"
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="11"
-                    android:textAlignment="textEnd"
-                    android:textColor="#ff6a00"
-                    android:textSize="18dp" />
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvText03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Meteoritos Destruidos:"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/tvNumMeteoritos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="11"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff6a00"
+                        android:textSize="18dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvText04"
+                        android:layout_width="281dp"
+                        android:layout_height="wrap_content"
+                        android:text=" Preguntas de Matemáticas"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <ProgressBar
+
+                        android:id="@+id/pbmat"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:progress="45" />
+
+
+
+                </LinearLayout>
+
+
+
+
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                   <TextView
+                        android:id="@+id/tvText05"
+                        android:layout_width="281dp"
+                        android:layout_height="wrap_content"
+                        android:text=" Preguntas de Lectura crítica"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+
+                    <ProgressBar
+                        android:id="@+id/pblc"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:progress="66" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvText06"
+                        android:layout_width="282dp"
+                        android:layout_height="wrap_content"
+                        android:text=" Preguntas de Ciencias Sociales"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <ProgressBar
+                        android:id="@+id/pbcs"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:progress="80" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tvText07"
+                        android:layout_width="276dp"
+                        android:layout_height="wrap_content"
+                        android:text=" Preguntas de Ciencias Naturales"
+                        android:textColor="#000000"
+                        android:textSize="18dp"
+                        android:layout_weight="1.67" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <ProgressBar
+                        android:id="@+id/pbcn"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:progress="70" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                   <TextView
+                        android:id="@+id/tvText08"
+                        android:layout_width="281dp"
+                        android:layout_height="wrap_content"
+                        android:text=" Preguntas de Inglés"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/colorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <ProgressBar
+                        android:id="@+id/pbin"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:progress="12" />
+
+                </LinearLayout>
+
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvText04"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=" Preguntas de Matemáticas"
-                android:textColor="#000000"
-                android:textSize="18dp" />
-
-            <ProgressBar
-                android:id="@+id/pbmat"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="45" />
-
-            <TextView
-                android:id="@+id/tvText05"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=" Preguntas de Lectura crítica"
-                android:textColor="#000000"
-                android:textSize="18dp" />
-
-            <ProgressBar
-                android:id="@+id/pblc"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="66" />
-
-            <TextView
-                android:id="@+id/tvText06"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=" Preguntas de Ciencias Sociales"
-                android:textColor="#000000"
-                android:textSize="18dp" />
-
-            <ProgressBar
-                android:id="@+id/pbcs"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="80" />
-
-            <TextView
-                android:id="@+id/tvText07"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=" Preguntas de Ciencias Naturales"
-                android:textColor="#000000"
-                android:textSize="18dp" />
-
-            <ProgressBar
-                android:id="@+id/pbcn"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="70" />
-
-            <TextView
-                android:id="@+id/tvText08"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=" Preguntas de Inglés"
-                android:textColor="#000000"
-                android:textSize="18dp" />
-
-            <ProgressBar
-                android:id="@+id/pbin"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="12" />
 
         </LinearLayout>
-
-    </RelativeLayout>
+ </RelativeLayout>
 </ScrollView>

@@ -113,7 +113,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.ModuloAR" />
+        <activity android:name=".Activities.ModuloLudica" />
 
         <!-- Manifest Activity Perfil -->
         <activity
@@ -135,7 +135,7 @@
         </activity>
         <!-- Manifest Activty Resultados Examen Diagnóstico -->
         <activity
-            android:name=".Activities.PruebaDiagnostico"
+            android:name=".Activities.ModuloDiagnostico"
             android:label="Examen Diagnostico"
             android:parentActivityName=".Activities.MainMenu">
             <intent-filter>
@@ -147,7 +147,7 @@
 
         <!-- Manifest Activty Módulo Pruebas Diarias -->
         <activity
-            android:name=".Activities.ModuloPruebasDiarias"
+            android:name=".Activities.ModuloEntrenamiento"
             android:parentActivityName=".Activities.MainMenu"
             android:theme="@style/AppTheme01">
             <intent-filter>

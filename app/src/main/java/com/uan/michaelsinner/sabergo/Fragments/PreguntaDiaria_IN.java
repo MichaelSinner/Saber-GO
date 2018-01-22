@@ -55,7 +55,7 @@ public class PreguntaDiaria_IN extends Fragment {
 
         //loadDatos();
         iniciarAdaptador();
-        recyclerView.setBackgroundColor(R.drawable.btn_frag_in);
+        //recyclerView.setBackgroundColor(R.drawable.btn_frag_in);
         recyclerView.setAdapter(adapter);
         return v;
     }

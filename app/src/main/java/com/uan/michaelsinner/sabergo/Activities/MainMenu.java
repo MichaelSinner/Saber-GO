@@ -516,20 +516,20 @@ public class MainMenu extends AppCompatActivity
     }
 
     private Intent toPruebaDiagnostico() {
-        Intent toPruebaDiagnostico = new Intent(MainMenu.this, PruebaDiagnostico.class);
+        Intent toPruebaDiagnostico = new Intent(MainMenu.this, ModuloDiagnostico.class);
         toPruebaDiagnostico.putExtra("ID", user.getUserID());
         toPruebaDiagnostico.putExtra("USER", new Gson().toJson(user));
         return toPruebaDiagnostico;
     }
 
     private Intent toPruebaEntrenamiento() {
-        Intent toPruebaEntrenamiento = new Intent(MainMenu.this, ModuloPruebasDiarias.class);
+        Intent toPruebaEntrenamiento = new Intent(MainMenu.this, ModuloEntrenamiento.class);
         toPruebaEntrenamiento.putExtra("USER", new Gson().toJson(user));
         return toPruebaEntrenamiento;
     }
 
     private Intent toModuloLudica() {
-        Intent toModuloLudica = new Intent(MainMenu.this, ModuloAR.class);
+        Intent toModuloLudica = new Intent(MainMenu.this, ModuloLudica.class);
         return toModuloLudica;
     }
 

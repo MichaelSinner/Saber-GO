@@ -58,7 +58,7 @@ public class PreguntaDiaria_LC extends Fragment {
 
         //loadDatos();
         iniciarAdaptador();
-        recyclerView.setBackgroundColor(R.drawable.btn_frag_lc);
+        //recyclerView.setBackgroundColor(R.drawable.btn_frag_lc);
         recyclerView.setAdapter(adapter);
 
         return v;

@@ -2,12 +2,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimarySG"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.uan.michaelsinner.sabergo.Fragments.PreguntaDiaria_RN">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Funcionalidad en construcción" />
+    
+    <github.hellocsl.cursorwheel.CursorWheelLayout
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:id="@+id/wheelRN"
+        app:wheelBackgroundColor="@color/colorTitle"
+        app:wheelCursorColor="@color/colorAnswerFalse"
+        app:wheelCursorHeight="19dp"
+        app:wheelItemRotateMode="none"
+        app:wheelSelectedAngle="270"
+        android:layout_width="280dp"
+        android:layout_height="280dp">
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:id="@id/id_wheel_menu_center_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Pregunta aleatoria"
+            android:textSize="16dp"
+            android:textColor="#000000"
+
+            />
+    </github.hellocsl.cursorwheel.CursorWheelLayout>
+
 
 </RelativeLayout>
