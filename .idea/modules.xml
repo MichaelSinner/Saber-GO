@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SaberGo.iml" filepath="$PROJECT_DIR$/SaberGo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SaberGoAR/SaberGoAR.iml" filepath="$PROJECT_DIR$/SaberGoAR/SaberGoAR.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

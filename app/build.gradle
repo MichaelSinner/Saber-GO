@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.uan.michaelsinner.sabergo"
         minSdkVersion 21
-        targetSdkVersion 21
+        targetSdkVersion 25
         versionCode 3
         versionName "1.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -45,6 +45,8 @@ dependencies {
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile 'github.hellocsl:CursorWheelLayout:1.1.0'
     testCompile 'junit:junit:4.12'
+
+    compile project(path: ':SaberGoAR')
 }
 
 apply plugin: 'com.google.gms.google-services'

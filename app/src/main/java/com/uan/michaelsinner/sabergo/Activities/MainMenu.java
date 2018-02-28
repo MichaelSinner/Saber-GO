@@ -30,8 +30,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.uan.michaelsinner.sabergo.Data.User;
-import com.uan.michaelsinner.sabergo.R;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -48,6 +46,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.uan.michaelsinner.sabergo.Data.User;
+import com.uan.michaelsinner.sabergo.R;
+import com.uan.michaelsinner.sabergoar.UnityPlayerActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -183,8 +184,8 @@ public class MainMenu extends AppCompatActivity
             public void onClick(View view) {
 
                 if (isOnline(getApplicationContext())) {
-                    //startActivity(toModuloLudica());
-                    //updateProfile(user.getUserID());
+                    startActivity(toModuloLudica());
+                    updateProfile(user.getUserID());
 
                 } else {
                     startActivity(toNoInternet());
@@ -482,7 +483,7 @@ public class MainMenu extends AppCompatActivity
             }
         } else if (id == R.id.itmLudica) {
             if (isOnline(getApplicationContext())) {
-              //  startActivity(toModuloLudica());
+                startActivity(toModuloLudica());
             } else {
                 startActivity(toNoInternet());
             }
@@ -529,7 +530,7 @@ public class MainMenu extends AppCompatActivity
     }
 
     private Intent toModuloLudica() {
-        Intent toModuloLudica = new Intent(MainMenu.this, ModuloLudica.class);
+        Intent toModuloLudica = new Intent(MainMenu.this, UnityPlayerActivity.class);
         return toModuloLudica;
     }
 

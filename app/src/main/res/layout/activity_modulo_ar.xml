@@ -5,4 +5,11 @@
     android:layout_height="match_parent"
     tools:context="com.uan.michaelsinner.sabergo.Activities.ModuloLudica">
 
+    <TextView
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:text="AR"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
+
 </android.support.constraint.ConstraintLayout>
