@@ -431,6 +431,7 @@ public class ModuloDiagnostico extends AppCompatActivity {
                         DataSnapshot childSnapshot = (DataSnapshot) itr.next();
                         Question questionAdd = childSnapshot.getValue(Question.class);
                         questionAdd.setQuestionKey(childSnapshot.getKey());
+
                         Log.e(TAG, questionAdd.toString());
 
                         arrayList.add(questionAdd);

@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/black_overlay"
+            app:srcCompat="@color/colorTitle"
             tools:layout_editor_absoluteX="8dp"
             android:layout_below="@+id/tvTime"
             android:layout_alignParentStart="true" />
@@ -187,6 +187,15 @@
 
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pgNumExam"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvTime"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
 
     </RelativeLayout>
 </ScrollView>

@@ -1,15 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background05"
     tools:context="com.uan.michaelsinner.sabergo.Activities.ModuloLudica">
 
-    <TextView
-        android:layout_width="304dp"
-        android:layout_height="wrap_content"
-        android:text="AR"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp" />
+    <RelativeLayout
+        android:id="@+id/relativeExmDiag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvTime"
+            android:textColor="@color/colorTitle"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:text="03:23" />
+
+        <TextView
+            android:id="@+id/tvnumQuest"
+            android:textColor="@color/colorTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:text="3/50" />
+
+        <TextView
+            android:id="@+id/tvIdQuestion"
+            android:layout_width="wrap_content"
+            android:textColor="@color/colorTitle"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Saber GO" />
+
+        <Button
+            android:id="@+id/btnIniciarExamen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="48dp"
+            android:text="Iniciar Examen"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteY="341dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:id="@+id/imgQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/black_overlay"
+            tools:layout_editor_absoluteX="8dp"
+            android:layout_below="@+id/tvTime"
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/imgQuestion"
+
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnSendAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="false"
+                android:layout_below="@+id/imgQuestion"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#ffffff"
+                android:textAlignment="center"
+                android:gravity="center_vertical|fill_horizontal|center"
+                android:text="Enviar Respuesta"
+                android:textColor="#000000"
+
+                />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/btnSendAnswer"
+                android:layout_margin="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp">
+
+
+                <Button
+                    android:id="@+id/btnOpcionA"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/btnSendAnswer"
+                    android:layout_marginStart="7dp"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:text="A"
+                    android:textColor="#000000"
+                    android:textSize="16dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="389dp" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btnOpcionB"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/btnOpcionA"
+                    android:layout_alignBottom="@+id/btnOpcionA"
+                    android:layout_toEndOf="@+id/btnOpcionA"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:text="B"
+                    android:textColor="#000000"
+                    android:textSize="16dp"
+                    tools:layout_editor_absoluteX="76dp"
+                    tools:layout_editor_absoluteY="389dp" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btnOpcionC"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/btnOpcionB"
+                    android:layout_alignBottom="@+id/btnOpcionB"
+                    android:layout_toEndOf="@+id/btnOpcionB"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:text="C"
+                    android:textColor="#000000"
+                    android:textSize="16dp"
+                    tools:layout_editor_absoluteX="164dp"
+                    tools:layout_editor_absoluteY="389dp" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+
+                <Button
+                    android:id="@+id/btnOpcionD"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnSendAnswer"
+                    android:layout_toEndOf="@+id/btnOpcionC"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:text="D"
+                    android:textColor="#000000"
+                    android:textSize="16dp"
+                    tools:layout_editor_absoluteX="238dp"
+                    tools:layout_editor_absoluteY="389dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
