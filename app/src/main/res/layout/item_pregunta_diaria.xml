@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativePD"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorPrimarySG"
     android:layout_width="match_parent"
@@ -13,21 +15,23 @@
     <TextView
         android:id="@+id/tvPregunta_PD"
         android:layout_width="wrap_content"
-        android:text="Pregunta "
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:padding="5dp"
-        android:layout_height="wrap_content" />
+        android:text="Pregunta " />
 
     <TextView
-        android:textColor="#fa1414"
         android:id="@+id/tvIDQuest_PD"
-        android:textSize="23dp"
         android:layout_width="wrap_content"
-        android:text="MT00023"
-
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@+id/tvPregunta_PD" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/tvPregunta_PD"
+
+        android:layout_marginEnd="35dp"
+        android:text="MT00023"
+        android:textColor="#fa1414"
+        android:textSize="23dp" />
 
     <TextView
         android:id="@+id/tvArea_PD"
@@ -42,31 +46,40 @@
         android:id="@+id/tvPuntos_PD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="48dp"
         android:text="Puntos"
-        android:textSize="15dp"
         android:textColor="#0004ff"
-        android:layout_alignBottom="@+id/tvArea_PD"
-        android:layout_alignEnd="@+id/tvIDQuest_PD" />
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/tvPuntosEXP_PD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvIDQuest_PD"
+        android:layout_alignTop="@+id/tvPuntosFRG_PD"
         android:text="+2 EXP"
-        android:textSize="15dp"
         android:textColor="#00ff00"
-        android:layout_toStartOf="@+id/tvPuntos_PD"
-        android:layout_below="@+id/tvPuntos_PD" />
+        android:textSize="15dp" />
+
+    <ImageView
+        android:id="@+id/ivPregunta_PD"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvArea_PD"
+        android:layout_marginStart="32dp" />
 
     <TextView
         android:id="@+id/tvPuntosFRG_PD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+1 MT"
-        android:textSize="15dp"
-        android:textColor="#fa1414"
-        android:layout_below="@+id/tvPuntos_PD"
+        android:layout_alignBottom="@+id/ivPregunta_PD"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/tvIDQuest_PD" />
+        android:layout_marginEnd="22dp"
+        android:text="+1 MT"
+        android:textColor="#fa1414"
+        android:textSize="15dp" />
 
 </RelativeLayout>

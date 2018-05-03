@@ -93,6 +93,7 @@ public class ResultsExam extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Typeface font2 = Typeface.createFromAsset(getAssets(),"fonts/IndieFlower.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Sanlabello.ttf");
 
 
 
@@ -204,6 +205,9 @@ public class ResultsExam extends AppCompatActivity {
         time = (int) bundle.get("Seconds");
         money = rightAnswer * 500;
         experience = rightAnswer + 10;
+        Log.e(TAG, "Seconds: "+time);
+
+
 
         //stringUser = bundle.getString("USER");
 
@@ -224,7 +228,7 @@ public class ResultsExam extends AppCompatActivity {
 
             }
         });
-        btnVolver.setTypeface(font2);
+        btnVolver.setTypeface(font);
 
 
     }
@@ -322,9 +326,10 @@ public class ResultsExam extends AppCompatActivity {
         tvExp.setText("+" + String.valueOf(experience));
         tvMoney.setText("+" + String.valueOf(money));
 
-        if (time>60){
-            int minutues = time % 60;
-            tvTime.setText(minutues+"'"+time+"''");
+        if (time>59){
+            int secs = time % 60;
+            int minutues = time / 60;
+            tvTime.setText(minutues+"'"+secs+"''");
         }else{
             tvTime.setText("0'"+time+"''");
         }

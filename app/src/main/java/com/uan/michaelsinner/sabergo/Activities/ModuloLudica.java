@@ -328,6 +328,7 @@ public class ModuloLudica extends AppCompatActivity {
         toResults.putExtra("ANSWER",answer);
         toResults.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(toResults);
+        this.finish();
 
     }
 

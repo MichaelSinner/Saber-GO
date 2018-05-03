@@ -32,28 +32,11 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_victory" />
 
-        <LinearLayout
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvRes01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" Número de respuestas correctas"
-                android:textColor="#ffffff"
-                android:textSize="16dp" />
-
-            <TextView
-                android:id="@+id/tvResRightAnsw"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="  1"
-                android:textAlignment="textEnd"
-                android:textColor="#19e722"
-                android:textSize="16dp" />
-        </LinearLayout>
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimarySG" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,7 +63,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:background="@color/colorPrimarySG" />
 
@@ -109,7 +92,7 @@
                 android:id="@+id/tvResExp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+8"
+                android:text="+2"
                 android:textAlignment="textEnd"
                 android:textColor="#9d00ff"
                 android:textSize="18dp" />
@@ -132,21 +115,29 @@
                 android:id="@+id/tvResFrag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+8"
+                android:text="+1"
                 android:textAlignment="textEnd"
                 android:textColor="#fa1414"
                 android:textSize="18dp" />
+
         </LinearLayout>
 
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@color/colorPrimarySG" />
+
         <Button
             android:id="@+id/btnVolverMenuPD"
-            android:layout_width="wrap_content"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="@drawable/btn_opciones"
-            android:text="Continuar" />
+            android:background="@drawable/btn_init"
+            android:text="Continuar"
+            android:textColor="@color/colorTitle"
+            android:textSize="24dp" />
 
 
     </LinearLayout>

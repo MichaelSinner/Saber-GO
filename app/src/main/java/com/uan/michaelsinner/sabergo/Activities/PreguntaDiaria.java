@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -18,15 +18,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.uan.michaelsinner.sabergo.Data.Question;
-import com.uan.michaelsinner.sabergo.Data.User;
-import com.uan.michaelsinner.sabergo.R;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
+import com.uan.michaelsinner.sabergo.Data.Question;
+import com.uan.michaelsinner.sabergo.Data.User;
+import com.uan.michaelsinner.sabergo.R;
 
-import java.text.Format;
 import java.util.concurrent.TimeUnit;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -231,6 +230,7 @@ public class PreguntaDiaria extends AppCompatActivity {
         toResults.putExtra("right_CN", numRight_CN);
         toResults.putExtra("right_IN", numRight_IN);
         toResults.putExtra("ANSWER",answer);
+        toResults.putExtra("ANSWERQ",question.getAnswer());
         toResults.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(toResults);
 

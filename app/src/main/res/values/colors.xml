@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#3f51b5</color>
     <color name="colorAccent">#d37525</color>
-    <color name="colorPrimarySG">#25B7D3</color>
+    <color name="colorPrimarySG">#25b7d3</color>
     <color name="black_overlay">#66000000</color>
     <color name="colorTitle">#ffffff</color>
     <color name="colorAnswerTrue">#03c100</color>
@@ -15,6 +15,7 @@
     <color name="colorLC">#9d00ff</color>
     <color name="colorIN">#ff3d3d</color>
     <color name="colorContinue">#FF530D</color>
+    <color name="colorBack">#716d6b</color>
 
 
 

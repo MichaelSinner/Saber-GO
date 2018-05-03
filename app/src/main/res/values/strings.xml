@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SaberGo</string>
     <string name="facebook_app_id">200353460445301</string>
-    <string name="strYear">2017</string>
+    <string name="strYear">2018</string>
 
     --Login
     <string name="strSignup">Registrarse</string>
@@ -36,6 +36,27 @@
     <string name="strCorrectas">0/50</string>
     <string name="strIncorrectas">0/50</string>
     <string name="strTime">00:00</string>
+
+    -- Achievments
+
+    <string name="strLog01">Subir a nivel 20</string>
+    <string name="strLog02">Responde 50 preguntas del área de matemáticas</string>
+    <string name="strLog03">Responde 50 preguntas del área de lectura crítica</string>
+    <string name="strLog04">Responde 50 preguntas del área de ciencias sociales</string>
+    <string name="strLog05">Responde 50 preguntas del área de ciencias naturales</string>
+    <string name="strLog06">Responde 50 preguntas del área de inglés</string>
+    <string name="strLog07">Finaliza 10 exámenes diagnóstico</string>
+    <string name="strLog08">Destruye un total de 50 meteoritos</string>
+
+    <string name="strLogTit01">Logro 01: El comienzo del viaje</string>
+    <string name="strLogTit02">Logro 02: Be Rational, Get Real!</string>
+    <string name="strLogTit03">Logro 03: El Come Libros</string>
+    <string name="strLogTit04">Logro 04: El Conocimiento es poder</string>
+    <string name="strLogTit05">Logro 05: Yeah Science B*tch</string>
+    <string name="strLogTit06">Logro 06: Éeexito</string>
+    <string name="strLogTit07">Logro 07: Doctor Diagnostic</string>
+    <string name="strLogTit08">Logro 08: Salvador del Universo</string>
+    <string name="strLogTit09">Logro 09: Redes Sociales Espaciales</string>
 
     -- Common
     <string name="strTitulo">Saber GO</string>
@@ -127,5 +148,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_modulo_preguntas_diarias">ModuloPreguntasDiarias</string>
+    <string name="x">X</string>
+
 </resources>
 

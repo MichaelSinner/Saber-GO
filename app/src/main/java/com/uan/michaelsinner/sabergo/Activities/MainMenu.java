@@ -138,9 +138,12 @@ public class MainMenu extends AppCompatActivity
 
         String stringUser;
         allInfo = getIntent().getExtras();
-        stringUser = allInfo.getString("USER");
+        if(allInfo!= null){
+            stringUser = allInfo.getString("USER");
 
-        user = new Gson().fromJson(stringUser, User.class);
+            user = new Gson().fromJson(stringUser, User.class);
+        }
+
 
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -456,9 +459,7 @@ public class MainMenu extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

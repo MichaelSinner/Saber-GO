@@ -20,12 +20,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.uan.michaelsinner.sabergo.Data.User;
-import com.uan.michaelsinner.sabergo.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -51,6 +48,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
+import com.uan.michaelsinner.sabergo.Data.User;
+import com.uan.michaelsinner.sabergo.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,8 +80,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private DatabaseReference mDatabase;
     private DatabaseReference userReference;
 
-    private ProgressBar progressBarFireBase;
-    private TextView tvTitleLogin, tvprueba;
+    private TextView tvTitleLogin, tvInfo01,tvInfo02,tvInfo03, tvInfo04;
     private Button btnLogIn, btnSignup;
     private EditText etEmail, etPassword;
     String emailUser, nameUser;
@@ -105,7 +103,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        progressBarFireBase = (ProgressBar) findViewById(R.id.prgBarFirebase);
+
         callbackManager = CallbackManager.Factory.create();
 
         final GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
@@ -122,6 +120,15 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Sanlabello.ttf");
         Typeface font2 = Typeface.createFromAsset(getAssets(), "fonts/IndieFlower.ttf");
         tvTitleLogin.setTypeface(font);
+
+        tvInfo01 = (TextView) findViewById(R.id.tvSub01);
+        tvInfo01.setTypeface(font);
+        tvInfo02 = (TextView) findViewById(R.id.tvSub02);
+        tvInfo02.setTypeface(font);
+        tvInfo03 = (TextView) findViewById(R.id.tvSub03);
+        tvInfo03.setTypeface(font);
+        tvInfo04 = (TextView) findViewById(R.id.tvSub04);
+        tvInfo04.setTypeface(font);
 
         List<String> permissions = new ArrayList<>();
         permissions.add("public_profile");
@@ -180,6 +187,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             }
         });
         btnFBLogin.setTypeface(font2);
+        btnFBLogin.setVisibility(View.GONE);
         //btnFBLogin.setTextSize(R.dimen.activity_horizontal_margin);
 
 
@@ -202,7 +210,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         etEmail.setTypeface(font2);
         etPassword = (EditText) findViewById(R.id.etPassword);
         etPassword.setTypeface(font2);
-        tvprueba = (TextView) findViewById(R.id.textViewPrueba);
+
 
         btnLogIn = (Button) findViewById(R.id.btnIniciarSesion);
         btnLogIn.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +228,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                 } else if (isOnline(getApplicationContext())) {
                     toLogin(etEmail.getText().toString(), etPassword.getText().toString());
-                    tvprueba.setText(etEmail.getText());
+
                 } else {
                     toNoInternet();
                 }
@@ -228,7 +236,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
             }
         });
-        btnLogIn.setTypeface(font2);
+        btnLogIn.setTypeface(font);
 
         //--- Listener State Firebase ------------------------------------------------------------//
         firebaseAuth = FirebaseAuth.getInstance();
@@ -286,7 +294,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 toRegister();
             }
         });
-        btnSignup.setTypeface(font2);
+        btnSignup.setTypeface(font);
     }
 
     private void setProfileToView(JSONObject object) {
@@ -317,13 +325,17 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     }
 
     private void handleFacebookAccesToken(final AccessToken accessToken) {
-        progressBarFireBase.setVisibility(View.VISIBLE);
+
         btnFBLogin.setVisibility(View.GONE);
         signInButton.setVisibility(View.GONE);
         btnSignup.setVisibility(View.GONE);
         btnLogIn.setVisibility(View.GONE);
         etEmail.setVisibility(View.GONE);
         etPassword.setVisibility(View.GONE);
+        tvInfo01.setVisibility(View.GONE);
+        tvInfo02.setVisibility(View.GONE);
+        tvInfo03.setVisibility(View.GONE);
+        tvInfo04.setVisibility(View.GONE);
 
         final AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -334,14 +346,17 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                     Toast.makeText(getApplicationContext(), "Error Firebase", Toast.LENGTH_LONG).show();
                 }
 
-                progressBarFireBase.setVisibility(View.GONE);
+
                 btnFBLogin.setVisibility(View.GONE);
                 btnSignup.setVisibility(View.VISIBLE);
                 btnLogIn.setVisibility(View.VISIBLE);
                 etEmail.setVisibility(View.VISIBLE);
                 signInButton.setVisibility(View.VISIBLE);
                 etPassword.setVisibility(View.VISIBLE);
-                btnFBLogin.setVisibility(View.GONE);
+                tvInfo01.setVisibility(View.VISIBLE);
+                tvInfo02.setVisibility(View.VISIBLE);
+                tvInfo03.setVisibility(View.VISIBLE);
+                tvInfo04.setVisibility(View.VISIBLE);
 
             }
         });
@@ -356,7 +371,10 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     }
 
     private void firebasAuthwithGoogle(GoogleSignInAccount signInAccount) {
-        progressBarFireBase.setVisibility(View.VISIBLE);
+        tvInfo01.setVisibility(View.GONE);
+        tvInfo02.setVisibility(View.GONE);
+        tvInfo03.setVisibility(View.GONE);
+        tvInfo04.setVisibility(View.GONE);
         signInButton.setVisibility(View.GONE);
         btnFBLogin.setVisibility(View.GONE);
         btnSignup.setVisibility(View.GONE);
@@ -373,14 +391,17 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                     Toast.makeText(getApplicationContext(), "No se realizo la autenticacion a Firebase", Toast.LENGTH_LONG).show();
                 }
 
-                progressBarFireBase.setVisibility(View.GONE);
+
                 btnFBLogin.setVisibility(View.GONE);
                 signInButton.setVisibility(View.VISIBLE);
                 btnSignup.setVisibility(View.VISIBLE);
                 btnLogIn.setVisibility(View.VISIBLE);
                 etEmail.setVisibility(View.VISIBLE);
                 etPassword.setVisibility(View.VISIBLE);
-                btnFBLogin.setVisibility(View.GONE);
+                tvInfo01.setVisibility(View.VISIBLE);
+                tvInfo02.setVisibility(View.VISIBLE);
+                tvInfo03.setVisibility(View.VISIBLE);
+                tvInfo04.setVisibility(View.VISIBLE);
             }
         });
     }

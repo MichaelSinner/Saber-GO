@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.uan.michaelsinner.sabergo.Activities.Index;
@@ -22,14 +24,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
-
-
-
 public class MainActivity extends Activity {
 
-
+    ImageButton nube01, nube02, nube03, nube04;
     Button btnStart;
-    ImageView imNube01, imNube02;
     TextView tvInicio;
     GeneradorExmDiagno generador;
 
@@ -39,20 +37,26 @@ public class MainActivity extends Activity {
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(com.uan.michaelsinner.sabergo.R.layout.activity_main);
 
-        imNube01 = (ImageView) findViewById(com.uan.michaelsinner.sabergo.R.id.ivNube00);
-        imNube01.setVisibility(View.VISIBLE);
-        imNube02 = (ImageView) findViewById(com.uan.michaelsinner.sabergo.R.id.ivNube01);
-        imNube02.setVisibility(View.VISIBLE);
-
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Sanlabello.ttf");
         tvInicio = (TextView) findViewById(com.uan.michaelsinner.sabergo.R.id.tvSubtitle);
         tvInicio.setTypeface(font);
 
         new TextFade(getBaseContext(), tvInicio);
 
-        //printHashKey();
+        final Animation animTranslate = AnimationUtils.loadAnimation(this,R.anim.move_to);
 
-        //  generador = new GeneradorExmDiagno(50,10,8,7,12,10,3);
+        nube01 = (ImageButton) findViewById(R.id.ibNube00);
+        nube02 = (ImageButton) findViewById(R.id.ibNube01);
+        nube03 = (ImageButton) findViewById(R.id.ibNube02);
+        nube04 = (ImageButton) findViewById(R.id.ibNube03);
+
+        nube01.startAnimation(animTranslate);
+        nube02.startAnimation(animTranslate);
+        nube03.startAnimation(animTranslate);
+        nube04.startAnimation(animTranslate);
+
+
+
 
         /*
         * se referencia la parte logica y visual del Button btnStart y se implenta su evento del click

@@ -6,28 +6,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.uan.michaelsinner.sabergo.Fragments.PreguntaDiaria_RN">
 
-    
-    <github.hellocsl.cursorwheel.CursorWheelLayout
+
+    <TextView
+        android:id="@+id/tvRuleta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/wheelRN"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:text="Gira la ruleta de preguntas"
+        android:textColor="@color/colorTitle"
+        android:textSize="24dp" />
+
+    <Button
+        android:id="@+id/btnResponderRand"
+        android:layout_width="262dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/btn_init"
+        android:text="Responder Pregunta"
+        android:textColor="@color/colorTitle"
+        android:textSize="20dp" />
+
+    <github.hellocsl.cursorwheel.CursorWheelLayout
         android:id="@+id/wheelRN"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_centerInParent="true"
         app:wheelBackgroundColor="@color/colorTitle"
         app:wheelCursorColor="@color/colorAnswerFalse"
         app:wheelCursorHeight="19dp"
         app:wheelItemRotateMode="none"
-        app:wheelSelectedAngle="270"
-        android:layout_width="280dp"
-        android:layout_height="280dp">
+        app:wheelSelectedAngle="270">
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Large.Inverse"
             android:id="@id/id_wheel_menu_center_item"
+            style="@style/TextAppearance.AppCompat.Large.Inverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Pregunta aleatoria"
-            android:textSize="16dp"
             android:textColor="#000000"
+            android:textSize="16dp"
 
             />
     </github.hellocsl.cursorwheel.CursorWheelLayout>

@@ -18,7 +18,6 @@ import com.uan.michaelsinner.sabergo.Fragments.PreguntaDiaria_CS;
 import com.uan.michaelsinner.sabergo.Fragments.PreguntaDiaria_IN;
 import com.uan.michaelsinner.sabergo.Fragments.PreguntaDiaria_LC;
 import com.uan.michaelsinner.sabergo.Fragments.PreguntaDiaria_MT;
-import com.uan.michaelsinner.sabergo.Fragments.PreguntaDiaria_RN;
 import com.uan.michaelsinner.sabergo.R;
 
 import java.util.ArrayList;
@@ -59,7 +58,7 @@ public class ModuloEntrenamiento extends AppCompatActivity {
         adapter.addFragment(new PreguntaDiaria_IN(), "Inglés");
         adapter.addFragment(new PreguntaDiaria_LC(), "Lectura Crítica");
         adapter.addFragment(new PreguntaDiaria_MT(), "Matemáticas");
-        adapter.addFragment(new PreguntaDiaria_RN(), "Aleatorio");
+        //adapter.addFragment(new PreguntaDiaria_RN(), "Aleatorio");
         viewPager.setAdapter(adapter);
     }
 
@@ -67,9 +66,7 @@ public class ModuloEntrenamiento extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == android.R.id.home) {
+        if (id == android.R.id.home) {
             Intent intent = NavUtils.getParentActivityIntent(this);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             NavUtils.navigateUpTo(this, intent);

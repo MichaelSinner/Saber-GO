@@ -48,13 +48,14 @@
             android:id="@+id/btnIniciarExamen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="48dp"
+            android:background="@drawable/btn_init"
             android:text="Iniciar Examen"
             android:textColor="#ffffff"
-            android:textSize="20dp"
-            tools:layout_editor_absoluteY="341dp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:textSize="28dp"
+            tools:layout_editor_absoluteY="341dp" />
 
         <ImageButton
             android:id="@+id/imgQuestion"
@@ -187,15 +188,6 @@
 
 
         </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/pgNumExam"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/tvTime"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
 
     </RelativeLayout>
 </ScrollView>

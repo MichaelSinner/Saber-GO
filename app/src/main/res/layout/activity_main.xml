@@ -10,40 +10,6 @@
     android:clipToPadding="false"
     android:weightSum="1">
 
-    <ImageView
-        android:id="@+id/ivNube01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnStart"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/holo_blue_light"
-        android:visibility="visible"
-        app:srcCompat="@drawable/nube01" />
-
-    <android.support.v7.widget.CardView
-        android:layout_gravity="center_horizontal"
-        app:cardBackgroundColor="@android:color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true">
-        <ImageView
-            android:id="@+id/ivNube00"
-            android:layout_width="match_parent"
-            android:layout_height="96dp"
-            android:elevation="30dp"
-
-            android:visibility="visible"
-            app:srcCompat="@drawable/nube02"
-            android:layout_below="@+id/btnStart"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="23dp"
-            android:layout_alignParentBottom="true" />
-
-    </android.support.v7.widget.CardView>
-
 
     <Button
         android:id="@+id/btnStart"
@@ -66,12 +32,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
+        android:background="@color/colorPrimarySG"
         android:gravity="center"
         android:textSize="20dp"
-        android:text="(Pulse aquí para continuar)"
+        android:text="(Pulse el título para continuar)"
         android:textColor="#ffffff"
         android:layout_below="@+id/btnStart"
         android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/ibNube00"
+        android:layout_width="244dp"
+        android:layout_height="114dp"
+        android:layout_above="@+id/btnStart"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimarySG"
+        android:scaleType="fitCenter"
+        android:src="@drawable/nube01" />
+
+    <ImageButton
+        android:id="@+id/ibNube01"
+        android:layout_width="182dp"
+        android:layout_height="88dp"
+        android:layout_above="@+id/ibNube02"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimarySG"
+        android:scaleType="fitCenter"
+        android:src="@drawable/nube00" />
+
+    <ImageButton
+        android:id="@+id/ibNube02"
+        android:layout_width="181dp"
+        android:layout_height="127dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="0dp"
+        android:background="@color/colorPrimarySG"
+        android:scaleType="fitXY"
+        android:src="@drawable/nube02" />
+
+    <ImageButton
+        android:id="@+id/ibNube03"
+        android:layout_width="178dp"
+        android:layout_height="136dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimarySG"
+        android:src="@drawable/nube02" />
 
 
 </RelativeLayout>

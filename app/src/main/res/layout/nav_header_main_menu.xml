@@ -13,8 +13,6 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
-
-
     <ImageView
         android:id="@+id/imgProfileMenu"
         android:layout_width="wrap_content"
@@ -34,7 +32,7 @@
 
 
         <Space
-            android:layout_width="70dp"
+            android:layout_width="16dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 

@@ -10,17 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.uan.michaelsinner.sabergo.Data.Question;
-import com.uan.michaelsinner.sabergo.R;
-import com.uan.michaelsinner.sabergo.Utilities.AdapterQuestion;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.uan.michaelsinner.sabergo.Data.Question;
+import com.uan.michaelsinner.sabergo.R;
+import com.uan.michaelsinner.sabergo.Utilities.AdapterQuestion;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +32,7 @@ public class PreguntaDiaria_CS extends Fragment {
     private ArrayList<Question> list;
     private AdapterQuestion adapter;
     private DatabaseReference databaseReference;
+    private Random random;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,12 +65,14 @@ public class PreguntaDiaria_CS extends Fragment {
     }
 
     public void loadDatos() {
+        random = new Random();
         list = new ArrayList<>();
         int num = 10;
 
 
         DatabaseReference refQuestions = databaseReference.child("Question");
 
+        /*
         Query query = refQuestions.orderByChild("area").equalTo("CS").limitToLast(6);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -90,6 +94,37 @@ public class PreguntaDiaria_CS extends Fragment {
         });
 
         query = null;
+        */
+        for(int i = 0; i<=4;i++)
+        {
+            refQuestions.orderByChild("area").equalTo("CS").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int questionCount = (int) dataSnapshot.getChildrenCount();
+                    int rand = random.nextInt(questionCount);
+                    Iterator itr = dataSnapshot.getChildren().iterator();
+                    // Log.e(TAG, " "+questionCount+"   "+rand);
+
+                    for(int i = 0; i < rand; i++) {
+                        itr.next();
+                    }
+                    DataSnapshot childSnapshot = (DataSnapshot) itr.next();
+                    Question questionAdd = childSnapshot.getValue(Question.class);
+                    questionAdd.setQuestionKey(childSnapshot.getKey());
+
+                    //Log.e(TAG, questionAdd.toString());
+
+                    list.add(questionAdd);
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
 
 
     }

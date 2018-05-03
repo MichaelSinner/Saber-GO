@@ -8,13 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.uan.michaelsinner.sabergo.Activities.PreguntaDiaria;
 import com.uan.michaelsinner.sabergo.Data.Question;
 import com.uan.michaelsinner.sabergo.Data.User;
 import com.uan.michaelsinner.sabergo.R;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -45,6 +47,22 @@ public class AdapterQuestion extends RecyclerView.Adapter<AdapterQuestion.Adapte
         holder.tvIDQUest.setText(question.getArea()+"000" + String.valueOf(question.getQuestionID()));
         holder.tvArea.setText("Área : " + question.getArea());
         holder.tvPuntosFRG_PD.setText("+ 1 "+question.getArea());
+
+        if(question.getArea().equals("CN")){
+            holder.imQuest.setBackgroundResource(R.drawable.ic_wheel_cn);
+
+        }else if(question.getArea().equals("CS")){
+            holder.imQuest.setBackgroundResource(R.drawable.ic_wheel_cs);
+        }else if (question.getArea().equals("IN")){
+            holder.imQuest.setBackgroundResource(R.drawable.ic_wheel_in);
+        }else if (question.getArea().equals("MT")){
+            holder.imQuest.setBackgroundResource(R.drawable.ic_wheel_mt);
+        }else if(question.getArea().equals("LC")){
+            holder.imQuest.setBackgroundResource(R.drawable.ic_wheel_lc);
+
+        }
+
+
     }
 
     @Override
@@ -55,6 +73,8 @@ public class AdapterQuestion extends RecyclerView.Adapter<AdapterQuestion.Adapte
     class AdapterQuiestionViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvIDQUest, tvArea, tvPuntosFRG_PD;
+        ImageView imQuest;
+        RelativeLayout layout;
         //public Context context;
         int expGained = 1;
         int fragGained = 2;
@@ -69,6 +89,8 @@ public class AdapterQuestion extends RecyclerView.Adapter<AdapterQuestion.Adapte
             tvIDQUest = (TextView) itemView.findViewById(R.id.tvIDQuest_PD);
             tvArea = (TextView) itemView.findViewById(R.id.tvArea_PD);
             tvPuntosFRG_PD = (TextView) itemView.findViewById(R.id.tvPuntosFRG_PD);
+            imQuest = (ImageView) itemView.findViewById(R.id.ivPregunta_PD);
+            layout = (RelativeLayout) itemView.findViewById(R.id.relativePD);
 
             context = itemView.getContext();
 

@@ -7,9 +7,9 @@ android {
     defaultConfig {
         applicationId "com.uan.michaelsinner.sabergo"
         minSdkVersion 21
-        targetSdkVersion 22
-        versionCode 3
-        versionName "1.4"
+        targetSdkVersion 24
+        versionCode 4
+        versionName "1.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,10 +24,11 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.google.code.gson:gson:2.7'
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.facebook.android:facebook-android-sdk:4.29.0'
@@ -44,7 +45,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:2.3.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.github.chrisbanes:PhotoView:1.2.6'
-    implementation 'github.hellocsl:CursorWheelLayout:1.1.0'
+    compile 'github.hellocsl:CursorWheelLayout:1.1.0'
     testImplementation 'junit:junit:4.12'
 
     implementation project(path: ':SaberGoAR')

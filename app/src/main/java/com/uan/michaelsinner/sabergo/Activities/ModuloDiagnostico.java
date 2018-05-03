@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -52,6 +53,7 @@ public class ModuloDiagnostico extends AppCompatActivity {
     private TextView tvTime;
     private TextView tvNumQuest;
     private TextView tvIDQuest;
+    private MediaPlayer mpWrong, mpCorrect;
 
     private Question question;
 
@@ -73,6 +75,7 @@ public class ModuloDiagnostico extends AppCompatActivity {
     private final int TOTAL_QUEST_CS = 1;
     private final int TOTAL_QUEST_MT = 1;
     private final int TOTAL_QUEST_IN = 1;
+    boolean endExam = false;
 
     private DatabaseReference mDatabase;
     private static final String TAG = "error";
@@ -108,11 +111,20 @@ public class ModuloDiagnostico extends AppCompatActivity {
         setContentView(R.layout.activity_prueba_diagnostico);
 
         Typeface font2 = Typeface.createFromAsset(getAssets(),"fonts/IndieFlower.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Sanlabello.ttf");
+
+        mpCorrect = MediaPlayer.create(this,R.raw.correct);
+        mpWrong = MediaPlayer.create(this,R.raw.wrong);
+
+
 
         relativeLayout = (RelativeLayout) findViewById(R.id.relativeExmDiag);
         tvNumQuest = (TextView) findViewById(R.id.tvnumQuest);
+        tvNumQuest.setTypeface(font);
         tvTime = (TextView) findViewById(R.id.tvTime);
+        tvTime.setTypeface(font);
         tvIDQuest = (TextView) findViewById(R.id.tvIdQuestion);
+        tvIDQuest.setTypeface(font);
         btnOpcionA = (Button) findViewById(R.id.btnOpcionA);
         btnOpcionA.setTypeface(font2);
         btnOpcionB = (Button) findViewById(R.id.btnOpcionB);
@@ -122,7 +134,7 @@ public class ModuloDiagnostico extends AppCompatActivity {
         btnOpcionD = (Button) findViewById(R.id.btnOpcionD);
         btnOpcionD.setTypeface(font2);
         btnIniciarExamen = (Button) findViewById(R.id.btnIniciarExamen);
-        btnIniciarExamen.setTypeface(font2);
+        btnIniciarExamen.setTypeface(font);
         btnSendAnswer = (Button) findViewById(R.id.btnSendAnswer);
         btnSendAnswer.setTypeface(font2);
         imgBtnQuestion = (ImageButton) findViewById(R.id.imgQuestion);
@@ -142,6 +154,7 @@ public class ModuloDiagnostico extends AppCompatActivity {
         }
 
         boolean beginExamen = false;
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
@@ -153,7 +166,7 @@ public class ModuloDiagnostico extends AppCompatActivity {
             tvTime.setVisibility(View.INVISIBLE);
             tvIDQuest.setVisibility(View.INVISIBLE);
             btnIniciarExamen.setVisibility(View.VISIBLE);
-            btnIniciarExamen.setText("Cargando Preguntas ...");
+            btnIniciarExamen.setText("... Cargando Preguntas ...");
             btnIniciarExamen.setBackgroundColor(Color.TRANSPARENT);
             btnIniciarExamen.setEnabled(false);
             btnOpcionA.setVisibility(View.INVISIBLE);
@@ -178,7 +191,7 @@ public class ModuloDiagnostico extends AppCompatActivity {
             @Override
             public void run() {
                 btnIniciarExamen.setEnabled(true);
-                btnIniciarExamen.setBackgroundColor(Color.GREEN);
+                btnIniciarExamen.setBackgroundResource(R.drawable.btn_init);
                 btnIniciarExamen.setText("Iniciar Examen");
             }
         }, 8500);
@@ -232,6 +245,29 @@ public class ModuloDiagnostico extends AppCompatActivity {
                         }
                     };
                     t.start();
+
+                    new CountDownTimer(30000 * 10, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                            // tvTime.setText("seconds remaining: " + millisUntilFinished / 1000);
+
+                            tvTime.setText("" + String.format(FORMAT, TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+                                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+
+                        }
+
+                        public void onFinish() {
+                            if (endExam!=true){
+                                goToExitTime();
+                            }else {
+                                tvTime.setText("Done!");
+                            }
+
+
+                        }
+                    }.start();
 
                     updateUI(question);
                 } else {
@@ -310,20 +346,23 @@ public class ModuloDiagnostico extends AppCompatActivity {
                     question = question_All.get(counterQuestion);
 
                     if (isCorrect(selectedAnswer, question)) {
-                        Snackbar snackbar = Snackbar.make(view.getRootView(), "No." + question.getQuestionID() + " Respuesta Correcta", Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        //Snackbar snackbar = Snackbar.make(view.getRootView(), "No." + question.getQuestionID() + " Respuesta Correcta", Snackbar.LENGTH_LONG);
+                        //snackbar.show();
                         getPoints(question);
                         counterQuestion--;
+                        mpCorrect.start();
                     } else {
-                        Snackbar snackbar = Snackbar.make(view.getRootView(), "No." + question.getQuestionID() + " Respuesta Incorrecta", Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        //Snackbar snackbar = Snackbar.make(view.getRootView(), "No." + question.getQuestionID() + " Respuesta Incorrecta", Snackbar.LENGTH_LONG);
+                        //snackbar.show();
                         counterQuestion--;
+                        mpWrong.start();
                     }
 
                     if (counterQuestion < 0) {
                         Log.e(TAG, "Numero de rtas correctas" + numAnswerTrue + " LC :" + numRight_LC + " MT :" + numRight_MT + " CS :" + numRight_CS + " CN :" + numRight_CN + " IN :" + numRight_IN);
                         btnSendAnswer.setBackgroundColor(getResources().getColor(R.color.colorContinue));
                         btnSendAnswer.setText("Ver resultados ...");
+                        endExam = true;
 
                         toResults();
 
@@ -331,6 +370,7 @@ public class ModuloDiagnostico extends AppCompatActivity {
                         question = question_All.get(counterQuestion);
                         numPregunta++;
                         updateUI(question);
+                        endExam = false;
                     }
                 }
             }
@@ -370,22 +410,12 @@ public class ModuloDiagnostico extends AppCompatActivity {
         //https://firebasestorage.googleapis.com/v0/b/saber-go.appspot.com/o/Preguntas%2F100002.PNG?alt=media&token=7a95d633-e45c-45f5-a477-8c502ce5397f
         */
 
-        new CountDownTimer(30000 * 10, 1000) {
 
-            public void onTick(long millisUntilFinished) {
-                // tvTime.setText("seconds remaining: " + millisUntilFinished / 1000);
 
-                tvTime.setText("" + String.format(FORMAT, TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
-                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(                              TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
-                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
 
-            }
 
-            public void onFinish() {
-                tvTime.setText("done!");
-            }
-        }.start();
+
+
 
 
     }
@@ -564,6 +594,16 @@ public class ModuloDiagnostico extends AppCompatActivity {
         startActivity(toResults);
         this.finish();
 
+
+    }
+
+    public void goToExitTime(){
+        Intent toResults = new Intent(ModuloDiagnostico.this, noComplete.class);
+        toResults.putExtra("USER", stringUser);
+        toResults.putExtra("ID", idUser);
+
+        startActivity(toResults);
+        this.finish();
 
     }
 

@@ -9,7 +9,6 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -24,8 +23,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.uan.michaelsinner.sabergo.Data.User;
-import com.uan.michaelsinner.sabergo.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -35,12 +32,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.uan.michaelsinner.sabergo.Data.User;
+import com.uan.michaelsinner.sabergo.R;
 
 public class Profile extends AppCompatActivity {
     private ProgressBar pgbExperience, pgbMT, pgbCN, pgbCS, pgbLC, pgbIN;
     private DatabaseReference mDatabase;
 
     private TextView tvName, tvEmail, tvRango, tvNivel, tvNumED, tvNumMD, tvNumLogros;
+    private TextView tvMT, tvIN, tvLC, tvCS, tvCN;
     private TextView tv01,tv02,tv03,tv04,tv05,tv06,tv07,tv08;
     private Button btnDinero, btnPuntosLC, btnPuntosMT, btnPuntosCS, btnPuntosCN, btnPuntosIN;
     private ImageView ivImageProfile;
@@ -107,6 +107,17 @@ public class Profile extends AppCompatActivity {
         tv07.setTypeface(font2);
         tv08 = (TextView) findViewById(R.id.tvText08);
         tv08.setTypeface(font2);
+
+        tvMT = (TextView) findViewById(R.id.textPGMT);
+        tvMT.setTypeface(font2);
+        tvLC = (TextView) findViewById(R.id.textPGLC);
+        tvLC.setTypeface(font2);
+        tvCS = (TextView) findViewById(R.id.textPGCS);
+        tvCS.setTypeface(font2);
+        tvCN = (TextView) findViewById(R.id.textPGCN);
+        tvCN.setTypeface(font2);
+        tvIN = (TextView) findViewById(R.id.textPGIN);
+        tvIN.setTypeface(font2);
 
 
         btnDinero = (Button) findViewById(R.id.btnDinero);
@@ -176,6 +187,12 @@ public class Profile extends AppCompatActivity {
                     pgbCN.setProgressTintList(ColorStateList.valueOf(Color.CYAN));
                     pgbCN.setProgress(currentUser.getNumPreguntasCN());
 
+                    tvMT.setText(currentUser.getNumPreguntasMT()+"/100");
+                    tvLC.setText(currentUser.getNumPreguntasLC()+"/100");
+                    tvCS.setText(currentUser.getNumPreguntasCS()+"/100");
+                    tvCN.setText(currentUser.getNumPreguntasCN()+"/100");
+                    tvIN.setText(currentUser.getNumPreguntasIN()+"/100");
+
 
                 }
             }
@@ -196,9 +213,7 @@ public class Profile extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == android.R.id.home) {
+      if (id == android.R.id.home) {
             Intent intent = NavUtils.getParentActivityIntent(this);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             NavUtils.navigateUpTo(this, intent);
@@ -247,3 +262,4 @@ public class Profile extends AppCompatActivity {
 
     }
 }
+
