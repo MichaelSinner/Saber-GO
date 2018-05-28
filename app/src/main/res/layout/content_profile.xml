@@ -495,7 +495,7 @@
                 android:layout_height="33dp"
                 android:background="@drawable/btn_delete"
                 android:text=" Eliminar Cuenta"
-                android:textColor="#000000" />
+                android:textColor="#ffffff" />
 
         </LinearLayout>
  </RelativeLayout>

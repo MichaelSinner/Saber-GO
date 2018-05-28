@@ -6,18 +6,50 @@
     tools:context="com.uan.michaelsinner.sabergo.Activities.Tutorial$PlaceholderFragment">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/tvSubTitleOne"
+            android:paddingTop="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Tutorial 1/3"
+            android:textSize="28dp" />
+
+        <TextView
+            android:paddingTop="4dp"
+            android:id="@+id/tvSubTitleOne2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:gravity="center"
-            android:text="Navegar por el menú"
+            android:text="@string/strTut01"
             android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btnPruebaDiagnostico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_shape02"
+            android:shadowColor="#EBD519"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="2"
+            android:text="@string/strBtnPruebaDiag"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp" />
 
         <TextView
             android:id="@+id/tvSubTitleTwo"
@@ -27,8 +59,16 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:gravity="center"
-            android:text="Ingresar a Pruebas Diarias"
+            android:text="@string/strTut02"
             android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/imglog02"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/time_out" />
 
         <TextView
             android:id="@+id/tvSubTitleTrhe"
@@ -38,37 +78,64 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:gravity="center"
-            android:text="Ingresar a Perfil y Logros"
+            android:text="@string/strTut03"
             android:textSize="20dp" />
 
-        <ImageView
-            android:id="@+id/gif01"
+        <Button
+            android:id="@+id/btnPruebasDiarias"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/tvSubTitleOne"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            app:srcCompat="@raw/gif01" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/btn_shape02"
+            android:shadowColor="#0B356D"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="@string/strBtnPruebaDiaria"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp" />
 
-        <ImageView
-            android:id="@+id/gif02"
+        <TextView
+            android:layout_below="@+id/gif02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/strTut04"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btnPerfil"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/tvSubTitleTwo"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            app:srcCompat="@raw/gif02" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/btn_shape02"
+            android:shadowColor="#227f12"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="@string/strBtnPerfil"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp" />
 
-        <ImageView
-            android:id="@+id/gif03"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/tvSubTitleTrhe"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            app:srcCompat="@raw/gif03" />
+        <TextView
+            android:layout_below="@+id/gif02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="(Para continuar el tutorial desliza hacia la izquierda)"
+            android:textSize="16dp" />
 
 
-    </RelativeLayout>
+
+
+    </LinearLayout>
 
 </ScrollView>

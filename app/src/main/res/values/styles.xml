@@ -43,6 +43,11 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <style name="Etiquetas">
+        <item name="android:background">@drawable/background_label_fab</item>
+        <item name="android:textColor">@color/colorTitle</item>
+    </style>
+
 
 </resources>
 

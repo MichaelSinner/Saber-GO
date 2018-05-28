@@ -8,6 +8,32 @@
     <string name="strLogin">Iniciar Sesión</string>
     --Signup
     <string name="strSubtittleSignUp">Crea tu cuenta</string>
+    --Profile
+    <string name="strDelete">¿Está seguro que desea eliminar toda la información de Saber GO ?</string>
+    --Tutorial
+    <string name="strTut01">En la App Saber Go encontrarás 3 módulos para que de diferentes maneras puedas entrenar y evaluar tus
+    conocimientos para la prueba Saber 11. Para ingresar al Módulo diagnóstico  busca el botón:</string>
+
+    <string name="strTut02">En el examen Dignóstico se presentarán 30 preguntas tipo ICFES para que sean respondidas en el tiempo correspondiente.
+        En caso de no alcanzar en el tiempo aparecera una nueva pantalla con el siguiente Icono:</string>
+    <string name="strTut03">El segundo módulo es el de "Preguntas Rápidas", en este módulo se generarán 5 preguntas de cada área que evalua la prueba Saber 11.
+    Para ingresar a las preguntas rápidas busca el botón:
+    </string>
+    <string name="strTut04">En este módulo tienes que responder la pregunta que se halla seleccionado en el tiempo correspondiente. Cada vez que respondas una pregunta en
+        cualquier módulo obtendras puntos de experiencia, fragmentos de las áreas y dinero de la aplicación. Para visualizar todo tu progreso, busca el siguiente botón que
+    te llevará a tu Perfil:</string>
+    <string name="strTut05">El último módulo de la aplicación se denomina "Meteoritos"; para poder utilizarlo correctamente es necesario que descarges e imprimas el
+    codigo QR para que puedas visualizar "el planeta de Saber GO", el marcador puede ser descargando dirigiendose en el apartado de
+         Acerca de en el menú principal desplegable.</string>
+
+    <string name="strTut06">Explora "el planeta Saber GO" y protegelo de los meteoritos que se acercan, si logras destruir uno se te consedera la oportunidad de responder una pregunta que te otorgará
+    valiosas recompensas en tu Perfil.</string>
+    <string name="strTut07">Busca en tu perfil los logros que se pueden desbloquear, sube de Nivel, Rango y conviértete en "Comandante del espacio". Para ingresar a los Logros busca el Icono del trofeo
+        en tu perfil o en el menú desplegable.</string>
+    <string name="strTut08">También puedes revisar los tips en tu perfil para que lleges mejor preparado para tu prueba Saber 11. Para lo anterior busca el icono del bombillo en tu perfil: </string>
+
+    <string name="strTut09">No siendo más, mucha suerte y éxitos preparándote para tu prueba Saber 11. Atentamente, Equipo de Saber GO.</string>
+
 
     -- No Internet
     <string name="strNoInternet">Lo sentimos, pero necesitas estar conectado a internet para continuar.</string>

@@ -40,11 +40,12 @@
 
         <Button
             android:id="@+id/btnIniciarExamen"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="48dp"
             android:text="Iniciar Examen"
             android:textColor="#ffffff"
+            android:background="@drawable/btn_init"
             android:textSize="20dp"
             tools:layout_editor_absoluteY="341dp"
             android:layout_centerVertical="true"

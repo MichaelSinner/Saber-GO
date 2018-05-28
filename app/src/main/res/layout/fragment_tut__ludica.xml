@@ -6,5 +6,66 @@
     android:orientation="vertical"
     tools:context="com.uan.michaelsinner.sabergo.Fragments.Tut_Ludica">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvSubTitleOne"
+            android:paddingTop="24dp"
+            android:paddingBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Tutorial 3/3"
+            android:textSize="28dp" />
+
+        <TextView
+            android:id="@+id/tvSubTitleTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="@string/strTut07" />
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_action_logros" />
+
+        <TextView
+            android:id="@+id/tvSubTitleTwo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="@string/strTut08" />
+
+        <ImageButton
+
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_lightbulb_outline_black_" />
+
+        <TextView
+            android:id="@+id/tvSubTitleTwo3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:text="@string/strTut09" />
+
+    </LinearLayout>
+
 
 </ScrollView>

@@ -16,7 +16,10 @@
     <color name="colorIN">#ff3d3d</color>
     <color name="colorContinue">#FF530D</color>
     <color name="colorBack">#716d6b</color>
+    <color name="colorTip">#ffd900</color>
 
+    <color name="negro_semitransparente">#B2000000</color>
+    <color name="blanco">#fafafa</color>
 
 
 

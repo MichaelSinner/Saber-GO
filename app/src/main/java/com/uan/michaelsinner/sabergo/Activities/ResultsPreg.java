@@ -80,6 +80,7 @@ public class ResultsPreg extends AppCompatActivity {
         tv02.setTypeface(font);
 
         tvRecompensa = (TextView) findViewById(R.id.tvRecompensas);
+        tvRecompensa.setTypeface(font);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -94,7 +95,7 @@ public class ResultsPreg extends AppCompatActivity {
         ANSWER = (int) bundle.get("ANSWER");
         ANSWERQ = (String) bundle.get("ANSWERQ");
         money = 10;
-        experience = 10;
+        experience = 1;
         userID = currentUser.getUserID();
 
         showAnswersImage(ANSWER);

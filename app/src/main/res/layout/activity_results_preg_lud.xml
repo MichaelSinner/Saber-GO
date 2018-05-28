@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center|center_vertical"
         android:orientation="vertical">
 
@@ -32,28 +32,11 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_victory" />
 
-        <LinearLayout
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvRes01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" Número de respuestas correctas"
-                android:textColor="#ffffff"
-                android:textSize="16dp" />
-
-            <TextView
-                android:id="@+id/tvResRightAnsw"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="  1"
-                android:textAlignment="textEnd"
-                android:textColor="#19e722"
-                android:textSize="16dp" />
-        </LinearLayout>
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimarySG" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,41 +63,131 @@
 
         <Space
             android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimarySG" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tvRecompensas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recompensas"
+            android:textColor="#deab2c"
+            android:textSize="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRes03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Experiencia obtenida"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tvResExp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+2"
+                android:textAlignment="textEnd"
+                android:textColor="#9d00ff"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRes04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Número de Fragmentos"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tvResFrag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+1"
+                android:textAlignment="textEnd"
+                android:textColor="#fa1414"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRes04ml"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Recompensa por Meteoro"
+                android:textColor="#ffffff"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tvResFragml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+1000"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorTip"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@color/colorPrimarySG" />
+
+        <Space
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimarySG" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
 
         <Button
             android:id="@+id/btnVolverMenuPD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textColor="@color/colorTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="@drawable/btn_opciones"
+            android:background="@drawable/btn_init"
             android:text="Continuar" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btnVolver"
-            android:layout_width="wrap_content"
+            android:textColor="@color/colorTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/btn_opciones"
+            android:background="@drawable/btn_init"
             android:text="Volver a AR" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_weight="1" />
 
 
     </LinearLayout>

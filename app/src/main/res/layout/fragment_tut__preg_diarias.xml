@@ -6,9 +6,23 @@
     tools:context="com.uan.michaelsinner.sabergo.Fragments.Tut_PregDiarias">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:paddingTop="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Tutorial 2/3"
+            android:textSize="28dp" />
+
         <TextView
             android:id="@+id/tvSubTitleOne"
             android:layout_width="wrap_content"
@@ -16,42 +30,89 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:gravity="center"
-            android:text="Ingresar a Examen Diagnóstico"
+            android:text="@string/strTut05"
             android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/tvSubTitleTwo"
-            android:layout_below="@+id/gif04"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:text="Responder y mover imágen pregunta"
-            android:textSize="20dp" />
-
-          <ImageView
+        <ImageView
             android:id="@+id/gif04"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_below="@+id/tvSubTitleOne"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            app:srcCompat="@raw/gif04" />
+            app:srcCompat="@drawable/ar_example" />
 
-        <ImageView
+        <TextView
+            android:id="@+id/tvSubTitleTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:text="@string/strTut06"
+            android:textSize="20dp" />
 
-            android:id="@+id/gif05"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:layout_below="@id/tvSubTitleTwo"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="match_parent"
+            android:weightSum="5">
+
+            <Button
+                android:id="@+id/btnPuntosIN"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_frag_in"
+                android:text="23 IN"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/btnPuntosMT"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_frag_mt"
+                android:text="23 MT"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/btnPuntosCN"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:background="@drawable/btn_frag_cn"
+                android:text="20 CN"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/btnPuntosLC"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_frag_lc"
+                android:text="35 LC"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/btnPuntosCS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_frag_cs"
+                android:text="75 CS"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="(Para continuar el tutorial desliza hacia la izquierda)"
+            android:textSize="16dp" />
 
 
-
-
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </ScrollView>

@@ -127,7 +127,7 @@ public class ModuloLudica extends AppCompatActivity {
             tvTime.setVisibility(View.INVISIBLE);
             tvIDQuest.setVisibility(View.INVISIBLE);
             btnIniciarExamen.setVisibility(View.VISIBLE);
-            btnIniciarExamen.setText("Cargando Preguntas ...");
+            btnIniciarExamen.setText("Cargando Pregunta ...");
             btnIniciarExamen.setBackgroundColor(Color.TRANSPARENT);
             btnIniciarExamen.setEnabled(false);
             btnOpcionA.setVisibility(View.INVISIBLE);
@@ -154,9 +154,9 @@ public class ModuloLudica extends AppCompatActivity {
             public void run() {
                 btnIniciarExamen.setEnabled(true);
                 btnIniciarExamen.setBackgroundColor(Color.GREEN);
-                btnIniciarExamen.setText("Iniciar Examen");
+                btnIniciarExamen.setText("Responder Pregunta");
             }
-        }, 5000);
+        }, 3000);
 
         btnIniciarExamen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,14 +182,11 @@ public class ModuloLudica extends AppCompatActivity {
                     imgBtnQuestion.setVisibility(View.VISIBLE);
 
 
-
-
-
                     showQuestion(question);
 
                 } else {
 
-                    Snackbar snackbar = Snackbar.make(view.getRootView(), "Espera a que carguen las preguntas ..." , Snackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(view.getRootView(), "Espera a que cargue la pregunta ..." , Snackbar.LENGTH_LONG);
                     snackbar.show();
 
 
@@ -326,6 +323,7 @@ public class ModuloLudica extends AppCompatActivity {
         toResults.putExtra("right_CN", numRight_CN);
         toResults.putExtra("right_IN", numRight_IN);
         toResults.putExtra("ANSWER",answer);
+        toResults.putExtra("ANSWERQ",question.getAnswer());
         toResults.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(toResults);
         this.finish();

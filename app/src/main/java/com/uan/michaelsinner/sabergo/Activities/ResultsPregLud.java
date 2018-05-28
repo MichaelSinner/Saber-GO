@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +33,8 @@ public class ResultsPregLud extends AppCompatActivity {
     private String userID;
     private ImageButton imgResultPreg;
 
+    private TextView tvAnser, tvFrag, tvExp, tvRecompensa,tvTitle,tv02,tv01,tv03,tv04;
+
     private int questMT;
     private int questCS;
     private int questCN;
@@ -40,6 +43,7 @@ public class ResultsPregLud extends AppCompatActivity {
     private int money;
     private int experience;
     private int ANSWER;
+    private String ANSWERQ;
 
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Student");
     private FirebaseAuth fireAuthStateListener;
@@ -60,6 +64,28 @@ public class ResultsPregLud extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Typeface font2 = Typeface.createFromAsset(getAssets(),"fonts/IndieFlower.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Sanlabello.ttf");
+
+        imgResultPreg = (ImageButton) findViewById(R.id.imgResultPreg);
+        tvAnser = (TextView)findViewById(R.id.tvResWrongAnsw);
+        tvAnser.setTypeface(font);
+        tvExp = (TextView) findViewById(R.id.tvResExp);
+        tvExp.setTypeface(font);
+        tvFrag = (TextView) findViewById(R.id.tvResFrag);
+        tvFrag.setTypeface(font);
+        tvTitle = (TextView) findViewById(R.id.tvTitle);
+        tvTitle.setTypeface(font);
+        tv01 = (TextView)findViewById(R.id.tvRes03);
+        tv01.setTypeface(font);
+        tv02 = (TextView)findViewById(R.id.tvRes04);
+        tv02.setTypeface(font);
+        tv03 = (TextView) findViewById(R.id.tvRes04ml);
+        tv03.setTypeface(font);
+        tv04 = (TextView) findViewById(R.id.tvResFragml);
+        tv04.setTypeface(font);
+
+        tvRecompensa = (TextView) findViewById(R.id.tvRecompensas);
+        tvRecompensa.setTypeface(font);
 
         imgResultPreg = (ImageButton) findViewById(R.id.imgResultPreg);
 
@@ -74,8 +100,9 @@ public class ResultsPregLud extends AppCompatActivity {
         questCN = (int) bundle.get("right_CN");
         questIN = (int) bundle.get("right_IN");
         ANSWER = (int) bundle.get("ANSWER");
-        money = 10;
-        experience = 10;
+        money = 1000;
+        experience = 5;
+        ANSWERQ = (String) bundle.get("ANSWERQ");
 
 
         showAnswersImage(ANSWER);
@@ -89,7 +116,7 @@ public class ResultsPregLud extends AppCompatActivity {
                 }
             }
         });
-        btnVolverAR.setTypeface(font2);
+        btnVolverAR.setTypeface(font);
 
         btnVolver = (Button) findViewById(R.id.btnVolverMenuPD);
         btnVolver.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +132,7 @@ public class ResultsPregLud extends AppCompatActivity {
 
             }
         });
-        btnVolver.setTypeface(font2);
+        btnVolver.setTypeface(font);
     }
 
     @Override
@@ -207,10 +234,16 @@ public class ResultsPregLud extends AppCompatActivity {
 
     public void showAnswersImage(final int Answer){
 
-        if (Answer == 1)
+        if (Answer == 1){
             imgResultPreg.setImageResource(R.drawable.ic_victory);
-        else if (Answer == 2)
+            tvAnser.setText(ANSWERQ);
+        } else if (Answer == 2){
             imgResultPreg.setImageResource(R.drawable.ic_defeat);
+            tvAnser.setText(ANSWERQ);
+            tvExp.setText("+0");
+            tvFrag.setText("+0");
+            tv04.setText("+0");
+        }
 
 
     }

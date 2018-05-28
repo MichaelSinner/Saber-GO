@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
         tvInicio = (TextView) findViewById(com.uan.michaelsinner.sabergo.R.id.tvSubtitle);
         tvInicio.setTypeface(font);
 
+        printHashKey();
         new TextFade(getBaseContext(), tvInicio);
 
         final Animation animTranslate = AnimationUtils.loadAnimation(this,R.anim.move_to);

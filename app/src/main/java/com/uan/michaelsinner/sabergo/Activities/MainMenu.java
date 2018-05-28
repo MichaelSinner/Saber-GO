@@ -649,7 +649,9 @@ public class MainMenu extends AppCompatActivity
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        if(connectionResult.isSuccess()){
+            Log.e(TAG, "No internet");
+        }
     }
 
     @Override

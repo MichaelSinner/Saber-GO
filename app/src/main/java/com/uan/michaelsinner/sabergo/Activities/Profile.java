@@ -1,14 +1,16 @@
 package com.uan.michaelsinner.sabergo.Activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -20,9 +22,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -35,19 +45,34 @@ import com.google.gson.Gson;
 import com.uan.michaelsinner.sabergo.Data.User;
 import com.uan.michaelsinner.sabergo.R;
 
-public class Profile extends AppCompatActivity {
+import java.util.Random;
+
+public class Profile extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private ProgressBar pgbExperience, pgbMT, pgbCN, pgbCS, pgbLC, pgbIN;
     private DatabaseReference mDatabase;
+    private GoogleApiClient googleApiClient;
+    private Random random;
 
     private TextView tvName, tvEmail, tvRango, tvNivel, tvNumED, tvNumMD, tvNumLogros;
     private TextView tvMT, tvIN, tvLC, tvCS, tvCN;
     private TextView tv01,tv02,tv03,tv04,tv05,tv06,tv07,tv08;
+    private TextView tvExit, tvTip;
     private Button btnDinero, btnPuntosLC, btnPuntosMT, btnPuntosCS, btnPuntosCN, btnPuntosIN;
+    private Button btnDelete, btnDeleteSi, btnDeleteNo;
     private ImageView ivImageProfile;
+    private Dialog dialog;
 
     private User currentUser;
     private Uri photoUrl;
     private String providerId;
+    private String[] tipsList = {"'Lee atentamente cada pregunta y cada opción de principio a fin, evita sacar conclusiones precipitadas, esto porque cuando se están creando los exámenes, las preguntas señuelo, se hacen con el propósito de confundir'",
+            "'Responde primero a las preguntas que se puede dar una certeza de la respuesta por su facilidad y después, a las preguntas que consideres difícil.'",
+            "'En las preguntas más difíciles, elimina las respuestas que son evidentemente erróneas, relee la pregunta y cada una de las respuestas restantes.'",
+            "'Pon atención a las palabras 'completamente' 'indiscutiblemente' 'siempre' 'jamás' 'nunca' en la formulación de la pregunta, significa que la respuesta correcta debería de ser un hecho irrefutable. Si las palabras son utilizadas en las respuestas, significa que la respuesta debe ser un hecho incontestable, y que solamente puede ser verdadero o falso.'",
+            "'Examina las respuestas que enuncien las expresiones “todas las respuestas anteriores” o “cada una de las anteriores”. Nunca consideres este tipo de respuestas como la respuesta correcta hasta no haber analizado si todos los enunciados, pese a ser verdaderos, tengan una relación real con la pregunta.'",
+            "'Ten especial cuidado con las preguntas que contienen “NO” o “EXCEPTO”, aún más cuando se combinan y resultan en una afirmación, ya que es común errar desde el inicio y suele ser un elemento de distracción.'",
+            "'Modificar la respuesta si se encuentra una buena razón para hacerlo. En caso de no tener certeza de la respuesta, elige la que más crea ya que tiene un 25 % de probabilidad de acertar.'",
+            "'Siempre es mejor una respuesta probable que una pregunta sin contestar, conteste todas las preguntas.'"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +85,47 @@ public class Profile extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        dialog = new Dialog(this);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
+                requestEmail().build();
+        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
 
 
+        com.getbase.floatingactionbutton.FloatingActionButton fab_logros = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.fab_logros);
+        com.getbase.floatingactionbutton.FloatingActionButton fab_tips = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.fab_tips);
 
         Typeface font2 = Typeface.createFromAsset(getAssets(),"fonts/IndieFlower.ttf");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+
+        fab_logros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Profile.this,Achievements.class);
                 startActivity(intent);
+            }
+        });
+
+        fab_tips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                random = new Random();
+                int index = random.nextInt(tipsList.length-1);
+
+                dialog.setContentView(R.layout.pop_tip);
+                tvTip = (TextView) dialog.findViewById(R.id.str_Tip);
+                tvExit = (TextView) dialog.findViewById(R.id.tvClosePop);
+                tvTip.setText(tipsList[index]);
+
+                tvExit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
             }
         });
 
@@ -132,6 +187,8 @@ public class Profile extends AppCompatActivity {
         btnPuntosCS.setTypeface(font2);
         btnPuntosIN = (Button) findViewById(R.id.btnPuntosIN);
         btnPuntosIN.setTypeface(font2);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnDelete.setTypeface(font2);
 
 
         pgbExperience = (ProgressBar) findViewById(R.id.pgbLevel);
@@ -146,10 +203,10 @@ public class Profile extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         String userSrting = bundle.getString("USER");
-        User triaded = new Gson().fromJson(userSrting, User.class);
+        final User user = new Gson().fromJson(userSrting, User.class);
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Student");
-        mDatabase.orderByKey().equalTo(triaded.getUserID()).addValueEventListener(new ValueEventListener() {
+        mDatabase.orderByKey().equalTo(user.getUserID()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot message : dataSnapshot.getChildren()) {
@@ -172,19 +229,19 @@ public class Profile extends AppCompatActivity {
                     pgbExperience.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
                     pgbExperience.setProgress(currentUser.getNumExamDiagnostic());
 
-                    pgbMT.setProgressTintList(ColorStateList.valueOf(Color.RED));
+                    pgbMT.setProgressTintList(ColorStateList.valueOf(Color.BLUE));
                     pgbMT.setProgress(currentUser.getNumPreguntasMT());
 
-                    pgbLC.setProgressTintList(ColorStateList.valueOf(Color.BLUE));
+                    pgbLC.setProgressTintList(ColorStateList.valueOf(Color.MAGENTA));
                     pgbLC.setProgress(currentUser.getNumPreguntasLC());
 
-                    pgbCS.setProgressTintList(ColorStateList.valueOf(Color.YELLOW));
+                    pgbCS.setProgressTintList(ColorStateList.valueOf(Color.rgb(116,31,0)));
                     pgbCS.setProgress(currentUser.getNumPreguntasCS());
 
-                    pgbIN.setProgressTintList(ColorStateList.valueOf(Color.MAGENTA));
+                    pgbIN.setProgressTintList(ColorStateList.valueOf(Color.RED));
                     pgbIN.setProgress(currentUser.getNumPreguntasIN());
 
-                    pgbCN.setProgressTintList(ColorStateList.valueOf(Color.CYAN));
+                    pgbCN.setProgressTintList(ColorStateList.valueOf(Color.rgb(15,180,0)));
                     pgbCN.setProgress(currentUser.getNumPreguntasCN());
 
                     tvMT.setText(currentUser.getNumPreguntasMT()+"/100");
@@ -204,6 +261,33 @@ public class Profile extends AppCompatActivity {
         });
 
         loadImageProfile();
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.setContentView(R.layout.pop_delete);
+                btnDeleteSi = (Button) dialog.findViewById(R.id.btnDelete_Si);
+                btnDeleteNo = (Button) dialog.findViewById(R.id.btnDelete_No);
+
+                btnDeleteSi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        deleteAcount(user);
+                    }
+                });
+
+                btnDeleteNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+            }
+        });
 
 
     }
@@ -259,6 +343,47 @@ public class Profile extends AppCompatActivity {
                 }
             });
         }
+
+    }
+
+    public void deleteAcount(User user)
+    {
+        FirebaseDatabase.getInstance().getReference().child("Student").child(user.getUserID()).removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                exitApp();
+            }
+        });
+
+
+    }
+
+    private void exitApp() {
+
+        Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                if(status.isSuccess()){
+                    goLoginScreen();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Error al Revocar la sesión Google", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+    private void goLoginScreen() {
+        final Intent intent = new Intent(this, Login.class);
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }
