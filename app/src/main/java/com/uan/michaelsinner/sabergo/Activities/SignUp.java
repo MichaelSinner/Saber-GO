@@ -89,10 +89,11 @@ public class SignUp extends AppCompatActivity {
                 String strName = etNombre.getText().toString();
 
 
-                if (TextUtils.isEmpty(strEmail) || TextUtils.isEmpty(strPassword)) {
+                if (TextUtils.isEmpty(strEmail) || TextUtils.isEmpty(strPassword) || TextUtils.isEmpty(strName)) {
                     etEmail.setError("Escribe tu correo aquí");
                     etPassword.setError("Escribe tu contraseña");
-                    snackbar = Snackbar.make(view.getRootView(), " Correo electrónico o contraseña no valido ", Snackbar.LENGTH_SHORT);
+                    etNombre.setError("Escribe tu nick o nombre");
+                    snackbar = Snackbar.make(view.getRootView(), " Correo electrónico, contraseña o nombre invalido", Snackbar.LENGTH_SHORT);
                     snackbar.show();
 
                     return;
@@ -165,6 +166,8 @@ public class SignUp extends AppCompatActivity {
 
     private void toRegister(final String emailEditText, final String passwordEditText, final String etName, final View view) {
 
+
+
         firebaseAuth.createUserWithEmailAndPassword(emailEditText, passwordEditText).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             public static final String TAG = "1";
 
@@ -172,8 +175,10 @@ public class SignUp extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()) {
                     Log.d(TAG, "FAILED");
-                    Snackbar snackbar = Snackbar.make(view.getRootView(), " Error al intentar Registrar ", Snackbar.LENGTH_SHORT);
+                    Snackbar snackbar = Snackbar.make(view.getRootView(), " Error al intentar Registrar / El correo: "+emailEditText+" ya ha sido registrado", Snackbar.LENGTH_SHORT);
                     snackbar.show();
+
+
 
                     //Toast.makeText(getApplicationContext(), "Error al intentar registrar ", Toast.LENGTH_LONG).show();
                 }else{
